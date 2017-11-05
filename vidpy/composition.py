@@ -7,27 +7,6 @@ from .clip import Clip
 from .utils import timestamp
 
 
-'''
-get xml
-
-if duration:
-    set the background image duration
-    set the tractor duration
-if not duration:
-    find duration from tractor
-    set background duration
-
-save temp xml
-
-then render/preview/write xml
-
-
-ISSUE:
-    if the clips duration is bigger than user defined duration, the clip keeps playing...
-
-    if i try to fix this by setting out on a track, the last frame remains...
-'''
-
 class Composition(object):
 
     def __init__(self, clips, bgcolor='#000000', singletrack=False, duration=None, fps=30, width=1280, height=720):
