@@ -1,8 +1,32 @@
-from subprocess import call
+import os
+from subprocess import call, check_output
 import uuid
+from xml.etree.ElementTree import Element, tostring, fromstring
 from . import MELT_BINARY
 from .clip import Clip
 from .utils import timestamp
+
+
+'''
+get xml
+
+if duration:
+    set the background image duration
+    set the tractor duration
+if not duration:
+    find duration from tractor
+    set background duration
+
+save temp xml
+
+then render/preview/write xml
+
+
+ISSUE:
+    if the clips duration is bigger than user defined duration, the clip keeps playing...
+
+    if i try to fix this by setting out on a track, the last frame remains...
+'''
 
 class Composition(object):
 
@@ -16,40 +40,56 @@ class Composition(object):
         self.height = height
 
 
-    def preview(self):
-        call(self.args())
+    def xml(self):
+        xml = check_output(self.args() + ['-consumer', 'xml'])
+        xml = fromstring(xml)
 
+        duration = self.duration
 
-    def preview_xml(self):
-        call(self.args() + ['-consumer', 'xml'])
+        if not duration:
+            duration = self.duration = tractor = xml.find('tractor').get('out')
+
+        xml.find('tractor').set('out', str(duration))
+        xml.find('producer').set('out', str(duration))
+        xml.find('producer').remove(xml.find('./producer/property[@name="length"]'))
+        xml.find('./playlist/entry').set('out', str(duration))
+
+        return tostring(xml)
 
 
     def save_xml(self, filename=None):
         if filename is None:
             filename = str(uuid.uuid4()) + '.xml'
 
-        call(self.args() + ['-consumer', 'xml:{}'.format(filename)])
+        with open(filename, 'wb') as outfile:
+            outfile.write(self.xml())
 
         return filename
 
 
-    def calculate_duration(self):
-        pass
+    def preview(self):
+        xmlfile = self.save_xml()
+        call([MELT_BINARY, xmlfile, 'out="{}"'.format(self.duration)])
+        os.remove(xmlfile)
 
 
     def save(self, filename, **kwargs):
+        xmlfile = self.save_xml()
+
+        args = [
+            MELT_BINARY,
+            xmlfile,
+            'out="{}"'.format(self.duration),
+            '-consumer',
+            'avformat:{}'.format(filename)
+        ]
+
         extra_params = ['{}="{}"'.format(key, val) for key, val in kwargs.items()]
-        args = self.args() + ['-consumer', 'avformat:{}'.format(filename)] + extra_params
+        args += extra_params
 
-        if not self.duration:
-            self.calculate_duration()
+        call(args)
 
-        if self.duration:
-            xml = self.save_xml()
-            clip = Clip(xml, end=self.duration)
-            call(Composition([clip]).args() + args)
-        else:
-            call(args)
+        os.remove(xmlfile)
 
         return filename
 
@@ -58,7 +98,7 @@ class Composition(object):
         args = [MELT_BINARY, '-profile', 'atsc_720p_25']
 
         if not self.singletrack:
-            args += ['-track', 'color:{}'.format(self.bg), 'out={}'.format(self.duration)]
+            args += ['-track', 'color:{}'.format(self.bg), 'out=0']#.format(self.duration)]
 
         for c in self.clips:
             c.output_fps = self.fps
