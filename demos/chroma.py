@@ -8,7 +8,7 @@ for i in range(0, 5):
     clip = Clip(video)
 
     # attempt to automatically remove background color
-    # (use color='#00ff00' to remove green, for example
+    # you can also specify a color with color='#00ff00'
     clip.chroma(amount=0.2)
 
     # start the clips 1/2 second after last clip

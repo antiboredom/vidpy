@@ -76,14 +76,17 @@ class Composition(object):
     def args(self):
         args = [MELT_BINARY, '-profile', 'atsc_720p_25']
 
-        if not self.singletrack:
-            args += ['-track', 'color:{}'.format(self.bg), 'out=0']#.format(self.duration)]
+        args += ['-track', 'color:{}'.format(self.bg), 'out=0']#.format(self.duration)]
+
+        if self.singletrack:
+            args += ['-track']
 
         for c in self.clips:
-            c.output_fps = self.fps
             args += c.args(self.singletrack)
 
-        if not self.singletrack:
+        if self.singletrack:
+            args += ['-transition', 'composite', 'distort=1', 'a_track=0', 'b_track=1']
+        else:
             for i, c in enumerate(self.clips):
                 args += ['-transition', 'composite', 'distort=1', 'a_track=0', 'b_track={}'.format(i+1)]
 

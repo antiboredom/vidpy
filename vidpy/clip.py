@@ -18,17 +18,27 @@ class Clip(object):
             self._temp_resource = True
 
 
-    def cut(self, start=None, end=None):
+    def cut(self, start=None, end=None, duration=None):
         if start:
             self.start = timestamp(start)
 
         if end:
             self.end = timestamp(end)
 
+        if duration:
+            self.end = self.start + timestamp(duration)
+
+        return self
+
+
+    def set_duration(self, duration):
+        self.end = self.start + timestamp(duration)
+        return self
+
 
     def set_offset(self, offset):
         self.offset = timestamp(offset)
-
+        return self
 
 
     def fx(self, name, params=[]):
