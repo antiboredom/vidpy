@@ -2,9 +2,7 @@
 
 A Python video editor and compositor based on the [MLT Multimedia Framework](https://www.mltframework.org/).
 
-* Installation
-* Documentation
-* Examples
+**VidPy is currently in alpha - there are probably a bunch of bugs, and the api will likely change. If you're interested in testing it out, please do, and leave comments/suggestions/issues in the [issue tracker](https://github.com/antiboredom/vidpy/issues).**
 
 ## Installation/Dependencies
 
@@ -72,7 +70,7 @@ clip2 = Clip('anothervideo.mp4')
 clip2.cut(start=2, end=4) # use clip2 from 2 to 4 seconds
 ```
 
-You can also play clips sequentially by adding `singletrack=True` as a parameter.
+You can also play clips one after the other (instead of all at the same time) by adding `singletrack=True` as a parameter to your composition.
 
 ```python
 composition = Composition([clip1, clip2], singletrack=True)
@@ -101,19 +99,23 @@ clip.cut(0, 1)
 
 ## Filters & Effects
 
-You can assign filters to clips.
+There are a number of effects built into VidPy: 
 
 ```python
 clip.fadein(1) 		# fade the clip in over 1 second
 clip.fadeout(0.5) 	# fade the clip over 0.5 seconds
 clip.glow()   		# add a glow effect
-clip.spin(2)  		# make the clip spin around
+clip.spin(2)  		# make the clip spin around. (Why would you do this? I don't know!)
 clip.chroma() 		# attempt to automatically remove the background color
+
+# start the clip scaled to 200% at coordinates (0, 0)
+# then move it to (200, 200) and scale it to 90% over 5 seconds
+clip.zoompan([0, 0, '200%', '200%'], [200, 200, '90%', '90%'], start=0, end=5)
 ```
 
 For a full list see the filters documentation: (link to come)
 
-You can also add [any filter supported by mlt](https://www.mltframework.org/plugins/PluginsFilters/) with the `fx` method.
+You can also use [any filter supported by mlt](https://www.mltframework.org/plugins/PluginsFilters/) with the `fx` method. The first parameter should be the name of the filter, and the second a dictionary of options.
 
 For example, to add a [cartoon effect](https://www.mltframework.org/plugins/FilterFrei0r-cartoon/):
 
@@ -165,7 +167,7 @@ Some optional parameters for text clips are:
 
 ## Credits
 
-VidPy is by Sam Lavigne, and heavily inspired by / indebted to MoviePy by Zulko.
+VidPy is by [Sam Lavigne](http://lav.io), and draws heavily from [MoviePy by Zulko](http://zulko.github.io/moviepy/).
 
 
 
