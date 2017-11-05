@@ -107,6 +107,13 @@ clip.fadeout(0.5) 	# fade the clip over 0.5 seconds
 clip.glow()   		# add a glow effect
 clip.spin(2)  		# make the clip spin around. (Why would you do this? I don't know!)
 clip.chroma() 		# attempt to automatically remove the background color
+clip.volume(0)		# mute a video
+
+# set clip's position 
+clip.position(x=100, y=20)
+
+# resize a clip
+clip.position(w='50%', h='20%'')
 
 # start the clip scaled to 200% at coordinates (0, 0)
 # then move it to (200, 200) and scale it to 90% over 5 seconds

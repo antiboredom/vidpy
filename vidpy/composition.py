@@ -9,7 +9,7 @@ from .utils import timestamp
 
 class Composition(object):
 
-    def __init__(self, clips, bgcolor='#000000', singletrack=False, duration=None, fps=30, width=1280, height=720):
+    def __init__(self, clips, bgcolor='#000000', singletrack=False, duration=None, fps=None, width=None, height=None):
         self.clips = clips
         self.bg = bgcolor
         self.singletrack = singletrack
@@ -32,6 +32,17 @@ class Composition(object):
         xml.find('producer').set('out', str(duration))
         xml.find('producer').remove(xml.find('./producer/property[@name="length"]'))
         xml.find('./playlist/entry').set('out', str(duration))
+
+        profile = xml.find('profile')
+
+        if self.fps:
+            profile.set('frame_rate_num', str(self.fps))
+
+        if self.width and self.height:
+            profile.set('width', str(self.width))
+            profile.set('display_aspect_num', str(self.width))
+            profile.set('height', str(self.height))
+            profile.set('display_aspect_den', str(self.height))
 
         return tostring(xml)
 
@@ -74,7 +85,7 @@ class Composition(object):
 
 
     def args(self):
-        args = [MELT_BINARY, '-profile', 'atsc_720p_25']
+        args = [MELT_BINARY]#, '-profile', 'atsc_720p_30']
 
         args += ['-track', 'color:{}'.format(self.bg), 'out=0']#.format(self.duration)]
 

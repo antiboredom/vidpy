@@ -36,5 +36,5 @@ while y < canvas_height:
         y += vid_height
         x = 0
 
-grid = Composition(clips)
+grid = Composition(clips, width=canvas_width, height=canvas_height)
 grid.save('grid.mp4')
