@@ -8,6 +8,23 @@ from .utils import timestamp
 
 
 class Composition(object):
+    '''A composition made of a list of clips.
+
+    Args:
+        clips (list): A list of Clip objects
+
+        bgcolor (str): The background color of the composition, in hex
+
+        singletrack (bool): Boolean that determines if clips play all at once (default) or sequentially
+
+        duration (float): Duration of the composition in seconds.
+
+        fps (int): Frames per second of output
+
+        width (int): Width of output in pixels
+
+        height (int): Height of output in pixels
+    '''
 
     def __init__(self, clips, bgcolor='#000000', singletrack=False, duration=None, fps=None, width=None, height=None):
         self.clips = clips
@@ -20,6 +37,12 @@ class Composition(object):
 
 
     def xml(self):
+        '''Renders the composition as XML and sets the current duration, width, height and fps.
+
+        Returns:
+            str: an mlt xml representation of the composition
+        '''
+
         xml = check_output(self.args() + ['-consumer', 'xml'])
         xml = fromstring(xml)
 
@@ -48,6 +71,16 @@ class Composition(object):
 
 
     def save_xml(self, filename=None):
+        '''Saves the composition as a mlt xml file.
+
+        Args:
+            filename (str): path to save to
+
+        Returns:
+            str: path to the saved file
+
+        '''
+
         if filename is None:
             filename = str(uuid.uuid4()) + '.xml'
 
@@ -58,12 +91,25 @@ class Composition(object):
 
 
     def preview(self):
+        ''' Previews the composition using melt's default viewer.'''
+
         xmlfile = self.save_xml()
         call([MELT_BINARY, xmlfile, 'out="{}"'.format(self.duration)])
         os.remove(xmlfile)
 
 
     def save(self, filename, **kwargs):
+        '''Save the composition as a video file.
+
+        Args:
+            filename (str): the file to save to (any video type is accepted)
+            **kwargs: additional parameters to pass to ffmpeg
+
+        Returns:
+            filename (str): the path to the saved file
+
+        '''
+
         xmlfile = self.save_xml()
 
         args = [
@@ -85,6 +131,12 @@ class Composition(object):
 
 
     def args(self):
+        '''Generate mlt command line arguments
+
+        Returns:
+            str: mlt command line arguments
+        '''
+
         args = [MELT_BINARY]#, '-profile', 'atsc_720p_30']
 
         args += ['-track', 'color:{}'.format(self.bg), 'out=0']#.format(self.duration)]
