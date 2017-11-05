@@ -4,7 +4,7 @@ video = 'videos/hand1.mp4'
 
 clips = []
 
-for i in range(0, 6):
+for i in range(0, 5):
     clip = Clip(video)
 
     # attempt to automatically remove background color
@@ -23,6 +23,5 @@ for i in range(0, 6):
     clips.append(clip)
 
 
-comp = Composition(clips, bgcolor='#ff4dff')
-# comp.preview()
+comp = Composition(clips, bgcolor='#ff4dff', duration=4)
 comp.save('chroma_overlay.mp4')
