@@ -129,8 +129,8 @@ editor) which comes with a prebuilt melt binary.</p>
 <p>VidPy will attempt to locate the melt binary, searching first for a
 Shotcut installation on Mac/Windows. You can also point VidPy to a
 specific binary like so:</p>
-<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">vidpy</span>
-<span class="n">vidpy</span><span class="o">.</span><span class="n">MELT_BINARY</span> <span class="o">=</span> <span class="s1">&#39;/path/to/melt&#39;</span>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">vidpy</span> <span class="k">import</span> <span class="n">config</span>
+<span class="n">config</span><span class="o">.</span><span class="n">MELT_BINARY</span> <span class="o">=</span> <span class="s1">&#39;/path/to/melt&#39;</span>
 </pre></div>
 </div>
 </div>

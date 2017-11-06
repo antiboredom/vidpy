@@ -27,5 +27,5 @@ specific binary like so:
 
 .. code:: python
 
-    import vidpy
-    vidpy.MELT_BINARY = '/path/to/melt'
+    from vidpy import config
+    config.MELT_BINARY = '/path/to/melt'

@@ -107,9 +107,9 @@
 <span class="kn">from</span> <span class="nn">subprocess</span> <span class="k">import</span> <span class="n">call</span><span class="p">,</span> <span class="n">check_output</span>
 <span class="kn">import</span> <span class="nn">uuid</span>
 <span class="kn">from</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">import</span> <span class="n">Element</span><span class="p">,</span> <span class="n">tostring</span><span class="p">,</span> <span class="n">fromstring</span>
-<span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">MELT_BINARY</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">config</span>
 <span class="kn">from</span> <span class="nn">.clip</span> <span class="k">import</span> <span class="n">Clip</span>
-<span class="kn">from</span> <span class="nn">.utils</span> <span class="k">import</span> <span class="n">timestamp</span>
+<span class="kn">from</span> <span class="nn">.utils</span> <span class="k">import</span> <span class="n">timestamp</span><span class="p">,</span> <span class="n">check_melt</span>
 
 
 <div class="viewcode-block" id="Composition"><a class="viewcode-back" href="../../documentation.html#vidpy.Composition">[docs]</a><span class="k">class</span> <span class="nc">Composition</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -198,8 +198,10 @@
 <div class="viewcode-block" id="Composition.preview"><a class="viewcode-back" href="../../documentation.html#vidpy.Composition.preview">[docs]</a>    <span class="k">def</span> <span class="nf">preview</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39; Previews the composition using melt&#39;s default viewer.&#39;&#39;&#39;</span>
 
+        <span class="n">check_melt</span><span class="p">()</span>
+
         <span class="n">xmlfile</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">save_xml</span><span class="p">()</span>
-        <span class="n">call</span><span class="p">([</span><span class="n">MELT_BINARY</span><span class="p">,</span> <span class="n">xmlfile</span><span class="p">,</span> <span class="s1">&#39;out=&quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">duration</span><span class="p">)])</span>
+        <span class="n">call</span><span class="p">([</span><span class="n">config</span><span class="o">.</span><span class="n">MELT_BINARY</span><span class="p">,</span> <span class="n">xmlfile</span><span class="p">,</span> <span class="s1">&#39;out=&quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">duration</span><span class="p">)])</span>
         <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">xmlfile</span><span class="p">)</span></div>
 
 
@@ -215,10 +217,12 @@
 
 <span class="sd">        &#39;&#39;&#39;</span>
 
+        <span class="n">check_melt</span><span class="p">()</span>
+
         <span class="n">xmlfile</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">save_xml</span><span class="p">()</span>
 
         <span class="n">args</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="n">MELT_BINARY</span><span class="p">,</span>
+            <span class="n">config</span><span class="o">.</span><span class="n">MELT_BINARY</span><span class="p">,</span>
             <span class="n">xmlfile</span><span class="p">,</span>
             <span class="s1">&#39;out=&quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">duration</span><span class="p">),</span>
             <span class="s1">&#39;-consumer&#39;</span><span class="p">,</span>
@@ -242,7 +246,7 @@
 <span class="sd">            str: mlt command line arguments</span>
 <span class="sd">        &#39;&#39;&#39;</span>
 
-        <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">MELT_BINARY</span><span class="p">]</span><span class="c1">#, &#39;-profile&#39;, &#39;atsc_720p_30&#39;]</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">config</span><span class="o">.</span><span class="n">MELT_BINARY</span><span class="p">]</span><span class="c1">#, &#39;-profile&#39;, &#39;atsc_720p_30&#39;]</span>
 
         <span class="n">args</span> <span class="o">+=</span> <span class="p">[</span><span class="s1">&#39;-track&#39;</span><span class="p">,</span> <span class="s1">&#39;color:</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bg</span><span class="p">),</span> <span class="s1">&#39;out=0&#39;</span><span class="p">]</span><span class="c1">#.format(self.duration)]</span>
 
