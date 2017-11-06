@@ -193,7 +193,7 @@ class Clip(object):
         '''
 
         self.fx('affine', {
-            'transition.rotate_{}'.format(axis): amt
+            'transition.rotate_{}'.format(axis): speed
         })
         return self
 
