@@ -1,4 +1,4 @@
-from vidpy.utils import timestamp, get_bg_color
+from .utils import timestamp, get_bg_color
 
 class Clip(object):
     '''A VidPy clip
@@ -383,6 +383,27 @@ class Clip(object):
                 args += ['{}="{}"'.format(key, str(fxargs[key]))]
 
         return args
+
+
+    def preview(self):
+        '''Previews the clip'''
+
+        from vidpy import Composition
+        comp = Composition([self])
+        comp.preview()
+
+
+    def save(self, filename, **kwargs):
+        '''Saves the clip as a video file
+
+        Args:
+            filename (str): The file to save to.
+            kwargs: Pass in any arguments that you would to Composition (width, height, fps, bgcolor)
+        '''
+
+        from vidpy import Composition
+        comp = Composition([self], **kwargs)
+        comp.save(filename)
 
 
     def __str__(self):
