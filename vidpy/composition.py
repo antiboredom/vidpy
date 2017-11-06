@@ -156,6 +156,7 @@ class Composition(object):
         else:
             for i, c in enumerate(self.clips):
                 args += ['-transition', 'composite', 'distort=1', 'a_track=0', 'b_track={}'.format(i+1)]
+                args += ['-transition', 'mix', 'a_track=0', 'b_track={}'.format(i+1)]
 
         return args
 
