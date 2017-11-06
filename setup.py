@@ -14,7 +14,7 @@ setup(name='vidpy',
       author='Sam Lavigne',
       author_email='lavigne@saaaam.com',
       license='MIT',
-      packages=find_packages('vidpy', exclude=['*.mp4']),
+      packages=find_packages('vidpy', exclude=['*.mp4', 'docs']),
       install_requires=['pillow'],
       zip_safe=False
 )
