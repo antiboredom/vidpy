@@ -1,0 +1,291 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>vidpy.composition &#8212; VidPy 1.0.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">VidPy</a></h1>
+
+
+
+<p class="blurb">Python video editing and compositing</p>
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=antiboredom&repo=vidpy&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#mac-windows">Mac/Windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#ubuntu-debian">Ubuntu/Debian</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#setup">Setup</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation.html">Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../documentation.html#clip">Clip</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../documentation.html#text">Text</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../documentation.html#composition">Composition</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../examples.html#stitch-videos">Stitch Videos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples.html#video-grid">Video Grid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples.html#auto-chroma-key">Auto Chroma Key</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples.html#text">Text</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for vidpy.composition</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">subprocess</span> <span class="k">import</span> <span class="n">call</span><span class="p">,</span> <span class="n">check_output</span>
+<span class="kn">import</span> <span class="nn">uuid</span>
+<span class="kn">from</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">import</span> <span class="n">Element</span><span class="p">,</span> <span class="n">tostring</span><span class="p">,</span> <span class="n">fromstring</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">MELT_BINARY</span>
+<span class="kn">from</span> <span class="nn">.clip</span> <span class="k">import</span> <span class="n">Clip</span>
+<span class="kn">from</span> <span class="nn">.utils</span> <span class="k">import</span> <span class="n">timestamp</span>
+
+
+<div class="viewcode-block" id="Composition"><a class="viewcode-back" href="../../documentation.html#vidpy.Composition">[docs]</a><span class="k">class</span> <span class="nc">Composition</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;A composition made of a list of clips.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        clips (list): A list of Clip objects</span>
+
+<span class="sd">        bgcolor (str): The background color of the composition, in hex</span>
+
+<span class="sd">        singletrack (bool): Boolean that determines if clips play all at once (default) or sequentially</span>
+
+<span class="sd">        duration (float): Duration of the composition in seconds.</span>
+
+<span class="sd">        fps (int): Frames per second of output</span>
+
+<span class="sd">        width (int): Width of output in pixels</span>
+
+<span class="sd">        height (int): Height of output in pixels</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clips</span><span class="p">,</span> <span class="n">bgcolor</span><span class="o">=</span><span class="s1">&#39;#000000&#39;</span><span class="p">,</span> <span class="n">singletrack</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fps</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">clips</span> <span class="o">=</span> <span class="n">clips</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bg</span> <span class="o">=</span> <span class="n">bgcolor</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">singletrack</span> <span class="o">=</span> <span class="n">singletrack</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">duration</span> <span class="o">=</span> <span class="n">timestamp</span><span class="p">(</span><span class="n">duration</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fps</span> <span class="o">=</span> <span class="n">fps</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">width</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="n">height</span>
+
+
+<div class="viewcode-block" id="Composition.xml"><a class="viewcode-back" href="../../documentation.html#vidpy.Composition.xml">[docs]</a>    <span class="k">def</span> <span class="nf">xml</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Renders the composition as XML and sets the current duration, width, height and fps.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: an mlt xml representation of the composition</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="n">xml</span> <span class="o">=</span> <span class="n">check_output</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">()</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;-consumer&#39;</span><span class="p">,</span> <span class="s1">&#39;xml&#39;</span><span class="p">])</span>
+        <span class="n">xml</span> <span class="o">=</span> <span class="n">fromstring</span><span class="p">(</span><span class="n">xml</span><span class="p">)</span>
+
+        <span class="n">duration</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">duration</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">duration</span><span class="p">:</span>
+            <span class="n">duration</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">duration</span> <span class="o">=</span> <span class="n">tractor</span> <span class="o">=</span> <span class="n">xml</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;tractor&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;out&#39;</span><span class="p">)</span>
+
+        <span class="n">xml</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;tractor&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;out&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">duration</span><span class="p">))</span>
+        <span class="n">xml</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;producer&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;out&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">duration</span><span class="p">))</span>
+        <span class="n">xml</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;producer&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">xml</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;./producer/property[@name=&quot;length&quot;]&#39;</span><span class="p">))</span>
+        <span class="n">xml</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;./playlist/entry&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;out&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">duration</span><span class="p">))</span>
+
+        <span class="n">profile</span> <span class="o">=</span> <span class="n">xml</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;profile&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">fps</span><span class="p">:</span>
+            <span class="n">profile</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;frame_rate_num&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fps</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">:</span>
+            <span class="n">profile</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;width&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">))</span>
+            <span class="n">profile</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;display_aspect_num&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">))</span>
+            <span class="n">profile</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;height&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">))</span>
+            <span class="n">profile</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;display_aspect_den&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">tostring</span><span class="p">(</span><span class="n">xml</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Composition.save_xml"><a class="viewcode-back" href="../../documentation.html#vidpy.Composition.save_xml">[docs]</a>    <span class="k">def</span> <span class="nf">save_xml</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Saves the composition as a mlt xml file.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            filename (str): path to save to</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: path to the saved file</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">filename</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">())</span> <span class="o">+</span> <span class="s1">&#39;.xml&#39;</span>
+
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">outfile</span><span class="p">:</span>
+            <span class="n">outfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">xml</span><span class="p">())</span>
+
+        <span class="k">return</span> <span class="n">filename</span></div>
+
+
+<div class="viewcode-block" id="Composition.preview"><a class="viewcode-back" href="../../documentation.html#vidpy.Composition.preview">[docs]</a>    <span class="k">def</span> <span class="nf">preview</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Previews the composition using melt&#39;s default viewer.&#39;&#39;&#39;</span>
+
+        <span class="n">xmlfile</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">save_xml</span><span class="p">()</span>
+        <span class="n">call</span><span class="p">([</span><span class="n">MELT_BINARY</span><span class="p">,</span> <span class="n">xmlfile</span><span class="p">,</span> <span class="s1">&#39;out=&quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">duration</span><span class="p">)])</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">xmlfile</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Composition.save"><a class="viewcode-back" href="../../documentation.html#vidpy.Composition.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Save the composition as a video file.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            filename (str): the file to save to (any video type is accepted)</span>
+<span class="sd">            **kwargs: additional parameters to pass to ffmpeg</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            filename (str): the path to the saved file</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="n">xmlfile</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">save_xml</span><span class="p">()</span>
+
+        <span class="n">args</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">MELT_BINARY</span><span class="p">,</span>
+            <span class="n">xmlfile</span><span class="p">,</span>
+            <span class="s1">&#39;out=&quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">duration</span><span class="p">),</span>
+            <span class="s1">&#39;-consumer&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;avformat:</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+        <span class="p">]</span>
+
+        <span class="n">extra_params</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">=&quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
+        <span class="n">args</span> <span class="o">+=</span> <span class="n">extra_params</span>
+
+        <span class="n">call</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+
+        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">xmlfile</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">filename</span></div>
+
+
+<div class="viewcode-block" id="Composition.args"><a class="viewcode-back" href="../../documentation.html#vidpy.Composition.args">[docs]</a>    <span class="k">def</span> <span class="nf">args</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Generate mlt command line arguments</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: mlt command line arguments</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">MELT_BINARY</span><span class="p">]</span><span class="c1">#, &#39;-profile&#39;, &#39;atsc_720p_30&#39;]</span>
+
+        <span class="n">args</span> <span class="o">+=</span> <span class="p">[</span><span class="s1">&#39;-track&#39;</span><span class="p">,</span> <span class="s1">&#39;color:</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bg</span><span class="p">),</span> <span class="s1">&#39;out=0&#39;</span><span class="p">]</span><span class="c1">#.format(self.duration)]</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">singletrack</span><span class="p">:</span>
+            <span class="n">args</span> <span class="o">+=</span> <span class="p">[</span><span class="s1">&#39;-track&#39;</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">clips</span><span class="p">:</span>
+            <span class="n">args</span> <span class="o">+=</span> <span class="n">c</span><span class="o">.</span><span class="n">args</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">singletrack</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">singletrack</span><span class="p">:</span>
+            <span class="n">args</span> <span class="o">+=</span> <span class="p">[</span><span class="s1">&#39;-transition&#39;</span><span class="p">,</span> <span class="s1">&#39;composite&#39;</span><span class="p">,</span> <span class="s1">&#39;distort=1&#39;</span><span class="p">,</span> <span class="s1">&#39;a_track=0&#39;</span><span class="p">,</span> <span class="s1">&#39;b_track=1&#39;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">clips</span><span class="p">):</span>
+                <span class="n">args</span> <span class="o">+=</span> <span class="p">[</span><span class="s1">&#39;-transition&#39;</span><span class="p">,</span> <span class="s1">&#39;composite&#39;</span><span class="p">,</span> <span class="s1">&#39;distort=1&#39;</span><span class="p">,</span> <span class="s1">&#39;a_track=0&#39;</span><span class="p">,</span> <span class="s1">&#39;b_track=</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+
+        <span class="k">return</span> <span class="n">args</span></div>
+
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">())</span></div>
+
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2017, Sam Lavigne.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+    </div>
+
+    
+    <a href="https://github.com/antiboredom/vidpy" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>
