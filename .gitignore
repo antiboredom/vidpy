@@ -5,4 +5,5 @@ build/
 __pycache__/
 *.pyc
 *.mp4
+dist/
 !demos/videos/*.mp4
