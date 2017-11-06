@@ -2,10 +2,13 @@
 Utility functions for vidpy
 '''
 
+from __future__ import print_function
 import os
-from subprocess import call
+import sys
+from subprocess import call, Popen
 import uuid
 from PIL import Image
+from . import config
 
 def get_bg_color(filename):
     """
@@ -47,6 +50,16 @@ def timestamp(val):
         return val
     else:
         return Second(val)
+
+
+def check_melt():
+    try:
+        devnull = open(os.devnull)
+        Popen([config.MELT_BINARY], stdout=devnull, stderr=devnull).communicate()
+    except OSError as e:
+        if e.errno == os.errno.ENOENT:
+            print('Error: Could not find melt. See https://antiboredom.github.com/vidpy for installation instructions.')
+            sys.exit()
 
 
 class Frame(int):

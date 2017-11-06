@@ -56,5 +56,5 @@ for line in lines:
 
     clips.append(text)
 
-comp = Composition(clips, singletrack=True)
+comp = Composition(clips, singletrack=True, width=1280, height=720, fps=30)
 comp.save('manifesto.mp4')

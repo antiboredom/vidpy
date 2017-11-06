@@ -2,9 +2,9 @@ import os
 from subprocess import call, check_output
 import uuid
 from xml.etree.ElementTree import Element, tostring, fromstring
-from . import MELT_BINARY
+from . import config
 from .clip import Clip
-from .utils import timestamp
+from .utils import timestamp, check_melt
 
 
 class Composition(object):
@@ -93,8 +93,10 @@ class Composition(object):
     def preview(self):
         ''' Previews the composition using melt's default viewer.'''
 
+        check_melt()
+
         xmlfile = self.save_xml()
-        call([MELT_BINARY, xmlfile, 'out="{}"'.format(self.duration)])
+        call([config.MELT_BINARY, xmlfile, 'out="{}"'.format(self.duration)])
         os.remove(xmlfile)
 
 
@@ -110,10 +112,12 @@ class Composition(object):
 
         '''
 
+        check_melt()
+
         xmlfile = self.save_xml()
 
         args = [
-            MELT_BINARY,
+            config.MELT_BINARY,
             xmlfile,
             'out="{}"'.format(self.duration),
             '-consumer',
@@ -137,7 +141,7 @@ class Composition(object):
             str: mlt command line arguments
         '''
 
-        args = [MELT_BINARY]#, '-profile', 'atsc_720p_30']
+        args = [config.MELT_BINARY]#, '-profile', 'atsc_720p_30']
 
         args += ['-track', 'color:{}'.format(self.bg), 'out=0']#.format(self.duration)]
 
