@@ -7,7 +7,7 @@ except IOError:
     long_description = ''
 
 setup(name='vidpy',
-      version='0.1.0',
+      version='0.1.1',
       description='Video editing and compositing in Python',
       long_description=long_description,
       url='https://antiboredom.github.io/vidpy',
