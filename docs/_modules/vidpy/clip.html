@@ -103,7 +103,7 @@
           <div class="body" role="main">
             
   <h1>Source code for vidpy.clip</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">vidpy.utils</span> <span class="k">import</span> <span class="n">timestamp</span><span class="p">,</span> <span class="n">get_bg_color</span>
+<span></span><span class="kn">from</span> <span class="nn">.utils</span> <span class="k">import</span> <span class="n">timestamp</span><span class="p">,</span> <span class="n">get_bg_color</span>
 
 <div class="viewcode-block" id="Clip"><a class="viewcode-back" href="../../documentation.html#vidpy.Clip">[docs]</a><span class="k">class</span> <span class="nc">Clip</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;A VidPy clip</span>
@@ -123,8 +123,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">start</span> <span class="o">=</span> <span class="n">timestamp</span><span class="p">(</span><span class="n">start</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">end</span> <span class="o">=</span> <span class="n">timestamp</span><span class="p">(</span><span class="n">end</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">offset</span> <span class="o">=</span> <span class="n">timestamp</span><span class="p">(</span><span class="n">offset</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">repeats</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_repeat</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">output_fps</span> <span class="o">=</span> <span class="mi">30</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_speed</span> <span class="o">=</span> <span class="mf">1.0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">fxs</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span> <span class="o">=</span> <span class="n">kwargs</span>
 
@@ -174,6 +175,20 @@
 <span class="sd">        &#39;&#39;&#39;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">offset</span> <span class="o">=</span> <span class="n">timestamp</span><span class="p">(</span><span class="n">offset</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+<div class="viewcode-block" id="Clip.speed"><a class="viewcode-back" href="../../documentation.html#vidpy.Clip.speed">[docs]</a>    <span class="k">def</span> <span class="nf">speed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">speed</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Sets the playback speed of the clip.</span>
+
+<span class="sd">        The speed can be any number between 20 and 0.01.</span>
+<span class="sd">        Negative values will play video in reverse.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            speed (float): playback speed</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_speed</span> <span class="o">=</span> <span class="n">speed</span>
         <span class="k">return</span> <span class="bp">self</span></div>
 
 
@@ -283,7 +298,7 @@
 <span class="sd">        &#39;&#39;&#39;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">fx</span><span class="p">(</span><span class="s1">&#39;affine&#39;</span><span class="p">,</span> <span class="p">{</span>
-            <span class="s1">&#39;transition.rotate_</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">axis</span><span class="p">):</span> <span class="n">amt</span>
+            <span class="s1">&#39;transition.rotate_</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">axis</span><span class="p">):</span> <span class="n">speed</span>
         <span class="p">})</span>
         <span class="k">return</span> <span class="bp">self</span></div>
 
@@ -412,7 +427,7 @@
 <span class="sd">            total (int): How many times to repeat the clip</span>
 <span class="sd">        &#39;&#39;&#39;</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">repeats</span> <span class="o">=</span> <span class="n">total</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_repeat</span> <span class="o">=</span> <span class="n">total</span>
         <span class="k">return</span> <span class="bp">self</span></div>
 
 
@@ -445,7 +460,12 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">offset</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">args</span> <span class="o">+=</span> <span class="p">[</span><span class="s1">&#39;-blank&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">offset</span><span class="p">)]</span>
 
-        <span class="n">args</span> <span class="o">+=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">resource</span><span class="p">,</span> <span class="s1">&#39;in=&quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">)]</span>
+        <span class="n">resource</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">resource</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_speed</span> <span class="o">!=</span> <span class="mf">1.0</span><span class="p">:</span>
+            <span class="n">resource</span> <span class="o">=</span> <span class="s1">&#39;timewarp:</span><span class="si">{}</span><span class="s1">:</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_speed</span><span class="p">,</span> <span class="n">resource</span><span class="p">)</span>
+
+        <span class="n">args</span> <span class="o">+=</span> <span class="p">[</span><span class="n">resource</span><span class="p">,</span> <span class="s1">&#39;in=&quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">)]</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">end</span><span class="p">:</span>
             <span class="n">args</span> <span class="o">+=</span> <span class="p">[</span><span class="s1">&#39;out=&quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">end</span><span class="p">)]</span>
@@ -453,17 +473,14 @@
         <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">:</span>
             <span class="n">args</span> <span class="o">+=</span> <span class="p">[</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">=&quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="n">key</span><span class="p">])]</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">repeats</span><span class="p">:</span>
-            <span class="n">args</span> <span class="o">+=</span> <span class="p">[</span><span class="s1">&#39;-repeat&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">repeats</span><span class="p">)]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_repeat</span><span class="p">:</span>
+            <span class="n">args</span> <span class="o">+=</span> <span class="p">[</span><span class="s1">&#39;-repeat&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_repeat</span><span class="p">)]</span>
 
         <span class="k">for</span> <span class="n">fx</span><span class="p">,</span> <span class="n">fxargs</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">fxs</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">singletrack</span><span class="p">:</span>
                 <span class="n">args</span> <span class="o">+=</span> <span class="p">[</span><span class="s1">&#39;-attach-clip&#39;</span><span class="p">,</span> <span class="n">fx</span><span class="p">]</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">args</span> <span class="o">+=</span> <span class="p">[</span><span class="s1">&#39;-attach-track&#39;</span><span class="p">,</span> <span class="n">fx</span><span class="p">]</span>
-                <span class="c1"># args += [&#39;-attach-clip&#39;, fx]</span>
-                <span class="c1"># args += [&#39;-attach-cut&#39;, fx]</span>
-                <span class="c1"># args += [&#39;-attach&#39;, fx]</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">offset</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="n">args</span> <span class="o">+=</span> <span class="p">[</span><span class="s1">&#39;in=</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">offset</span><span class="p">)]</span>
 
@@ -471,6 +488,27 @@
                 <span class="n">args</span> <span class="o">+=</span> <span class="p">[</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">=&quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">fxargs</span><span class="p">[</span><span class="n">key</span><span class="p">]))]</span>
 
         <span class="k">return</span> <span class="n">args</span></div>
+
+
+<div class="viewcode-block" id="Clip.preview"><a class="viewcode-back" href="../../documentation.html#vidpy.Clip.preview">[docs]</a>    <span class="k">def</span> <span class="nf">preview</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Previews the clip&#39;&#39;&#39;</span>
+
+        <span class="kn">from</span> <span class="nn">vidpy</span> <span class="k">import</span> <span class="n">Composition</span>
+        <span class="n">comp</span> <span class="o">=</span> <span class="n">Composition</span><span class="p">([</span><span class="bp">self</span><span class="p">])</span>
+        <span class="n">comp</span><span class="o">.</span><span class="n">preview</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Clip.save"><a class="viewcode-back" href="../../documentation.html#vidpy.Clip.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Saves the clip as a video file</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            filename (str): The file to save to.</span>
+<span class="sd">            kwargs: Pass in any arguments that you would to Composition (width, height, fps, bgcolor)</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="kn">from</span> <span class="nn">vidpy</span> <span class="k">import</span> <span class="n">Composition</span>
+        <span class="n">comp</span> <span class="o">=</span> <span class="n">Composition</span><span class="p">([</span><span class="bp">self</span><span class="p">],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">comp</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span></div>
 
 
     <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>

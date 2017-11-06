@@ -296,6 +296,12 @@
 </dd></dl>
 
 <dl class="method">
+<dt id="vidpy.Clip.preview">
+<code class="descname">preview</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/vidpy/clip.html#Clip.preview"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vidpy.Clip.preview" title="Permalink to this definition">¶</a></dt>
+<dd><p>Previews the clip</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="vidpy.Clip.repeat">
 <code class="descname">repeat</code><span class="sig-paren">(</span><em>total</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vidpy/clip.html#Clip.repeat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vidpy.Clip.repeat" title="Permalink to this definition">¶</a></dt>
 <dd><p>Repeats the clip</p>
@@ -348,6 +354,24 @@
 </dd></dl>
 
 <dl class="method">
+<dt id="vidpy.Clip.save">
+<code class="descname">save</code><span class="sig-paren">(</span><em>filename</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vidpy/clip.html#Clip.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vidpy.Clip.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves the clip as a video file</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – The file to save to.</li>
+<li><strong>kwargs</strong> – Pass in any arguments that you would to Composition (width, height, fps, bgcolor)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="vidpy.Clip.set_duration">
 <code class="descname">set_duration</code><span class="sig-paren">(</span><em>duration</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vidpy/clip.html#Clip.set_duration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vidpy.Clip.set_duration" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sets the duration of the clip</p>
@@ -370,6 +394,22 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>offset</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) – Offset of the clip in seconds</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vidpy.Clip.speed">
+<code class="descname">speed</code><span class="sig-paren">(</span><em>speed</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vidpy/clip.html#Clip.speed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vidpy.Clip.speed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the playback speed of the clip.</p>
+<p>The speed can be any number between 20 and 0.01.
+Negative values will play video in reverse.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>speed</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) – playback speed</td>
 </tr>
 </tbody>
 </table>
