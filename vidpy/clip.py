@@ -18,8 +18,9 @@ class Clip(object):
         self.start = timestamp(start)
         self.end = timestamp(end)
         self.offset = timestamp(offset)
-        self.repeats = None
+        self._repeat = None
         self.output_fps = 30
+        self._speed = 1.0
         self.fxs = []
         self.kwargs = kwargs
 
@@ -69,6 +70,20 @@ class Clip(object):
         '''
 
         self.offset = timestamp(offset)
+        return self
+
+
+    def speed(self, speed):
+        '''Sets the playback speed of the clip.
+
+        The speed can be any number between 20 and 0.01.
+        Negative values will play video in reverse.
+
+        Args:
+            speed (float): playback speed
+        '''
+
+        self._speed = speed
         return self
 
 
@@ -307,7 +322,7 @@ class Clip(object):
             total (int): How many times to repeat the clip
         '''
 
-        self.repeats = total
+        self._repeat = total
         return self
 
 
@@ -340,7 +355,12 @@ class Clip(object):
         if self.offset > 0:
             args += ['-blank', str(self.offset)]
 
-        args += [self.resource, 'in="{}"'.format(self.start)]
+        resource = self.resource
+
+        if self._speed != 1.0:
+            resource = 'timewarp:{}:{}'.format(self._speed, resource)
+
+        args += [resource, 'in="{}"'.format(self.start)]
 
         if self.end:
             args += ['out="{}"'.format(self.end)]
@@ -348,17 +368,14 @@ class Clip(object):
         for key in self.kwargs:
             args += ['{}="{}"'.format(key, self.kwargs[key])]
 
-        if self.repeats:
-            args += ['-repeat', str(self.repeats)]
+        if self._repeat:
+            args += ['-repeat', str(self._repeat)]
 
         for fx, fxargs in self.fxs:
             if singletrack:
                 args += ['-attach-clip', fx]
             else:
                 args += ['-attach-track', fx]
-                # args += ['-attach-clip', fx]
-                # args += ['-attach-cut', fx]
-                # args += ['-attach', fx]
             if self.offset > 0:
                 args += ['in={}'.format(self.offset)]
 
