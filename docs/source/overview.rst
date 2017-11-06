@@ -133,13 +133,26 @@ in.
 Text
 ----
 
-Use the ``Text`` class to add text clips
+Use the ``Text`` class to render text
 
 .. code:: python
 
-    from vidpy import Text
+    from vidpy import Text, Composition
 
     text_clip = Text("A spectre is haunting Europe.", font="Comic Sans Ms", size=100, color="#ff0000")
+    composition = Composition([text]).preview()
+
+You can use a Text clip the same way as a normal clip.
+
+You can also directly overlay text on to another clip with the ``text`` method.
+
+.. code:: python
+
+    from vidpy import Clip
+
+    clip = Clip('somevideo.mp4')
+    clip.text("Hello!", color="#ffffff")
+
 
 Some optional parameters for text clips are:
 

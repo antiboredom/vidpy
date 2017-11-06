@@ -217,10 +217,19 @@ in.</p>
 </div>
 <div class="section" id="text">
 <h2>Text<a class="headerlink" href="#text" title="Permalink to this headline">¶</a></h2>
-<p>Use the <code class="docutils literal"><span class="pre">Text</span></code> class to add text clips</p>
-<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">vidpy</span> <span class="k">import</span> <span class="n">Text</span>
+<p>Use the <code class="docutils literal"><span class="pre">Text</span></code> class to render text</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">vidpy</span> <span class="k">import</span> <span class="n">Text</span><span class="p">,</span> <span class="n">Composition</span>
 
 <span class="n">text_clip</span> <span class="o">=</span> <span class="n">Text</span><span class="p">(</span><span class="s2">&quot;A spectre is haunting Europe.&quot;</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="s2">&quot;Comic Sans Ms&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#ff0000&quot;</span><span class="p">)</span>
+<span class="n">composition</span> <span class="o">=</span> <span class="n">Composition</span><span class="p">([</span><span class="n">text</span><span class="p">])</span><span class="o">.</span><span class="n">preview</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>You can use a Text clip the same way as a normal clip.</p>
+<p>You can also directly overlay text on to another clip with the <code class="docutils literal"><span class="pre">text</span></code> method.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">vidpy</span> <span class="k">import</span> <span class="n">Clip</span>
+
+<span class="n">clip</span> <span class="o">=</span> <span class="n">Clip</span><span class="p">(</span><span class="s1">&#39;somevideo.mp4&#39;</span><span class="p">)</span>
+<span class="n">clip</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="s2">&quot;Hello!&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#ffffff&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Some optional parameters for text clips are:</p>

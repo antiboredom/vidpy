@@ -270,6 +270,45 @@ class Clip(object):
         return self
 
 
+    def text(self, text, color="#ffffff", bgcolor="0x00000000", olcolor="0x00000000", outline=0, halign="center", valign="middle", pad=0, font="Sans", size=1080, style="normal", weight=400, bbox=(0, 0, '100%', '100%')):
+        '''Overlays text on a clip.
+
+        Args:
+            text (str): The text
+            font (str): The font family to use
+            color (str): Text foreground color
+            bgcolor (str): Optional background color
+            olcolor (str): Text outline color
+            outline (int): Outline size
+            style (str): Font style, can be "normal" or "italic"
+            weight (int): The weight of the text (boldness). Can be between 100 and 1000
+            bbox (list): A bounding box for text to appear in. By default is (0, 0, '100%', '100%'
+            halign (str): Horizontal aligment of text. Can be "center" (default), "left" or "right"
+            valign (str): Vertical aligment of text. Can be "middle" (default), "top" or "bottom"
+
+        '''
+
+        geometry = '{}/{}:{}x{}'.format(*bbox)
+
+        self.fx('dynamictext', {
+            'argument': text,
+            'geometry': geometry,
+            'family': font,
+            'size': size,
+            'weight': weight,
+            'style': style,
+            'fgcolour': color,
+            'bgcolour': bgcolor,
+            'olcolour': olcolor,
+            'outline': outline,
+            'pad': pad,
+            'halign': halign,
+            'valign': valign
+        })
+
+        return self
+
+
     def position(self, x=0, y=0, w='100%', h='100%', distort=False):
         '''Positions and resizes the clip. Coordinates can be either in pixels or percent.
 

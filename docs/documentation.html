@@ -439,6 +439,33 @@ Negative values will play video in reverse.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="vidpy.Clip.text">
+<code class="descname">text</code><span class="sig-paren">(</span><em>text</em>, <em>color='#ffffff'</em>, <em>bgcolor='0x00000000'</em>, <em>olcolor='0x00000000'</em>, <em>outline=0</em>, <em>halign='center'</em>, <em>valign='middle'</em>, <em>pad=0</em>, <em>font='Sans'</em>, <em>size=1080</em>, <em>style='normal'</em>, <em>weight=400</em>, <em>bbox=(0</em>, <em>0</em>, <em>'100%'</em>, <em>'100%')</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vidpy/clip.html#Clip.text"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vidpy.Clip.text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overlays text on a clip.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>text</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – The text</li>
+<li><strong>font</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – The font family to use</li>
+<li><strong>color</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Text foreground color</li>
+<li><strong>bgcolor</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Optional background color</li>
+<li><strong>olcolor</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Text outline color</li>
+<li><strong>outline</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – Outline size</li>
+<li><strong>style</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Font style, can be “normal” or “italic”</li>
+<li><strong>weight</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – The weight of the text (boldness). Can be between 100 and 1000</li>
+<li><strong>bbox</strong> (<em>list</em>) – A bounding box for text to appear in. By default is (0, 0, ‘100%’, ‘100%’</li>
+<li><strong>halign</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Horizontal aligment of text. Can be “center” (default), “left” or “right”</li>
+<li><strong>valign</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Vertical aligment of text. Can be “middle” (default), “top” or “bottom”</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="vidpy.Clip.vflip">
 <code class="descname">vflip</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/vidpy/clip.html#Clip.vflip"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vidpy.Clip.vflip" title="Permalink to this definition">¶</a></dt>
 <dd><p>Flip the clip vertically</p>
