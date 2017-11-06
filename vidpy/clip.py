@@ -1,6 +1,16 @@
 from vidpy.utils import timestamp, get_bg_color
 
 class Clip(object):
+    '''A VidPy clip
+
+    Args:
+        resource (str): Path to a video file, audio file, image, or melt xml document
+        service (str): Optional melt service
+        start (float): The in-point of the clip in seconds (optional). Setting this will trim from the start of the clip
+        end (float): The out-point of the clip in seconds (optional). Setting this will trim from the end of the clip
+        offset (float): Time in seconds before the clip is played.
+        **kwargs: Option parameters that will get sent to melt
+    '''
 
     def __init__(self, resource=None, service=None, start=0, end=None, offset=0, **kwargs):
         self.resource = resource
@@ -19,6 +29,15 @@ class Clip(object):
 
 
     def cut(self, start=None, end=None, duration=None):
+        '''Trims the clip
+
+        Args:
+            start (float): Time to trim from the start of the clip in seconds
+            end (float): Time to trim from the end of the clip in seconds
+            duration (float): Total duration of the clip (overwrited end)
+
+        '''
+
         if start:
             self.start = timestamp(start)
 
@@ -32,11 +51,23 @@ class Clip(object):
 
 
     def set_duration(self, duration):
+        '''Sets the duration of the clip
+
+        Args:
+            duration (float): Duration of the clip in seconds
+        '''
+
         self.end = self.start + timestamp(duration)
         return self
 
 
     def set_offset(self, offset):
+        '''Sets the offset of the clip - determines when the clip will start playing.
+
+        Args:
+            offset (float): Offset of the clip in seconds
+        '''
+
         self.offset = timestamp(offset)
         return self
 
@@ -45,12 +76,23 @@ class Clip(object):
         '''Adds any melt filter to a clip
 
         For a full list, see: https://www.mltframework.org/plugins/PluginsFilters/
+
+        Args:
+            name (str): the name of a filter to add
+            params (dict): a dictionary containing melt filter parameters
         '''
+
         self.fxs.append((name, params))
         return self
 
 
     def fadein(self, duration):
+        '''Fades the clip in
+
+        Args:
+            duration (float): Time to fade in, in seconds
+        '''
+
         self.fx('brightness', {
             'alpha': '0=0;{}=1'.format(timestamp(duration)),
             'opacity': '0=0;{}=1'.format(timestamp(duration))
@@ -59,6 +101,12 @@ class Clip(object):
 
 
     def fadeout(self, duration):
+        '''Fades the clip out
+
+        Args:
+            duration (float): Time to fade out, in seconds
+        '''
+
         self.fx('brightness', {
             'alpha': '{}=1;-1=0'.format(timestamp(duration*-1)),
             'opacity': '{}=1;-1=0'.format(timestamp(duration*-1))
@@ -67,6 +115,12 @@ class Clip(object):
 
 
     def opacity(self, amount):
+        '''Sets the clip's opacity
+
+        Args:
+            amount (float): Opacity, between 0.0 and 1.0
+        '''
+
         self.fx('brightness', {
             'alpha': amount,
             'opacity': amount
@@ -75,6 +129,14 @@ class Clip(object):
 
 
     def chroma(self, amount=0.15, color=None, blend=None):
+        '''Removes a color from the clip, making it transparent
+
+        Args:
+            amount (float): distance to the color, between 0.0 and 1.0. The higher the number the more will be removed.
+            color (str): The color to remove. If left blank, the top left pixel color will be used.
+            blend (float): Chromakey blend value, between 0 and 1
+        '''
+
         if color is None:
             color = get_bg_color(self.resource)
 
@@ -90,47 +152,71 @@ class Clip(object):
                 '1': amount
             })
 
-        # self.fx('frei0r.keyspillm0pup', {
-        #     '0': color,
-        #     '1': '#ffffff',
-        #     '2': 1,
-        #     '3': 0.5
-        # })
         return self
 
 
-    def rotate(self, amt=1, axis="x"):
+    def rotate(self, amount=1, axis="x"):
+        '''Rotate the clip along an axis
+
+        Args:
+            amount (float): Degrees to rotate by
+            axis (str): The axis to rotate over, by default "x"
+        '''
+
         self.fx('affine', {
-            'transition.fix_rotate_{}'.format(axis): amt
+            'transition.fix_rotate_{}'.format(axis): amount
         })
         return self
 
 
-    def spin(self, amt=1, axis="x"):
+    def spin(self, speed=1, axis="x"):
+        '''Spin the clip continuously. But why?
+
+        Args:
+            speed (float): Speed to rotate by
+            axis (str): The axis to rotate over, by default "x"
+        '''
+
         self.fx('affine', {
             'transition.rotate_{}'.format(axis): amt
         })
         return self
 
 
-    def glow(self, amount):
+    def glow(self, blur=0.5):
+        '''Apply a glow effect
+
+        Args:
+            blur (float): Amount to blur by
+        '''
+
         self.fx('frei0r.glow', {
-            '0': amount
+            '0': blur
         })
         return self
 
 
     def vflip(self):
+        '''Flip the clip vertically'''
+
         self.fx('avfilter.vflip')
         return self
 
 
     def hflip(self):
+        '''Flip the clip horizontally'''
+
         self.fx('avfilter.hflip')
         return self
 
 
     def flip(self, axis):
+        '''Flip the clip over an axis
+
+        Args:
+            axis (str): The axis to flip over, either "horizontal" or "vertical"
+        '''
+
         if axis.lower() == 'horizontal':
             self.hflip()
         else:
@@ -139,6 +225,17 @@ class Clip(object):
 
 
     def zoompan(self, origin, dest, start=0, end=-1):
+        '''Zooms and pans the clip over time
+
+        Takes an origin and destination coordinates either in pixels or percent.
+
+        Args:
+            origin (list): where to start from, as an [x, y, width, height] list
+            dest (list): where to end up as an [x, y, width, height] list
+            start (float): when to start the zoompan in seconds
+            end (float): when to end the zoompan in seconds
+        '''
+
         args = {
             'x1': origin[0],
             'y1': origin[1],
@@ -159,6 +256,18 @@ class Clip(object):
 
 
     def position(self, x=0, y=0, w='100%', h='100%', distort=False):
+        '''Positions and resizes the clip. Coordinates can be either in pixels or percent.
+
+        Aspect ratio will be mainted unless distort is set to True
+
+        Args:
+            x: optional x coordinate
+            y: optional y coordinate
+            w: optional width
+            h: optional height
+            distort (bool): Option to distort the image or maintain its ratio
+        '''
+
         self.fx('affine', {
             'transition.geometry': '{}/{}:{}x{}'.format(x, y, w, h),
             'transition.valign': 'middle',
@@ -171,6 +280,16 @@ class Clip(object):
 
 
     def resize(self, w='100%', h='100%', distort=False):
+        '''Resizes the clip. Coordinates can be either in pixels or percent.
+
+        Aspect ratio will be mainted unless distort is set to True
+
+        Args:
+            w: optional width
+            h: optional height
+            distort (bool): Option to distort the image or maintain its ratio
+        '''
+
         self.fx('affine', {
             'transition.geometry': '{}/{}:{}x{}'.format(0, 0, w, h),
             'transition.valign': 'middle',
@@ -182,24 +301,36 @@ class Clip(object):
 
 
     def repeat(self, total):
+        '''Repeats the clip
+
+        Args:
+            total (int): How many times to repeat the clip
+        '''
+
         self.repeats = total
         return self
 
 
     def loop(self):
+        '''Loops the clip indefinitely'''
+
         self.repeat(100000000)
         return self
 
 
     def volume(self, amt):
+        '''Sets the volume for the clip, from 0 (mute) to 1 (full volume)
+
+        Args:
+            amt (float): Volume between 0 and 1
+        '''
+
         self.fx('avfilter.volume', {'av.volume': amt})
         return self
 
 
     def args(self, singletrack=False):
-        """
-        Returns melt command line arguments as a list
-        """
+        '''Returns melt command line arguments as a list'''
 
         args = []
 
