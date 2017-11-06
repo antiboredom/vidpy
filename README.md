@@ -26,9 +26,9 @@ VidPy requires melt, which can be tricky to properly install on Mac and Windows.
 VidPy will attempt to locate the melt binary, searching first for a Shotcut installation on Mac/Windows. You can also point VidPy to a specific binary like so:
 
 ```python
-import vidpy
-vidpy.MELT_BINARY = '/path/to/melt'
-``` 
+from vidpy import config
+config.MELT_BINARY = '/path/to/melt'
+```
 
 ## Overview
 
