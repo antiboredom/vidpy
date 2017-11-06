@@ -7,14 +7,14 @@ except IOError:
     long_description = ''
 
 setup(name='vidpy',
-      version='0.1.1',
+      version='0.1.2',
       description='Video editing and compositing in Python',
       long_description=long_description,
       url='https://antiboredom.github.io/vidpy',
       author='Sam Lavigne',
       author_email='lavigne@saaaam.com',
       license='MIT',
-      packages=find_packages('vidpy', exclude=['*.mp4', 'docs']),
+      packages=find_packages(),
       install_requires=['pillow'],
       zip_safe=False
 )
