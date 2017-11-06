@@ -4,6 +4,8 @@ A Python video editor and compositor based on the [MLT Multimedia Framework](htt
 
 **VidPy is currently in alpha - there are probably a bunch of bugs, and the api will likely change. If you're interested in testing it out, please do, and leave comments/suggestions/issues in the [issue tracker](https://github.com/antiboredom/vidpy/issues).**
 
+Read the full documentation here: https://antiboredom.github.io/vidpy
+
 ## Installation/Dependencies
 
 VidPy requires melt, which can be tricky to properly install on Mac and Windows. The easiest option is to install Shotcut (an open source video editor) which comes with a prebuilt melt binary.
