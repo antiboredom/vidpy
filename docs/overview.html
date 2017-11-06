@@ -63,7 +63,12 @@
 <li class="toctree-l2"><a class="reference internal" href="installation.html#setup">Setup</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Overview</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#working-with-clips-and-compositions">Working with Clips and Compositions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#filters-effects">Filters &amp; Effects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#text">Text</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="documentation.html">Documentation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="documentation.html#clip">Clip</a></li>
 <li class="toctree-l2"><a class="reference internal" href="documentation.html#text">Text</a></li>
@@ -106,6 +111,8 @@
             
   <div class="section" id="overview">
 <h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="working-with-clips-and-compositions">
+<h2>Working with Clips and Compositions<a class="headerlink" href="#working-with-clips-and-compositions" title="Permalink to this headline">¶</a></h2>
 <p>Use the <code class="docutils literal"><span class="pre">Clip</span></code> class to create and manipulate video clips, and the
 <code class="docutils literal"><span class="pre">Composition</span></code> class to put clips together.</p>
 <p><code class="docutils literal"><span class="pre">Composition()</span></code> takes a list of clips as input, and then allows you to
@@ -161,7 +168,71 @@ color.</p>
 <p>Finally, you can convert compositions to clips to reuse.</p>
 <div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">comp</span> <span class="o">=</span> <span class="n">Composition</span><span class="p">([</span><span class="n">clip1</span><span class="p">,</span> <span class="n">clip2</span><span class="p">,</span> <span class="n">clip3</span><span class="p">],</span> <span class="n">singletrack</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">clip</span> <span class="o">=</span> <span class="n">Clip</span><span class="p">(</span><span class="n">comp</span><span class="p">)</span>
+
+<span class="c1"># do stuff with the entire composition</span>
+<span class="n">clip</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
+<div class="section" id="filters-effects">
+<h2>Filters &amp; Effects<a class="headerlink" href="#filters-effects" title="Permalink to this headline">¶</a></h2>
+<p>There are a number of effects built into VidPy:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">clip</span><span class="o">.</span><span class="n">fadein</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>      <span class="c1"># fade the clip in over 1 second</span>
+<span class="n">clip</span><span class="o">.</span><span class="n">fadeout</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>   <span class="c1"># fade the clip over 0.5 seconds</span>
+<span class="n">clip</span><span class="o">.</span><span class="n">glow</span><span class="p">()</span>         <span class="c1"># add a glow effect</span>
+<span class="n">clip</span><span class="o">.</span><span class="n">spin</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>        <span class="c1"># make the clip spin around. (Why would you do this? I don&#39;t know!)</span>
+<span class="n">clip</span><span class="o">.</span><span class="n">chroma</span><span class="p">()</span>       <span class="c1"># attempt to automatically remove the background color</span>
+<span class="n">clip</span><span class="o">.</span><span class="n">volume</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>      <span class="c1"># mute a video</span>
+
+<span class="c1"># set clip&#39;s position</span>
+<span class="n">clip</span><span class="o">.</span><span class="n">position</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+
+<span class="c1"># resize a clip</span>
+<span class="n">clip</span><span class="o">.</span><span class="n">position</span><span class="p">(</span><span class="n">w</span><span class="o">=</span><span class="s1">&#39;50%&#39;</span><span class="p">,</span> <span class="n">h</span><span class="o">=</span><span class="s1">&#39;20%&#39;&#39;)</span>
+
+<span class="c1"># start the clip scaled to 200% at coordinates (0, 0)</span>
+<span class="c1"># then move it to (200, 200) and scale it to 90% over 5 seconds</span>
+<span class="n">clip</span><span class="o">.</span><span class="n">zoompan</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;200%&#39;</span><span class="p">,</span> <span class="s1">&#39;200%&#39;</span><span class="p">],</span> <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="s1">&#39;90%&#39;</span><span class="p">,</span> <span class="s1">&#39;90%&#39;</span><span class="p">],</span> <span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For a full list see the filters documentation: (link to come)</p>
+<p>You can also use <a class="reference external" href="https://www.mltframework.org/plugins/PluginsFilters/">any filter supported by
+mlt</a> with the
+<code class="docutils literal"><span class="pre">fx</span></code> method. The first parameter should be the name of the filter, and
+the second a dictionary of options.</p>
+<p>For example, to add a <a class="reference external" href="https://www.mltframework.org/plugins/FilterFrei0r-cartoon/">cartoon
+effect</a>:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># use the full filter name as the first parameter</span>
+<span class="c1"># and then a dictionary of options, based on the mlt documentation</span>
+<span class="n">clip</span><span class="o">.</span><span class="n">fx</span><span class="p">(</span><span class="s1">&#39;frei0r.cartoon&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;0&#39;</span><span class="p">:</span> <span class="mf">0.999</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>Or, <a class="reference external" href="https://www.mltframework.org/plugins/FilterAvfilter-colorchannelmixer/">play with
+colors</a>:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">clip</span><span class="o">.</span><span class="n">fx</span><span class="p">(</span><span class="s1">&#39;avfilter.colorchannelmixer&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;av.rr&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;av.br&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>Remember to look at the mlt docs to figure out what parameters to pass
+in.</p>
+</div>
+<div class="section" id="text">
+<h2>Text<a class="headerlink" href="#text" title="Permalink to this headline">¶</a></h2>
+<p>Use the <code class="docutils literal"><span class="pre">Text</span></code> class to add text clips</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">vidpy</span> <span class="k">import</span> <span class="n">Text</span>
+
+<span class="n">text_clip</span> <span class="o">=</span> <span class="n">Text</span><span class="p">(</span><span class="s2">&quot;A spectre is haunting Europe.&quot;</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="s2">&quot;Comic Sans Ms&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#ff0000&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Some optional parameters for text clips are:</p>
+<p><code class="docutils literal"><span class="pre">font</span></code> any font name on your system</p>
+<p><code class="docutils literal"><span class="pre">color</span></code> color of text</p>
+<p><code class="docutils literal"><span class="pre">weight</span></code> between 100 and 1000</p>
+<p><code class="docutils literal"><span class="pre">style</span></code> normal or italic</p>
+<p><code class="docutils literal"><span class="pre">olcolor</span></code> outline color</p>
+<p><code class="docutils literal"><span class="pre">outline</span></code> outline size</p>
+<p><code class="docutils literal"><span class="pre">halign</span></code> horizontal alignment (left, center, right)</p>
+<p><code class="docutils literal"><span class="pre">valign</span></code> vertical alignment (top, middle, bottom)</p>
+<p><code class="docutils literal"><span class="pre">bbox</span></code> a bounding box to put the text in (x, y, width, height)</p>
 </div>
 </div>
 

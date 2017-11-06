@@ -16,3 +16,10 @@ tracker <https://github.com/antiboredom/vidpy/issues>`_.
    overview
    documentation
    examples
+
+
+Credits
+-------
+
+VidPy is by `Sam Lavigne <http://lav.io>`__, and draws heavily from
+`MoviePy by Zulko <http://zulko.github.io/moviepy/>`__.

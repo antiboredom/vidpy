@@ -1,5 +1,8 @@
 Overview
-========
+===========
+
+Working with Clips and Compositions
+------------------------------------
 
 Use the ``Clip`` class to create and manipulate video clips, and the
 ``Composition`` class to put clips together.
@@ -71,3 +74,89 @@ Finally, you can convert compositions to clips to reuse.
 
     comp = Composition([clip1, clip2, clip3], singletrack=True)
     clip = Clip(comp)
+
+    # do stuff with the entire composition
+    clip.cut(0, 1)
+
+
+Filters & Effects
+-----------------
+
+There are a number of effects built into VidPy:
+
+.. code:: python
+
+    clip.fadein(1)      # fade the clip in over 1 second
+    clip.fadeout(0.5)   # fade the clip over 0.5 seconds
+    clip.glow()         # add a glow effect
+    clip.spin(2)        # make the clip spin around. (Why would you do this? I don't know!)
+    clip.chroma()       # attempt to automatically remove the background color
+    clip.volume(0)      # mute a video
+
+    # set clip's position 
+    clip.position(x=100, y=20)
+
+    # resize a clip
+    clip.position(w='50%', h='20%'')
+
+    # start the clip scaled to 200% at coordinates (0, 0)
+    # then move it to (200, 200) and scale it to 90% over 5 seconds
+    clip.zoompan([0, 0, '200%', '200%'], [200, 200, '90%', '90%'], start=0, end=5)
+
+For a full list see the filters documentation: (link to come)
+
+You can also use `any filter supported by
+mlt <https://www.mltframework.org/plugins/PluginsFilters/>`__ with the
+``fx`` method. The first parameter should be the name of the filter, and
+the second a dictionary of options.
+
+For example, to add a `cartoon
+effect <https://www.mltframework.org/plugins/FilterFrei0r-cartoon/>`__:
+
+.. code:: python
+
+    # use the full filter name as the first parameter
+    # and then a dictionary of options, based on the mlt documentation
+    clip.fx('frei0r.cartoon', {'0': 0.999})
+
+Or, `play with
+colors <https://www.mltframework.org/plugins/FilterAvfilter-colorchannelmixer/>`__:
+
+.. code:: python
+
+    clip.fx('avfilter.colorchannelmixer', {'av.rr': 2, 'av.br': 2})
+
+Remember to look at the mlt docs to figure out what parameters to pass
+in.
+
+
+Text
+----
+
+Use the ``Text`` class to add text clips
+
+.. code:: python
+
+    from vidpy import Text
+
+    text_clip = Text("A spectre is haunting Europe.", font="Comic Sans Ms", size=100, color="#ff0000")
+
+Some optional parameters for text clips are:
+
+``font`` any font name on your system
+
+``color`` color of text
+
+``weight`` between 100 and 1000
+
+``style`` normal or italic
+
+``olcolor`` outline color
+
+``outline`` outline size
+
+``halign`` horizontal alignment (left, center, right)
+
+``valign`` vertical alignment (top, middle, bottom)
+
+``bbox`` a bounding box to put the text in (x, y, width, height)
