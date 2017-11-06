@@ -1,0 +1,301 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Examples &#8212; VidPy 1.0.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Documentation" href="documentation.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">VidPy</a></h1>
+
+
+
+<p class="blurb">Python video editing and compositing</p>
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=antiboredom&repo=vidpy&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#mac-windows">Mac/Windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#ubuntu-debian">Ubuntu/Debian</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#setup">Setup</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation.html">Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="documentation.html#clip">Clip</a></li>
+<li class="toctree-l2"><a class="reference internal" href="documentation.html#text">Text</a></li>
+<li class="toctree-l2"><a class="reference internal" href="documentation.html#composition">Composition</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#stitch-videos">Stitch Videos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#video-grid">Video Grid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#auto-chroma-key">Auto Chroma Key</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#text">Text</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="documentation.html" title="previous chapter">Documentation</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="examples">
+<h1>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="stitch-videos">
+<h2>Stitch Videos<a class="headerlink" href="#stitch-videos" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">vidpy</span> <span class="k">import</span> <span class="n">Clip</span><span class="p">,</span> <span class="n">Composition</span>
+
+<span class="n">clip1</span> <span class="o">=</span> <span class="n">Clip</span><span class="p">(</span><span class="s1">&#39;videos/hand1.mp4&#39;</span><span class="p">)</span>
+<span class="n">clip2</span> <span class="o">=</span> <span class="n">Clip</span><span class="p">(</span><span class="s1">&#39;videos/hand2.mp4&#39;</span><span class="p">)</span>
+<span class="n">clip3</span> <span class="o">=</span> <span class="n">Clip</span><span class="p">(</span><span class="s1">&#39;videos/hand3.mp4&#39;</span><span class="p">)</span>
+
+<span class="n">clips</span> <span class="o">=</span> <span class="p">[</span><span class="n">clip1</span><span class="p">,</span> <span class="n">clip2</span><span class="p">,</span> <span class="n">clip3</span><span class="p">]</span>
+
+
+<span class="c1"># stitch all clips together</span>
+<span class="n">stiched</span> <span class="o">=</span> <span class="n">Composition</span><span class="p">(</span><span class="n">clips</span><span class="p">,</span> <span class="n">singletrack</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">stiched</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;allvids.mp4&#39;</span><span class="p">)</span>
+
+<span class="c1"># stitch the first second of all clips</span>
+<span class="k">for</span> <span class="n">clip</span> <span class="ow">in</span> <span class="n">clips</span><span class="p">:</span>
+    <span class="n">clip</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">stiched</span> <span class="o">=</span> <span class="n">Composition</span><span class="p">(</span><span class="n">clips</span><span class="p">,</span> <span class="n">singletrack</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">stiched</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;firstsecond.mp4&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="video-grid">
+<h2>Video Grid<a class="headerlink" href="#video-grid" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">vidpy</span> <span class="k">import</span> <span class="n">Clip</span><span class="p">,</span> <span class="n">Composition</span>
+
+<span class="n">video</span> <span class="o">=</span> <span class="s1">&#39;videos/hand1.mp4&#39;</span>
+
+<span class="n">canvas_width</span> <span class="o">=</span> <span class="mi">1280</span>
+<span class="n">canvas_height</span> <span class="o">=</span> <span class="mi">720</span>
+<span class="n">vid_width</span> <span class="o">=</span> <span class="n">canvas_width</span><span class="o">/</span><span class="mi">3</span>
+<span class="n">vid_height</span> <span class="o">=</span> <span class="p">(</span><span class="n">vid_width</span><span class="o">/</span><span class="n">canvas_width</span><span class="p">)</span> <span class="o">*</span> <span class="n">canvas_height</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">clips</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">while</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="n">canvas_height</span><span class="p">:</span>
+    <span class="c1"># create a clip</span>
+    <span class="n">clip</span> <span class="o">=</span> <span class="n">Clip</span><span class="p">(</span><span class="n">video</span><span class="p">)</span>
+
+    <span class="c1"># set clip position</span>
+    <span class="n">clip</span><span class="o">.</span><span class="n">position</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="n">vid_width</span><span class="p">,</span> <span class="n">h</span><span class="o">=</span><span class="n">vid_height</span><span class="p">)</span>
+
+    <span class="c1"># fade in for 1/2 second</span>
+    <span class="n">clip</span><span class="o">.</span><span class="n">fadein</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+
+    <span class="c1"># repeat the clip three times</span>
+    <span class="n">clip</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+    <span class="c1"># start the clip based on existing clips</span>
+    <span class="n">clip</span><span class="o">.</span><span class="n">set_offset</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">clips</span><span class="p">)</span><span class="o">*.</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">clips</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">clip</span><span class="p">)</span>
+
+    <span class="c1"># increment the x and y position</span>
+    <span class="n">x</span> <span class="o">+=</span> <span class="n">vid_width</span>
+    <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">canvas_width</span><span class="p">:</span>
+        <span class="n">y</span> <span class="o">+=</span> <span class="n">vid_height</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">grid</span> <span class="o">=</span> <span class="n">Composition</span><span class="p">(</span><span class="n">clips</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">canvas_width</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="n">canvas_height</span><span class="p">)</span>
+<span class="n">grid</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;grid.mp4&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="auto-chroma-key">
+<h2>Auto Chroma Key<a class="headerlink" href="#auto-chroma-key" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">vidpy</span> <span class="k">import</span> <span class="n">Clip</span><span class="p">,</span> <span class="n">Composition</span>
+
+<span class="n">video</span> <span class="o">=</span> <span class="s1">&#39;videos/hand1.mp4&#39;</span>
+
+<span class="n">clips</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">):</span>
+    <span class="n">clip</span> <span class="o">=</span> <span class="n">Clip</span><span class="p">(</span><span class="n">video</span><span class="p">)</span>
+
+    <span class="c1"># attempt to automatically remove background color</span>
+    <span class="c1"># you can also specify a color with color=&#39;#00ff00&#39;</span>
+    <span class="n">clip</span><span class="o">.</span><span class="n">chroma</span><span class="p">(</span><span class="n">amount</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+
+    <span class="c1"># start the clips 1/2 second after last clip</span>
+    <span class="n">clip</span><span class="o">.</span><span class="n">set_offset</span><span class="p">(</span><span class="n">i</span> <span class="o">*</span> <span class="mf">0.5</span><span class="p">)</span>
+
+    <span class="c1"># change the clips x coordinate</span>
+    <span class="n">clip</span><span class="o">.</span><span class="n">position</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span><span class="o">-</span><span class="mi">300</span><span class="p">)</span>
+
+    <span class="c1"># loop the clip 3 times</span>
+    <span class="n">clip</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+    <span class="n">clips</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">clip</span><span class="p">)</span>
+
+
+<span class="n">comp</span> <span class="o">=</span> <span class="n">Composition</span><span class="p">(</span><span class="n">clips</span><span class="p">,</span> <span class="n">bgcolor</span><span class="o">=</span><span class="s1">&#39;#ff4dff&#39;</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">comp</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;chroma_overlay.mp4&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="text">
+<h2>Text<a class="headerlink" href="#text" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">from</span> <span class="nn">vidpy</span> <span class="k">import</span> <span class="n">Text</span><span class="p">,</span> <span class="n">Clip</span><span class="p">,</span> <span class="n">Composition</span>
+
+<span class="n">lines</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;A spectre is haunting Europe -</span>
+<span class="s1">the spectre of communism.</span>
+<span class="s1">All the powers of old Europe</span>
+<span class="s1">have entered into a holy alliance</span>
+<span class="s1">to exorcise this spectre:</span>
+<span class="s1">Pope and Tsar,</span>
+<span class="s1">Metternich and Guizot,</span>
+<span class="s1">French Radicals and German police-spies.</span>
+<span class="s1">Where is the party in opposition that</span>
+<span class="s1">has not been decried as communistic by its opponents in power?</span>
+<span class="s1">Where is the opposition</span>
+<span class="s1">that has not hurled back</span>
+<span class="s1">the branding reproach of communism,</span>
+<span class="s1">against the more advanced opposition parties,</span>
+<span class="s1">as well as against its reactionary adversaries?</span>
+<span class="s1">Two things result from this fact:</span>
+<span class="s1">I. Communism is already acknowledged</span>
+<span class="s1">by all European powers to be itself a power.</span>
+<span class="s1">II. It is high time that Communists should openly,</span>
+<span class="s1">in the face of the whole world,</span>
+<span class="s1">publish their views,</span>
+<span class="s1">their aims,</span>
+<span class="s1">their tendencies,</span>
+<span class="s1">and meet this nursery tale</span>
+<span class="s1">of the Spectre of Communism</span>
+<span class="s1">with a manifesto of the party itself.&#39;&#39;&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># some random style choices</span>
+<span class="n">fonts</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Helvetica&#39;</span><span class="p">,</span> <span class="s1">&#39;Comic Sans MS&#39;</span><span class="p">,</span> <span class="s1">&#39;Andale Mono&#39;</span><span class="p">]</span>
+<span class="n">styles</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;normal&#39;</span><span class="p">,</span> <span class="s1">&#39;italic&#39;</span><span class="p">]</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#ff5179&#39;</span><span class="p">,</span> <span class="s1">&#39;#43f8ff&#39;</span><span class="p">,</span> <span class="s1">&#39;#a0ff5f&#39;</span><span class="p">,</span> <span class="s1">&#39;#ffed00&#39;</span><span class="p">]</span>
+
+<span class="n">clips</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+    <span class="c1"># select random attributes</span>
+    <span class="n">font</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">fonts</span><span class="p">)</span>
+    <span class="n">color</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">colors</span><span class="p">)</span>
+    <span class="n">outline_color</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">colors</span><span class="p">)</span>
+    <span class="n">outline_size</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+    <span class="n">weight</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+    <span class="n">style</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">styles</span><span class="p">)</span>
+
+    <span class="c1"># put the text in a bounding box that fills 90% of the screen</span>
+    <span class="c1"># (x, y, width, height)</span>
+    <span class="n">boundingbox</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;10%&#39;</span><span class="p">,</span> <span class="s1">&#39;10%&#39;</span><span class="p">,</span> <span class="s1">&#39;80%&#39;</span><span class="p">,</span> <span class="s1">&#39;80%&#39;</span><span class="p">)</span>
+
+    <span class="c1"># create a one second text clip with random parameters</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">Text</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="n">style</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="n">weight</span><span class="p">,</span> <span class="n">olcolor</span><span class="o">=</span><span class="n">outline_color</span><span class="p">,</span> <span class="n">outline</span><span class="o">=</span><span class="n">outline_size</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">bbox</span><span class="o">=</span><span class="n">boundingbox</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+
+    <span class="c1"># add a glow for some reason!</span>
+    <span class="n">text</span><span class="o">.</span><span class="n">glow</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">clips</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+<span class="n">comp</span> <span class="o">=</span> <span class="n">Composition</span><span class="p">(</span><span class="n">clips</span><span class="p">,</span> <span class="n">singletrack</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">comp</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;manifesto.mp4&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2017, Sam Lavigne.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/examples.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+    <a href="https://github.com/antiboredom/vidpy" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>
