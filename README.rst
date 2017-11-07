@@ -4,10 +4,10 @@ VidPy
 A Python video editor and compositor based on the `MLT Multimedia
 Framework <https://www.mltframework.org/>`__.
 
-**VidPy is currently in alpha - there are probably a bunch of bugs, and
+VidPy is currently in alpha - there are probably a bunch of bugs, and
 the api will likely change. If you're interested in testing it out,
 please do, and leave comments/suggestions/issues in the `issue
-tracker <https://github.com/antiboredom/vidpy/issues>`__.**
+tracker <https://github.com/antiboredom/vidpy/issues>`__.
 
 Read the full documentation here: https://antiboredom.github.io/vidpy
 
@@ -21,9 +21,8 @@ editor) which comes with a prebuilt melt binary.
 Mac/Windows
 ~~~~~~~~~~~
 
-1. `Download Shotcut <https://www.shotcut.org/download/>`__
-2. Install it
-3. Install VidPy with: ``pip install vidpy``
+1. `Install Shotcut <https://www.shotcut.org/download/>`__ (on a mac with brew: ``brew cask install shotcut``
+2. Install VidPy with: ``pip install vidpy``
 
 Ubuntu/Debian
 ~~~~~~~~~~~~~
