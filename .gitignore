@@ -8,3 +8,4 @@ __pycache__/
 dist/
 !demos/videos/*.mp4
 *.egg-info/
+.tox/

@@ -36,5 +36,6 @@ setup(name='vidpy',
       license='MIT',
       packages=find_packages(),
       install_requires=['pillow'],
-      zip_safe=False
+      zip_safe=False,
+      test_suite='tests'
 )
