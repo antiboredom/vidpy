@@ -1,3 +1,5 @@
+__version__ = '0.1.3'
+
 from .clip import Clip
 from .composition import Composition
 from .text import Text
