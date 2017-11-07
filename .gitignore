@@ -7,3 +7,4 @@ __pycache__/
 *.mp4
 dist/
 !demos/videos/*.mp4
+*.egg-info/
