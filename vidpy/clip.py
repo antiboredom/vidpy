@@ -1,3 +1,4 @@
+import os
 from .utils import timestamp, get_bg_color
 
 class Clip(object):
@@ -22,6 +23,7 @@ class Clip(object):
         self.output_fps = 30
         self._speed = 1.0
         self.fxs = []
+        self.transitions = []
         self.kwargs = kwargs
 
         if self.resource.__class__.__name__ == 'Composition':
@@ -198,6 +200,21 @@ class Clip(object):
         return self
 
 
+    def blink(self, interval):
+        '''Blinks the clip at an interval
+
+        Args:
+            interval (float): time in seconds for on/off cycle
+        '''
+        dn = os.path.dirname(os.path.realpath(__file__))
+        self.transitions.append(('webfx:{}'.format(os.path.join(dn, 'effects', 'blink.html')), {
+            'interval': interval * 1000,
+            'out': 1000000000
+        }))
+
+        return self
+
+
     def glow(self, blur=0.5):
         '''Apply a glow effect
 
@@ -236,6 +253,28 @@ class Clip(object):
             self.hflip()
         else:
             self.vflip()
+        return self
+
+
+    def move(self, sequence, repeat=False, cycle=0, mirror=False):
+        '''Moves the clip around.
+
+        Takes a list of (keyframe, x, y, w, h) params
+        At each target frame, the clip will be moved and optionally resized
+        to the supplied x,y,w,h params.
+
+        You can use pixels or percentages (in quotes)
+        '''
+
+        args = ['{}={}/{}:{}x{}'.format(*s) for s in sequence]
+        args = ';'.join(args)
+        self.fx('affine', {
+            'transition.geometry': args,
+            'background': 'color:0',
+            'transition.repeat_off': 0 if repeat else 1,
+            'transition.cycle': cycle,
+            'transition.mirror': 1 if mirror else 0
+        })
         return self
 
 
