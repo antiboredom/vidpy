@@ -65,7 +65,7 @@ def check_melt():
 def effects_path(effect=None):
     '''Returns the path to the effects directory'''
 
-    returnpath = os.path.dirname(os.path.realpath(__file__))
+    returnpath = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'effects')
 
     if effect is not None:
         returnpath = os.path.join(returnpath, effect)
