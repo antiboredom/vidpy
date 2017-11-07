@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Overview &#8212; VidPy 0.1.3 documentation</title>
+    <title>Overview &#8212; VidPy 0.1.4 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.1.3',
+        VERSION:     '0.1.4',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -195,7 +195,10 @@ color.</p>
 <span class="n">clip</span><span class="o">.</span><span class="n">zoompan</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;200%&#39;</span><span class="p">,</span> <span class="s1">&#39;200%&#39;</span><span class="p">],</span> <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="s1">&#39;90%&#39;</span><span class="p">,</span> <span class="s1">&#39;90%&#39;</span><span class="p">],</span> <span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>For a full list see the filters documentation: (link to come)</p>
+<p>Please note that effects will be applied in the order that you add them, and that order matters.
+For example, the chroma filter will be affected by any color adjustment already on the clip.</p>
+<p>For a full list see the filters documentation (link to come, in the meantime,
+look at the Clip class documentation).</p>
 <p>You can also use <a class="reference external" href="https://www.mltframework.org/plugins/PluginsFilters/">any filter supported by
 mlt</a> with the
 <code class="docutils literal"><span class="pre">fx</span></code> method. The first parameter should be the name of the filter, and

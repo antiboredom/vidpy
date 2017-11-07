@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Documentation &#8212; VidPy 0.1.3 documentation</title>
+    <title>Documentation &#8212; VidPy 0.1.4 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.1.3',
+        VERSION:     '0.1.4',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -482,6 +482,25 @@ Negative values will play video in reverse.</p>
 <li><strong>bbox</strong> (<em>list</em>) – A bounding box for text to appear in. By default is (0, 0, ‘100%’, ‘100%’</li>
 <li><strong>halign</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Horizontal aligment of text. Can be “center” (default), “left” or “right”</li>
 <li><strong>valign</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Vertical aligment of text. Can be “middle” (default), “top” or “bottom”</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vidpy.Clip.transition">
+<code class="descname">transition</code><span class="sig-paren">(</span><em>name</em>, <em>params=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vidpy/clip.html#Clip.transition"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vidpy.Clip.transition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds any melt transition to a track</p>
+<p>For a full list, see: <a class="reference external" href="https://www.mltframework.org/plugins/PluginsFilters/">https://www.mltframework.org/plugins/PluginsFilters/</a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>name</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – the name of a filter to add</li>
+<li><strong>params</strong> (<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) – a dictionary containing melt filter parameters</li>
 </ul>
 </td>
 </tr>

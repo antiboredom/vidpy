@@ -93,7 +93,7 @@ There are a number of effects built into VidPy:
     clip.chroma()       # attempt to automatically remove the background color
     clip.volume(0)      # mute a video
 
-    # set clip's position 
+    # set clip's position
     clip.position(x=100, y=20)
 
     # resize a clip
@@ -103,7 +103,11 @@ There are a number of effects built into VidPy:
     # then move it to (200, 200) and scale it to 90% over 5 seconds
     clip.zoompan([0, 0, '200%', '200%'], [200, 200, '90%', '90%'], start=0, end=5)
 
-For a full list see the filters documentation: (link to come)
+Please note that effects will be applied in the order that you add them, and that order matters.
+For example, the chroma filter will be affected by any color adjustment already on the clip.
+
+For a full list see the filters documentation (link to come, in the meantime,
+look at the Clip class documentation).
 
 You can also use `any filter supported by
 mlt <https://www.mltframework.org/plugins/PluginsFilters/>`__ with the
