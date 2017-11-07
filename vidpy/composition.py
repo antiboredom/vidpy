@@ -141,25 +141,28 @@ class Composition(object):
             str: mlt command line arguments
         '''
 
-        args = [config.MELT_BINARY]#, '-profile', 'atsc_720p_30']
+        args = [config.MELT_BINARY]
 
-        args += ['-track', 'color:{}'.format(self.bg), 'out=0']#.format(self.duration)]
 
+        # add the the background track
+        args += ['-track', 'color:{}'.format(self.bg), 'out=0']
+
+        # add a track for all clips in singletrack
         if self.singletrack:
             args += ['-track']
 
-        for c in self.clips:
+        # add args and transitions for all clips
+        for i, c in enumerate(self.clips):
             args += c.args(self.singletrack)
+            args += c.transition_args(i+1)
 
+        # add composite transitions for all tracks
         if self.singletrack:
             args += ['-transition', 'composite', 'distort=1', 'a_track=0', 'b_track=1']
         else:
             for i, c in enumerate(self.clips):
                 args += ['-transition', 'composite', 'distort=1', 'a_track=0', 'b_track={}'.format(i+1)]
                 args += ['-transition', 'mix', 'a_track=0', 'b_track={}'.format(i+1)]
-
-                # for t in c.transitions:
-                #     args += ['-transition', t[0], 
 
         return args
 

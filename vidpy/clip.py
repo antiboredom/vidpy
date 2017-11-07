@@ -1,5 +1,5 @@
 import os
-from .utils import timestamp, get_bg_color
+from .utils import timestamp, get_bg_color, effects_path
 
 class Clip(object):
     '''A VidPy clip
@@ -100,6 +100,21 @@ class Clip(object):
         '''
 
         self.fxs.append((name, params))
+        return self
+
+
+
+    def transition(self, name, params=None):
+        '''Adds any melt transition to a track
+
+        For a full list, see: https://www.mltframework.org/plugins/PluginsFilters/
+
+        Args:
+            name (str): the name of a filter to add
+            params (dict): a dictionary containing melt filter parameters
+        '''
+
+        self.transitions.append((name, params))
         return self
 
 
@@ -206,11 +221,11 @@ class Clip(object):
         Args:
             interval (float): time in seconds for on/off cycle
         '''
-        dn = os.path.dirname(os.path.realpath(__file__))
-        self.transitions.append(('webfx:{}'.format(os.path.join(dn, 'effects', 'blink.html')), {
+
+        self.transition('webvfx', {
+            'resource': effects_path('blink.html'),
             'interval': interval * 1000,
-            'out': 1000000000
-        }))
+        })
 
         return self
 
@@ -460,6 +475,16 @@ class Clip(object):
             for key in fxargs:
                 args += ['{}="{}"'.format(key, str(fxargs[key]))]
 
+        return args
+
+
+    def transition_args(self, track_number):
+        args = []
+        for transition, targs in self.transitions:
+            args += ['-transition', transition]
+            for key in targs:
+                args += ['{}="{}"'.format(key, str(targs[key]))]
+            args += ['b_track=0', 'a_track={}'.format(track_number)]
         return args
 
 
