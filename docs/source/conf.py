@@ -99,6 +99,7 @@ html_theme_options = {
     'page_width': '1100px',
     'fixed_sidebar': True,
     'github_banner': True,
+    'github_type': 'star',
     'sidebar_collapse': False
 }
 
