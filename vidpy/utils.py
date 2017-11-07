@@ -11,7 +11,7 @@ from PIL import Image
 from . import config
 
 def get_bg_color(filename):
-    """
+    '''
     Extracts the top left pixel color from the first frame of a video
 
     Args:
@@ -19,7 +19,7 @@ def get_bg_color(filename):
 
     Returns:
         color
-    """
+    '''
 
     tempname = str(uuid.uuid4()) + '.png'
     call([
@@ -62,20 +62,29 @@ def check_melt():
             sys.exit()
 
 
+def effects_path(effect=None):
+    '''Returns the path to the effects directory'''
+
+    returnpath = os.path.dirname(os.path.realpath(__file__))
+
+    if effect is not None:
+        returnpath = os.path.join(returnpath, effect)
+
+    return returnpath
+
+
 class Frame(int):
-    """
-    A wrapper class for int to help differentiate between timestamps and frames
-    """
+    '''A wrapper class for int to help differentiate between timestamps and frames'''
 
     pass
 
 
 class Second(float):
-    """
+    '''
     A wrapper class for float.
 
     Allows floats to be converted into melt timestamps
-    """
+    '''
 
     def __repr__(self):
         return ':%f' % self
