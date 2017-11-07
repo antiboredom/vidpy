@@ -8,9 +8,8 @@ editor) which comes with a prebuilt melt binary.
 Mac/Windows
 -----------
 
-1. `Download Shotcut <https://www.shotcut.org/download/>`_
-2. Install it
-3. Install VidPy with: ``pip install vidpy``
+1. `Install Shotcut <https://www.shotcut.org/download/>`_ (on a mac with brew you can also run ``brew cask install shotcut``
+2. Install VidPy with: ``pip install vidpy``
 
 Ubuntu/Debian
 -------------

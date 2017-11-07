@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Documentation &#8212; VidPy 1.0.0 documentation</title>
+    <title>Documentation &#8212; VidPy 0.1.0 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '1.0.0',
+        VERSION:     '0.1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -140,6 +140,20 @@
 </dd></dl>
 
 <dl class="method">
+<dt id="vidpy.Clip.blink">
+<code class="descname">blink</code><span class="sig-paren">(</span><em>interval</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vidpy/clip.html#Clip.blink"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vidpy.Clip.blink" title="Permalink to this definition">¶</a></dt>
+<dd><p>Blinks the clip at an interval</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>interval</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) – time in seconds for on/off cycle</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="vidpy.Clip.chroma">
 <code class="descname">chroma</code><span class="sig-paren">(</span><em>amount=0.15</em>, <em>color=None</em>, <em>blend=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vidpy/clip.html#Clip.chroma"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vidpy.Clip.chroma" title="Permalink to this definition">¶</a></dt>
 <dd><p>Removes a color from the clip, making it transparent</p>
@@ -262,6 +276,16 @@
 <dt id="vidpy.Clip.loop">
 <code class="descname">loop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/vidpy/clip.html#Clip.loop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vidpy.Clip.loop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Loops the clip indefinitely</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vidpy.Clip.move">
+<code class="descname">move</code><span class="sig-paren">(</span><em>sequence</em>, <em>repeat=False</em>, <em>cycle=0</em>, <em>mirror=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vidpy/clip.html#Clip.move"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vidpy.Clip.move" title="Permalink to this definition">¶</a></dt>
+<dd><p>Moves the clip around.</p>
+<p>Takes a list of (keyframe, x, y, w, h) params
+At each target frame, the clip will be moved and optionally resized
+to the supplied x,y,w,h params.</p>
+<p>You can use pixels or percentages (in quotes)</p>
 </dd></dl>
 
 <dl class="method">
