@@ -17,8 +17,9 @@ class TestComposition(unittest.TestCase):
         clip = Clip('video.mp4', offset=2)
         self.assertEqual(str(clip), '-track -blank :2.000000 video.mp4 in=":0.000000"')
 
-        clip = Clip('video.mp4', somearg=5, anotherarg="hi")
-        self.assertEqual(str(clip), '-track video.mp4 in=":0.000000" somearg="5" anotherarg="hi"')
+        clip = str(Clip('video.mp4', somearg=5, anotherarg="hi"))
+        self.assertTrue(' somearg="5"' in clip)
+        self.assertTrue(' anotherarg="hi"' in clip)
 
 
     def test_cut(self):
