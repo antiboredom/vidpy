@@ -89,4 +89,25 @@ class Second(float):
     def __repr__(self):
         return ':%f' % self
 
+    def __add__(self, y):
+        return Second(float(self) + y)
+
+    def __sub__(self, y):
+        return Second(float(self) - y)
+
+    def __mul__(self, y):
+        return Second(float(self) * y)
+
+    def __floordiv__(self, y):
+        return Second(float(self) // y)
+
+    def __mod__(self, y):
+        return Second(float(self) % y)
+
+    def __div__(self, y):
+        return Second(float(self) / y)
+
+    def __truediv__(self, y):
+        return Second(float(self) / y)
+
     __str__ = __repr__
