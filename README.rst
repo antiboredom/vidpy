@@ -1,6 +1,9 @@
 VidPy
 =====
 
+.. image:: https://api.travis-ci.org/antiboredom/vidpy.svg
+        :target: https://travis-ci.org/antiboredom/vidpy
+
 A Python video editor and compositor based on the `MLT Multimedia
 Framework <https://www.mltframework.org/>`__.
 
