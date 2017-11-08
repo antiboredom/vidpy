@@ -65,8 +65,10 @@ class TestComposition(unittest.TestCase):
         clip = Clip('video.mp4').fx('somefx')
         self.assertEqual(' '.join(clip.args(singletrack=True)), 'video.mp4 in=":0.000000" -attach-clip somefx')
 
-        clip = Clip('video.mp4').fx('somefx', {'param1': 2, 'param2': 'hello'})
-        self.assertEqual(str(clip), '-track video.mp4 in=":0.000000" -attach-track somefx param1="2" param2="hello"')
+        clip = str(Clip('video.mp4').fx('somefx', {'param1': 2, 'param2': 'hello'}))
+        self.assertTrue('-track video.mp4 in=":0.000000" -attach-track somefx' in clip)
+        self.assertTrue(' param1="2"' in clip)
+        self.assertTrue(' param2="hello"' in clip)
 
 
 if __name__ == '__main__':
