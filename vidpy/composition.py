@@ -36,26 +36,21 @@ class Composition(object):
         self.height = height
 
 
-    def xml(self):
-        '''Renders the composition as XML and sets the current duration, width, height and fps.
-
-        Returns:
-            str: an mlt xml representation of the composition
-        '''
-
-        xml = check_output(self.args() + ['-consumer', 'xml'])
-        xml = fromstring(xml)
-
+    def autoset_duration(self, xml):
         duration = self.duration
 
         if not duration:
-            duration = self.duration = tractor = xml.find('tractor').get('out')
+            duration = self.duration = xml.find('tractor').get('out')
 
         xml.find('tractor').set('out', str(duration))
         xml.find('producer').set('out', str(duration))
         xml.find('producer').remove(xml.find('./producer/property[@name="length"]'))
         xml.find('./playlist/entry').set('out', str(duration))
 
+        return xml
+
+
+    def set_meta(self, xml):
         profile = xml.find('profile')
 
         if self.fps:
@@ -66,6 +61,22 @@ class Composition(object):
             profile.set('display_aspect_num', str(self.width))
             profile.set('height', str(self.height))
             profile.set('display_aspect_den', str(self.height))
+
+        return xml
+
+
+    def xml(self):
+        '''Renders the composition as XML and sets the current duration, width, height and fps.
+
+        Returns:
+            str: an mlt xml representation of the composition
+        '''
+
+        xml = check_output(self.args() + ['-consumer', 'xml'])
+        xml = fromstring(xml)
+
+        xml = self.autoset_duration(xml)
+        xml = self.set_meta(xml)
 
         return tostring(xml)
 
