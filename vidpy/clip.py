@@ -89,7 +89,7 @@ class Clip(object):
         return self
 
 
-    def fx(self, name, params=[]):
+    def fx(self, name, params=None):
         '''Adds any melt filter to a clip
 
         For a full list, see: https://www.mltframework.org/plugins/PluginsFilters/
@@ -98,6 +98,9 @@ class Clip(object):
             name (str): the name of a filter to add
             params (dict): a dictionary containing melt filter parameters
         '''
+
+        if params is None:
+            params = []
 
         self.fxs.append((name, params))
         return self
@@ -115,6 +118,11 @@ class Clip(object):
         '''
 
         self.transitions.append((name, params))
+        return self
+
+
+    def luma(self, start=None, end=None):
+        self.transition('luma', {'in': timestamp(start), 'out': timestamp(end)})
         return self
 
 
@@ -484,7 +492,7 @@ class Clip(object):
             args += ['-transition', transition]
             for key in targs:
                 args += ['{}="{}"'.format(key, str(targs[key]))]
-            args += ['b_track=0', 'a_track={}'.format(track_number)]
+            args += ['a_track=0', 'b_track={}'.format(track_number)]
         return args
 
 
