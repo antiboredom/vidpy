@@ -5,7 +5,8 @@ Utility functions for vidpy
 from __future__ import print_function
 import os
 import sys
-from subprocess import call, Popen
+from subprocess import call, Popen, check_output
+from xml.etree.ElementTree import fromstring
 import uuid
 from PIL import Image
 from . import config
@@ -52,7 +53,36 @@ def timestamp(val):
         return Second(val)
 
 
+def get_melt_profile(resource):
+    '''
+    Retrieves a melt profile from any given resource.
+
+    Inlcudes, with, height, fps, duration
+    '''
+
+    xml = check_output([config.MELT_BINARY, resource, '-consumer', 'xml'])
+    xml = fromstring(xml)
+    profile = xml.find('profile')
+    total_frames = int(xml.find('producer').find('property[@name="length"]').text)
+    fps = float(profile.get('frame_rate_num'))/float(profile.get('frame_rate_den'))
+    width = int(profile.get('width'))
+    height =  int(profile.get('height'))
+    duration = round(float(total_frames)/fps, 2)
+    profile = {
+        'total_frames': total_frames,
+        'fps': fps,
+        'width': width,
+        'height': height,
+        'duration': duration
+    }
+    return profile
+
+
 def check_melt():
+    '''
+    Checks for a melt installation
+    '''
+
     try:
         devnull = open(os.devnull)
         Popen([config.MELT_BINARY], stdout=devnull, stderr=devnull).communicate()

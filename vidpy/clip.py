@@ -1,5 +1,5 @@
 import os
-from .utils import timestamp, get_bg_color, effects_path
+from .utils import timestamp, get_bg_color, effects_path, get_melt_profile
 
 class Clip(object):
     '''A VidPy clip
@@ -25,10 +25,47 @@ class Clip(object):
         self.fxs = []
         self.transitions = []
         self.kwargs = kwargs
+        self.__profile = None
 
         if self.resource.__class__.__name__ == 'Composition':
             self.resource = self.resource.save_xml()
             self._temp_resource = True
+
+
+    def get_profile(self):
+        '''Returns the melt generated profile for the clip'''
+        if self.__profile is None:
+            self.__profile = get_melt_profile(self.resource)
+        return self.__profile
+
+    @property
+    def duration(self):
+        '''User defined duration'''
+        start = self.start if self.start else timestamp(0)
+        end = self.end if self.end else timestamp(self.original_duration)
+        return timestamp(start - end)
+
+    @property
+    def total_frames(self):
+        '''Gets the duration and caches it'''
+        return self.get_profile().get('total_frames')
+
+    @property
+    def original_duration(self):
+        '''Gets the duration and caches it'''
+        return self.get_profile().get('duration')
+
+    @property
+    def original_fps(self):
+        return self.get_profile().get('fps')
+
+    @property
+    def width(self):
+        return self.get_profile().get('width')
+
+    @property
+    def height(self):
+        return self.get_profile().get('height')
 
 
     def cut(self, start=None, end=None, duration=None):

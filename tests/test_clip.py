@@ -72,6 +72,16 @@ class TestComposition(unittest.TestCase):
         self.assertTrue(' param2="hello"' in clip)
 
 
+    def test_profie(self):
+        clip = Clip(os.path.realpath('demos/videos/hand1.mp4'))
+
+        self.assertAlmostEqual(clip.original_duration, 4.18000)
+        self.assertEqual(clip.total_frames, 251)
+        self.assertEqual(clip.original_fps, 60)
+        self.assertEqual(clip.width, 1280)
+        self.assertEqual(clip.height, 720)
+
+
 if __name__ == '__main__':
     unittest.main()
 
