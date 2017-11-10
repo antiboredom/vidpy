@@ -72,6 +72,7 @@ class TestClip(unittest.TestCase):
         self.assertTrue(' param2="hello"' in clip)
 
 
+    @unittest.skipIf('TRAVIS' in os.environ and os.environ['TRAVIS'] == 'true', 'Skipping this test on Travis')
     def test_profie(self):
         clip = Clip(os.path.realpath('demos/videos/hand1.mp4'))
 
