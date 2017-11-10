@@ -3,7 +3,7 @@ import unittest
 from xml.etree.ElementTree import fromstring
 from vidpy import Composition, config, Clip
 
-class TestComposition(unittest.TestCase):
+class TestClip(unittest.TestCase):
     def test_args(self):
         clip = Clip('video.mp4')
         self.assertEqual(str(clip), '-track video.mp4 in=":0.000000"')
