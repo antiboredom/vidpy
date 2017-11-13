@@ -33,8 +33,48 @@
 
   </head>
   <body>
-  <div class="document">
-    
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<p>VidPy requires melt, which can be tricky to properly install on Mac and
+Windows. The easiest option is to install Shotcut (an open source video
+editor) which comes with a prebuilt melt binary.</p>
+<div class="section" id="mac-windows">
+<h2>Mac/Windows<a class="headerlink" href="#mac-windows" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><a class="reference external" href="https://www.shotcut.org/download/">Install Shotcut</a> (on a mac with brew you can also run <code class="docutils literal"><span class="pre">brew</span> <span class="pre">cask</span> <span class="pre">install</span> <span class="pre">shotcut</span></code></li>
+<li>Install VidPy with: <code class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">vidpy</span></code></li>
+</ol>
+</div>
+<div class="section" id="ubuntu-debian">
+<h2>Ubuntu/Debian<a class="headerlink" href="#ubuntu-debian" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Install melt: <code class="docutils literal"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">melt</span></code></li>
+<li>Install VidPy: <code class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">vidpy</span></code></li>
+</ol>
+</div>
+<div class="section" id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
+<p>VidPy will attempt to locate the melt binary, searching first for a
+Shotcut installation on Mac/Windows. You can also point VidPy to a
+specific binary like so:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">vidpy</span> <span class="k">import</span> <span class="n">config</span>
+<span class="n">config</span><span class="o">.</span><span class="n">MELT_BINARY</span> <span class="o">=</span> <span class="s1">&#39;/path/to/melt&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
 <h1 class="logo"><a href="index.html">VidPy</a></h1>
@@ -109,47 +149,8 @@
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
-  <div class="section" id="installation">
-<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
-<p>VidPy requires melt, which can be tricky to properly install on Mac and
-Windows. The easiest option is to install Shotcut (an open source video
-editor) which comes with a prebuilt melt binary.</p>
-<div class="section" id="mac-windows">
-<h2>Mac/Windows<a class="headerlink" href="#mac-windows" title="Permalink to this headline">¶</a></h2>
-<ol class="arabic simple">
-<li><a class="reference external" href="https://www.shotcut.org/download/">Install Shotcut</a> (on a mac with brew you can also run <code class="docutils literal"><span class="pre">brew</span> <span class="pre">cask</span> <span class="pre">install</span> <span class="pre">shotcut</span></code></li>
-<li>Install VidPy with: <code class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">vidpy</span></code></li>
-</ol>
-</div>
-<div class="section" id="ubuntu-debian">
-<h2>Ubuntu/Debian<a class="headerlink" href="#ubuntu-debian" title="Permalink to this headline">¶</a></h2>
-<ol class="arabic simple">
-<li>Install melt: <code class="docutils literal"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">melt</span></code></li>
-<li>Install VidPy: <code class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">vidpy</span></code></li>
-</ol>
-</div>
-<div class="section" id="setup">
-<h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
-<p>VidPy will attempt to locate the melt binary, searching first for a
-Shotcut installation on Mac/Windows. You can also point VidPy to a
-specific binary like so:</p>
-<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">vidpy</span> <span class="k">import</span> <span class="n">config</span>
-<span class="n">config</span><span class="o">.</span><span class="n">MELT_BINARY</span> <span class="o">=</span> <span class="s1">&#39;/path/to/melt&#39;</span>
-</pre></div>
-</div>
-</div>
-</div>
-
-
-          </div>
-        </div>
-      </div>
-    <div class="clearer"></div>
-  </div>
+      <div class="clearer"></div>
+    </div>
     <div class="footer">
       &copy;2017, Sam Lavigne.
       

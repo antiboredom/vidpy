@@ -31,8 +31,31 @@
 
   </head>
   <body>
-  <div class="document">
-    
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for vidpy.color</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">.clip</span> <span class="k">import</span> <span class="n">Clip</span>
+
+<div class="viewcode-block" id="Color"><a class="viewcode-back" href="../../documentation.html#vidpy.Color">[docs]</a><span class="k">class</span> <span class="nc">Color</span><span class="p">(</span><span class="n">Clip</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Subclass of Clip to create solid colors</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        color (str): the color of the clip</span>
+
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">Clip</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;color:</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">color</span><span class="p">),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
 <h1 class="logo"><a href="../../index.html">VidPy</a></h1>
@@ -107,30 +130,8 @@
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
-  <h1>Source code for vidpy.color</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">.clip</span> <span class="k">import</span> <span class="n">Clip</span>
-
-<div class="viewcode-block" id="Color"><a class="viewcode-back" href="../../documentation.html#vidpy.Color">[docs]</a><span class="k">class</span> <span class="nc">Color</span><span class="p">(</span><span class="n">Clip</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;Subclass of Clip to create solid colors</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        color (str): the color of the clip</span>
-
-<span class="sd">    &#39;&#39;&#39;</span>
-
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="n">Clip</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;color:</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">color</span><span class="p">),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
-</pre></div>
-
-          </div>
-        </div>
-      </div>
-    <div class="clearer"></div>
-  </div>
+      <div class="clearer"></div>
+    </div>
     <div class="footer">
       &copy;2017, Sam Lavigne.
       

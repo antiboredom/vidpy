@@ -31,8 +31,37 @@
 
   </head>
   <body>
-  <div class="document">
-    
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for vidpy.camera</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">.clip</span> <span class="k">import</span> <span class="n">Clip</span>
+
+<div class="viewcode-block" id="Camera"><a class="viewcode-back" href="../../documentation.html#vidpy.Camera">[docs]</a><span class="k">class</span> <span class="nc">Camera</span><span class="p">(</span><span class="n">Clip</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Captures from a camera using ffmpeg</span>
+
+<span class="sd">    (Only tested on so far!)</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        device: The device to use (by default, 0)</span>
+<span class="sd">        avformat: The format to use in ffmpeg (avfoundation by default)</span>
+<span class="sd">        width (int): width of capture (default 1280)</span>
+<span class="sd">        height (int): height of capture (default 720)</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">avformat</span><span class="o">=</span><span class="s1">&#39;avfoundation&#39;</span><span class="p">,</span> <span class="n">pixel_format</span><span class="o">=</span><span class="s1">&#39;yuyv422&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">1280</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">720</span><span class="p">,</span> <span class="n">fps</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">:</span><span class="si">{}</span><span class="s1">?framerate=</span><span class="si">{}</span><span class="s1">&amp;video_size=</span><span class="si">{}</span><span class="s1">x</span><span class="si">{}</span><span class="s1">&amp;pixel_format=</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">avformat</span><span class="p">,</span> <span class="n">device</span><span class="p">,</span> <span class="n">fps</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">pixel_format</span><span class="p">)</span>
+        <span class="n">Clip</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+</pre></div>
+
+          </div>
+        </div>
+      </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
 <h1 class="logo"><a href="../../index.html">VidPy</a></h1>
@@ -107,36 +136,8 @@
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
-  <h1>Source code for vidpy.camera</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">.clip</span> <span class="k">import</span> <span class="n">Clip</span>
-
-<div class="viewcode-block" id="Camera"><a class="viewcode-back" href="../../documentation.html#vidpy.Camera">[docs]</a><span class="k">class</span> <span class="nc">Camera</span><span class="p">(</span><span class="n">Clip</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;Captures from a camera using ffmpeg</span>
-
-<span class="sd">    (Only tested on so far!)</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        device: The device to use (by default, 0)</span>
-<span class="sd">        avformat: The format to use in ffmpeg (avfoundation by default)</span>
-<span class="sd">        width (int): width of capture (default 1280)</span>
-<span class="sd">        height (int): height of capture (default 720)</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">avformat</span><span class="o">=</span><span class="s1">&#39;avfoundation&#39;</span><span class="p">,</span> <span class="n">pixel_format</span><span class="o">=</span><span class="s1">&#39;yuyv422&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">1280</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">720</span><span class="p">,</span> <span class="n">fps</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="n">params</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">:</span><span class="si">{}</span><span class="s1">?framerate=</span><span class="si">{}</span><span class="s1">&amp;video_size=</span><span class="si">{}</span><span class="s1">x</span><span class="si">{}</span><span class="s1">&amp;pixel_format=</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">avformat</span><span class="p">,</span> <span class="n">device</span><span class="p">,</span> <span class="n">fps</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">pixel_format</span><span class="p">)</span>
-        <span class="n">Clip</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
-
-</pre></div>
-
-          </div>
-        </div>
-      </div>
-    <div class="clearer"></div>
-  </div>
+      <div class="clearer"></div>
+    </div>
     <div class="footer">
       &copy;2017, Sam Lavigne.
       

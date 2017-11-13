@@ -97,7 +97,7 @@ html_theme_options = {
     'github_repo': 'vidpy',
     'description': 'Python video editing and compositing',
     'page_width': '1100px',
-    'fixed_sidebar': True,
+    'fixed_sidebar': False,
     'github_banner': True,
     'github_type': 'star',
     'sidebar_collapse': False

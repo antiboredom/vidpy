@@ -31,8 +31,61 @@
 
   </head>
   <body>
-  <div class="document">
-    
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for vidpy.text</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">.clip</span> <span class="k">import</span> <span class="n">Clip</span>
+
+<div class="viewcode-block" id="Text"><a class="viewcode-back" href="../../documentation.html#vidpy.Text">[docs]</a><span class="k">class</span> <span class="nc">Text</span><span class="p">(</span><span class="n">Clip</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Subclass of Clip that allows you to write text in your composition</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        text (str): The text</span>
+<span class="sd">        font (str): The font family to use</span>
+<span class="sd">        color (str): Text foreground color</span>
+<span class="sd">        bgcolor (str): Optional background color</span>
+<span class="sd">        olcolor (str): Text outline color</span>
+<span class="sd">        outline (int): Outline size</span>
+<span class="sd">        style (str): Font style, can be &quot;normal&quot; or &quot;italic&quot;</span>
+<span class="sd">        weight (int): The weight of the text (boldness). Can be between 100 and 1000</span>
+<span class="sd">        bbox (list): A bounding box for text to appear in. By default is (0, 0, &#39;100%&#39;, &#39;100%&#39;</span>
+<span class="sd">        halign (str): Horizontal aligment of text. Can be &quot;center&quot; (default), &quot;left&quot; or &quot;right&quot;</span>
+<span class="sd">        valign (str): Vertical aligment of text. Can be &quot;middle&quot; (default), &quot;top&quot; or &quot;bottom&quot;</span>
+
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#ffffff&quot;</span><span class="p">,</span> <span class="n">bgcolor</span><span class="o">=</span><span class="s2">&quot;0x00000000&quot;</span><span class="p">,</span> <span class="n">olcolor</span><span class="o">=</span><span class="s2">&quot;0x00000000&quot;</span><span class="p">,</span> <span class="n">outline</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">halign</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">valign</span><span class="o">=</span><span class="s2">&quot;middle&quot;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="s2">&quot;Sans&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1080</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;normal&quot;</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">bbox</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;100%&#39;</span><span class="p">,</span> <span class="s1">&#39;100%&#39;</span><span class="p">),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+
+        <span class="n">Clip</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;color:#00000000&#39;</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="n">end</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="n">offset</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="n">geometry</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">/</span><span class="si">{}</span><span class="s1">:</span><span class="si">{}</span><span class="s1">x</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="n">bbox</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">fx</span><span class="p">(</span><span class="s1">&#39;dynamictext&#39;</span><span class="p">,</span> <span class="p">{</span>
+            <span class="s1">&#39;argument&#39;</span><span class="p">:</span> <span class="n">text</span><span class="p">,</span>
+            <span class="s1">&#39;geometry&#39;</span><span class="p">:</span> <span class="n">geometry</span><span class="p">,</span>
+            <span class="s1">&#39;family&#39;</span><span class="p">:</span> <span class="n">font</span><span class="p">,</span>
+            <span class="s1">&#39;size&#39;</span><span class="p">:</span> <span class="n">size</span><span class="p">,</span>
+            <span class="s1">&#39;weight&#39;</span><span class="p">:</span> <span class="n">weight</span><span class="p">,</span>
+            <span class="s1">&#39;style&#39;</span><span class="p">:</span> <span class="n">style</span><span class="p">,</span>
+            <span class="s1">&#39;fgcolour&#39;</span><span class="p">:</span> <span class="n">color</span><span class="p">,</span>
+            <span class="s1">&#39;bgcolour&#39;</span><span class="p">:</span> <span class="n">bgcolor</span><span class="p">,</span>
+            <span class="s1">&#39;olcolour&#39;</span><span class="p">:</span> <span class="n">olcolor</span><span class="p">,</span>
+            <span class="s1">&#39;outline&#39;</span><span class="p">:</span> <span class="n">outline</span><span class="p">,</span>
+            <span class="s1">&#39;pad&#39;</span><span class="p">:</span> <span class="n">pad</span><span class="p">,</span>
+            <span class="s1">&#39;halign&#39;</span><span class="p">:</span> <span class="n">halign</span><span class="p">,</span>
+            <span class="s1">&#39;valign&#39;</span><span class="p">:</span> <span class="n">valign</span>
+        <span class="p">})</span></div>
+
+</pre></div>
+
+          </div>
+        </div>
+      </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
 <h1 class="logo"><a href="../../index.html">VidPy</a></h1>
@@ -107,60 +160,8 @@
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
-  <h1>Source code for vidpy.text</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">.clip</span> <span class="k">import</span> <span class="n">Clip</span>
-
-<div class="viewcode-block" id="Text"><a class="viewcode-back" href="../../documentation.html#vidpy.Text">[docs]</a><span class="k">class</span> <span class="nc">Text</span><span class="p">(</span><span class="n">Clip</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;Subclass of Clip that allows you to write text in your composition</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        text (str): The text</span>
-<span class="sd">        font (str): The font family to use</span>
-<span class="sd">        color (str): Text foreground color</span>
-<span class="sd">        bgcolor (str): Optional background color</span>
-<span class="sd">        olcolor (str): Text outline color</span>
-<span class="sd">        outline (int): Outline size</span>
-<span class="sd">        style (str): Font style, can be &quot;normal&quot; or &quot;italic&quot;</span>
-<span class="sd">        weight (int): The weight of the text (boldness). Can be between 100 and 1000</span>
-<span class="sd">        bbox (list): A bounding box for text to appear in. By default is (0, 0, &#39;100%&#39;, &#39;100%&#39;</span>
-<span class="sd">        halign (str): Horizontal aligment of text. Can be &quot;center&quot; (default), &quot;left&quot; or &quot;right&quot;</span>
-<span class="sd">        valign (str): Vertical aligment of text. Can be &quot;middle&quot; (default), &quot;top&quot; or &quot;bottom&quot;</span>
-
-<span class="sd">    &#39;&#39;&#39;</span>
-
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#ffffff&quot;</span><span class="p">,</span> <span class="n">bgcolor</span><span class="o">=</span><span class="s2">&quot;0x00000000&quot;</span><span class="p">,</span> <span class="n">olcolor</span><span class="o">=</span><span class="s2">&quot;0x00000000&quot;</span><span class="p">,</span> <span class="n">outline</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">halign</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">valign</span><span class="o">=</span><span class="s2">&quot;middle&quot;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="s2">&quot;Sans&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1080</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;normal&quot;</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">bbox</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;100%&#39;</span><span class="p">,</span> <span class="s1">&#39;100%&#39;</span><span class="p">),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-
-        <span class="n">Clip</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;color:#00000000&#39;</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="n">end</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="n">offset</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
-        <span class="n">geometry</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">/</span><span class="si">{}</span><span class="s1">:</span><span class="si">{}</span><span class="s1">x</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="n">bbox</span><span class="p">)</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">fx</span><span class="p">(</span><span class="s1">&#39;dynamictext&#39;</span><span class="p">,</span> <span class="p">{</span>
-            <span class="s1">&#39;argument&#39;</span><span class="p">:</span> <span class="n">text</span><span class="p">,</span>
-            <span class="s1">&#39;geometry&#39;</span><span class="p">:</span> <span class="n">geometry</span><span class="p">,</span>
-            <span class="s1">&#39;family&#39;</span><span class="p">:</span> <span class="n">font</span><span class="p">,</span>
-            <span class="s1">&#39;size&#39;</span><span class="p">:</span> <span class="n">size</span><span class="p">,</span>
-            <span class="s1">&#39;weight&#39;</span><span class="p">:</span> <span class="n">weight</span><span class="p">,</span>
-            <span class="s1">&#39;style&#39;</span><span class="p">:</span> <span class="n">style</span><span class="p">,</span>
-            <span class="s1">&#39;fgcolour&#39;</span><span class="p">:</span> <span class="n">color</span><span class="p">,</span>
-            <span class="s1">&#39;bgcolour&#39;</span><span class="p">:</span> <span class="n">bgcolor</span><span class="p">,</span>
-            <span class="s1">&#39;olcolour&#39;</span><span class="p">:</span> <span class="n">olcolor</span><span class="p">,</span>
-            <span class="s1">&#39;outline&#39;</span><span class="p">:</span> <span class="n">outline</span><span class="p">,</span>
-            <span class="s1">&#39;pad&#39;</span><span class="p">:</span> <span class="n">pad</span><span class="p">,</span>
-            <span class="s1">&#39;halign&#39;</span><span class="p">:</span> <span class="n">halign</span><span class="p">,</span>
-            <span class="s1">&#39;valign&#39;</span><span class="p">:</span> <span class="n">valign</span>
-        <span class="p">})</span></div>
-
-</pre></div>
-
-          </div>
-        </div>
-      </div>
-    <div class="clearer"></div>
-  </div>
+      <div class="clearer"></div>
+    </div>
     <div class="footer">
       &copy;2017, Sam Lavigne.
       
