@@ -43,7 +43,7 @@ class Clip(object):
         '''User defined duration'''
         start = self.start if self.start else timestamp(0)
         end = self.end if self.end else timestamp(self.original_duration)
-        return timestamp(start - end)
+        return timestamp(end - start)
 
     @property
     def total_frames(self):

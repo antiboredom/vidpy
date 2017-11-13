@@ -77,6 +77,7 @@ class TestClip(unittest.TestCase):
         clip = Clip(os.path.realpath('demos/videos/hand1.mp4'))
 
         self.assertAlmostEqual(clip.original_duration, 4.18000)
+        self.assertAlmostEqual(clip.duration, 4.18000)
         self.assertEqual(clip.total_frames, 251)
         self.assertEqual(clip.original_fps, 60)
         self.assertEqual(clip.width, 1280)
