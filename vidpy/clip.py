@@ -26,6 +26,8 @@ class Clip(object):
         self.transitions = []
         self.kwargs = kwargs
         self.__profile = None
+        self.mask = None
+        self.is_mask = False
 
         if self.resource.__class__.__name__ == 'Composition':
             self.resource = self.resource.save_xml()
@@ -43,7 +45,8 @@ class Clip(object):
         '''User defined duration'''
         start = self.start if self.start else timestamp(0)
         end = self.end if self.end else timestamp(self.original_duration)
-        return timestamp(end - start)
+        repeat = self._repeat if self._repeat else 1
+        return timestamp((end - start) * repeat)
 
     @property
     def total_frames(self):
@@ -155,6 +158,24 @@ class Clip(object):
         '''
 
         self.transitions.append((name, params))
+        return self
+
+
+    def set_mask(self, clip):
+        '''
+        Sets the mask for the clip based on the luma values of a video, image, or vidpy Clip
+
+        Args:
+            clip (Clip or path): any vidpy clip, or path to video or image
+
+        '''
+
+        if isinstance(clip, str):
+            clip = Clip(clip)
+
+        clip.is_mask = True
+        self.mask = clip
+
         return self
 
 
