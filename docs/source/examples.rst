@@ -13,10 +13,22 @@ Video Grid
 .. literalinclude:: ../../demos/grid.py
 
 
+Masks
+----------------
+
+.. literalinclude:: ../../demos/mask.py
+
+
 Auto Chroma Key
 ----------------
 
 .. literalinclude:: ../../demos/chroma.py
+
+
+Camera
+----------------
+
+.. literalinclude:: ../../demos/camera.py
 
 
 Text

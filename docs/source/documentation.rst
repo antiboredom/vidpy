@@ -13,6 +13,18 @@ Text
   :members:
 
 
+Color
+-----
+.. autoclass:: vidpy.Color
+  :members:
+
+
+Camera
+------
+.. autoclass:: vidpy.Camera
+  :members:
+
+
 Composition
 -----------
 
