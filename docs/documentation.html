@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Documentation &#8212; VidPy 0.1.4 documentation</title>
+    <title>Documentation &#8212; VidPy 0.1.7 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.1.4',
+        VERSION:     '0.1.7',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -72,13 +72,17 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Documentation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#clip">Clip</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#text">Text</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#color">Color</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#camera">Camera</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#composition">Composition</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="examples.html#stitch-videos">Stitch Videos</a></li>
 <li class="toctree-l2"><a class="reference internal" href="examples.html#video-grid">Video Grid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#masks">Masks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="examples.html#auto-chroma-key">Auto Chroma Key</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#camera">Camera</a></li>
 <li class="toctree-l2"><a class="reference internal" href="examples.html#text">Text</a></li>
 </ul>
 </li>
@@ -191,6 +195,12 @@
 </table>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="vidpy.Clip.duration">
+<code class="descname">duration</code><a class="headerlink" href="#vidpy.Clip.duration" title="Permalink to this definition">¶</a></dt>
+<dd><p>User defined duration</p>
+</dd></dl>
+
 <dl class="method">
 <dt id="vidpy.Clip.fadein">
 <code class="descname">fadein</code><span class="sig-paren">(</span><em>duration</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vidpy/clip.html#Clip.fadein"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vidpy.Clip.fadein" title="Permalink to this definition">¶</a></dt>
@@ -235,7 +245,7 @@
 
 <dl class="method">
 <dt id="vidpy.Clip.fx">
-<code class="descname">fx</code><span class="sig-paren">(</span><em>name</em>, <em>params=[]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vidpy/clip.html#Clip.fx"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vidpy.Clip.fx" title="Permalink to this definition">¶</a></dt>
+<code class="descname">fx</code><span class="sig-paren">(</span><em>name</em>, <em>params=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vidpy/clip.html#Clip.fx"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vidpy.Clip.fx" title="Permalink to this definition">¶</a></dt>
 <dd><p>Adds any melt filter to a clip</p>
 <p>For a full list, see: <a class="reference external" href="https://www.mltframework.org/plugins/PluginsFilters/">https://www.mltframework.org/plugins/PluginsFilters/</a></p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -250,6 +260,12 @@
 </tr>
 </tbody>
 </table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vidpy.Clip.get_profile">
+<code class="descname">get_profile</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/vidpy/clip.html#Clip.get_profile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vidpy.Clip.get_profile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the melt generated profile for the clip</p>
 </dd></dl>
 
 <dl class="method">
@@ -300,6 +316,12 @@ to the supplied x,y,w,h params.</p>
 </tr>
 </tbody>
 </table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="vidpy.Clip.original_duration">
+<code class="descname">original_duration</code><a class="headerlink" href="#vidpy.Clip.original_duration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the duration and caches it</p>
 </dd></dl>
 
 <dl class="method">
@@ -415,6 +437,20 @@ to the supplied x,y,w,h params.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="vidpy.Clip.set_mask">
+<code class="descname">set_mask</code><span class="sig-paren">(</span><em>clip</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vidpy/clip.html#Clip.set_mask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vidpy.Clip.set_mask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the mask for the clip based on the luma values of a video, image, or vidpy Clip</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>clip</strong> (<a class="reference internal" href="#vidpy.Clip" title="vidpy.Clip"><em>Clip</em></a><em> or </em><em>path</em>) – any vidpy clip, or path to video or image</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="vidpy.Clip.set_offset">
 <code class="descname">set_offset</code><span class="sig-paren">(</span><em>offset</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vidpy/clip.html#Clip.set_offset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vidpy.Clip.set_offset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sets the offset of the clip - determines when the clip will start playing.</p>
@@ -487,6 +523,12 @@ Negative values will play video in reverse.</p>
 </tr>
 </tbody>
 </table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="vidpy.Clip.total_frames">
+<code class="descname">total_frames</code><a class="headerlink" href="#vidpy.Clip.total_frames" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the duration and caches it</p>
 </dd></dl>
 
 <dl class="method">
@@ -574,6 +616,47 @@ Negative values will play video in reverse.</p>
 <li><strong>bbox</strong> (<em>list</em>) – A bounding box for text to appear in. By default is (0, 0, ‘100%’, ‘100%’</li>
 <li><strong>halign</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Horizontal aligment of text. Can be “center” (default), “left” or “right”</li>
 <li><strong>valign</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Vertical aligment of text. Can be “middle” (default), “top” or “bottom”</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="color">
+<h2>Color<a class="headerlink" href="#color" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="vidpy.Color">
+<em class="property">class </em><code class="descclassname">vidpy.</code><code class="descname">Color</code><span class="sig-paren">(</span><em>color</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vidpy/color.html#Color"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vidpy.Color" title="Permalink to this definition">¶</a></dt>
+<dd><p>Subclass of Clip to create solid colors</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>color</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – the color of the clip</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="camera">
+<h2>Camera<a class="headerlink" href="#camera" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="vidpy.Camera">
+<em class="property">class </em><code class="descclassname">vidpy.</code><code class="descname">Camera</code><span class="sig-paren">(</span><em>device=0</em>, <em>avformat='avfoundation'</em>, <em>pixel_format='yuyv422'</em>, <em>width=1280</em>, <em>height=720</em>, <em>fps=30</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vidpy/camera.html#Camera"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vidpy.Camera" title="Permalink to this definition">¶</a></dt>
+<dd><p>Captures from a camera using ffmpeg</p>
+<p>(Only tested on so far!)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>device</strong> – The device to use (by default, 0)</li>
+<li><strong>avformat</strong> – The format to use in ffmpeg (avfoundation by default)</li>
+<li><strong>width</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – width of capture (default 1280)</li>
+<li><strong>height</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – height of capture (default 720)</li>
 </ul>
 </td>
 </tr>

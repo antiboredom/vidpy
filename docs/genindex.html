@@ -6,13 +6,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Index &#8212; VidPy 0.1.4 documentation</title>
+    <title>Index &#8212; VidPy 0.1.7 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.1.4',
+        VERSION:     '0.1.7',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -71,13 +71,17 @@
 <li class="toctree-l1"><a class="reference internal" href="documentation.html">Documentation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="documentation.html#clip">Clip</a></li>
 <li class="toctree-l2"><a class="reference internal" href="documentation.html#text">Text</a></li>
+<li class="toctree-l2"><a class="reference internal" href="documentation.html#color">Color</a></li>
+<li class="toctree-l2"><a class="reference internal" href="documentation.html#camera">Camera</a></li>
 <li class="toctree-l2"><a class="reference internal" href="documentation.html#composition">Composition</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="examples.html#stitch-videos">Stitch Videos</a></li>
 <li class="toctree-l2"><a class="reference internal" href="examples.html#video-grid">Video Grid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#masks">Masks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="examples.html#auto-chroma-key">Auto Chroma Key</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#camera">Camera</a></li>
 <li class="toctree-l2"><a class="reference internal" href="examples.html#text">Text</a></li>
 </ul>
 </li>
@@ -113,6 +117,7 @@
  <a href="#A"><strong>A</strong></a>
  | <a href="#B"><strong>B</strong></a>
  | <a href="#C"><strong>C</strong></a>
+ | <a href="#D"><strong>D</strong></a>
  | <a href="#F"><strong>F</strong></a>
  | <a href="#G"><strong>G</strong></a>
  | <a href="#H"><strong>H</strong></a>
@@ -151,15 +156,27 @@
 <h2 id="C">C</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="documentation.html#vidpy.Camera">Camera (class in vidpy)</a>
+</li>
       <li><a href="documentation.html#vidpy.Clip.chroma">chroma() (vidpy.Clip method)</a>
 </li>
       <li><a href="documentation.html#vidpy.Clip">Clip (class in vidpy)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="documentation.html#vidpy.Color">Color (class in vidpy)</a>
+</li>
       <li><a href="documentation.html#vidpy.Composition">Composition (class in vidpy)</a>
 </li>
       <li><a href="documentation.html#vidpy.Clip.cut">cut() (vidpy.Clip method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="D">D</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="documentation.html#vidpy.Clip.duration">duration (vidpy.Clip attribute)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -182,6 +199,10 @@
 
 <h2 id="G">G</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="documentation.html#vidpy.Clip.get_profile">get_profile() (vidpy.Clip method)</a>
+</li>
+  </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="documentation.html#vidpy.Clip.glow">glow() (vidpy.Clip method)</a>
 </li>
@@ -216,6 +237,10 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="documentation.html#vidpy.Clip.opacity">opacity() (vidpy.Clip method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="documentation.html#vidpy.Clip.original_duration">original_duration (vidpy.Clip attribute)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -261,9 +286,11 @@
       </ul></li>
       <li><a href="documentation.html#vidpy.Composition.save_xml">save_xml() (vidpy.Composition method)</a>
 </li>
+      <li><a href="documentation.html#vidpy.Clip.set_duration">set_duration() (vidpy.Clip method)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="documentation.html#vidpy.Clip.set_duration">set_duration() (vidpy.Clip method)</a>
+      <li><a href="documentation.html#vidpy.Clip.set_mask">set_mask() (vidpy.Clip method)</a>
 </li>
       <li><a href="documentation.html#vidpy.Clip.set_offset">set_offset() (vidpy.Clip method)</a>
 </li>
@@ -279,9 +306,11 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="documentation.html#vidpy.Text">Text (class in vidpy)</a>
 </li>
+      <li><a href="documentation.html#vidpy.Clip.text">text() (vidpy.Clip method)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="documentation.html#vidpy.Clip.text">text() (vidpy.Clip method)</a>
+      <li><a href="documentation.html#vidpy.Clip.total_frames">total_frames (vidpy.Clip attribute)</a>
 </li>
       <li><a href="documentation.html#vidpy.Clip.transition">transition() (vidpy.Clip method)</a>
 </li>
