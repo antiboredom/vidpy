@@ -318,6 +318,25 @@ class Clip(object):
         return self
 
 
+    def softglow(self, blur=0.5, brightness=0.75, sharpness=0.85, blurblend=0):
+        '''Does softglow effect on highlights
+
+        Args:
+            blur: Blur of the glow
+            brightness: Brightness of highlight areas
+            sharpness: Sharpness of highlight areas
+            blurblend: lend mode used to blend highlight blur with input image
+        '''
+
+        self.fx('frei0r.softglow', {
+            '0': blur,
+            '1': brightness,
+            '2': sharpness,
+            '3': blurblend,
+        })
+        return self
+
+
     def vflip(self):
         '''Flip the clip vertically'''
 
@@ -479,6 +498,351 @@ class Clip(object):
             'transition.halign': 'center',
             'transition.fill': 0,
             'transition.distort': 1 if distort else 0
+        })
+        return self
+
+
+    def brightness(self, brightness=0.5):
+        '''
+        Adjusts the brightness of the clip
+
+        Args:
+            brightness (float): brightness between 0.0 and 1.0
+
+        '''
+
+        self.fx('frei0r.brightness', {'0': brightness})
+        return self
+
+
+    def alpha_op(self, operation='shave', thresh=0.5, amount=0.333344, invert=False, display='image', input_as_alpha=0):
+        '''Display and manipulation of the alpha channel
+
+        https://www.mltframework.org/plugins/FilterFrei0r-alpha0ps/
+
+        Args:
+            display: Display: what to display. Choices are image, alpha_as_gray, gray+red, black, gray, white and checkers.
+            input_as_alpha: use input alpha for the display function above.
+            operation (str): select the operation to be done on the alpha channel. Options are: shave, shrink_hard, shrink_soft, grow_hard, grow_soft, thresh
+            thresh (float): threshold (only used if you've selected the thresh operation)
+            amount (float): grow/shrink amount
+            invert (bool): invert the alpha channel
+        '''
+
+        display = {'image': 1.0/7, 'alpha_as_gray': 2.0/7, 'gray+red': 3.0/7, 'black': 4.0/7, 'gray': 5.0/7, 'white': 6.0/7, 'checkers': 7.0/7}[display]
+        operation = {'shave': 1.0/6, 'shrink_hard': 2.0/6, 'shrink_soft': 3.0/6, 'grow_hard': 4.0/6, 'grow_soft': 5.0/6, 'thresh': 6.0/6}.get(operation, operation)
+
+        self.fx('frei0r.alpha0ps', {
+            '0': display,
+            '1': input_as_alpha,
+            '2': operation,
+            '3': thresh,
+            '4': amount,
+            '5': 1 if invert else 0
+        })
+        return self
+
+
+    def charcoal(self):
+        '''Applies a charcoal effect '''
+
+        self.fx('charcoal')
+        return self
+
+
+    def dust(self, maxdiameter=2, maxcount=10):
+        '''Add dust and specks to the Video, as in old movies
+
+        Args:
+            maxdiameter (int): Maximal diameter of a dust piece between 0 and 100
+            maxcount (int): How many dust pieces are on the image
+        '''
+
+        self.fx('dust', {
+            'maxdiameter': maxdiameter,
+            'maxcount': maxcount
+        })
+        return self
+
+
+    def cartoon(self, triplevel=.99, diffspace=0.003):
+        '''Cartoonify video, do a form of edge detect
+
+        Args:
+            triplevel (float): level of trip: mapped to [0,1] asymptotical
+            diffspace (float): difference space: a value from 0 to 256 (mapped to [0,1])
+        '''
+
+        self.fx('frei0r.cartoon', {
+            '0': triplevel,
+            '1': diffspace
+        })
+        return self
+
+
+    def contrast(self, amount=0.5):
+        '''Adjusts the contrast of the clip
+
+        Args:
+            contrast (float): The amount of contrast (between 0 and 1)
+        '''
+
+        self.fx('frei0r.contrast0r', {'0': amount})
+        return self
+
+
+    def extract_color(self, color='r'):
+        '''Extracts either red, green, or blue from clip
+
+        Args:
+            color (str): Either 'r', 'g' or 'b'
+        '''
+
+        if color not in 'rgb':
+            color = 'r'
+
+        self.fx('frei0r.{}'.format(color.upper()))
+        return self
+
+
+    def vignette(self, aspect=0.5, clear=0, softness=0.6):
+        '''Lens vignetting effect, applies natural vignetting
+
+        Args:
+            aspect (float): Aspect ratio (0 to 1)
+            clear (float): Size of the unaffected center (0 to 1)
+            softness (float): Softness (0 to 1)
+        '''
+
+        self.fx('frei0r.vignette', {
+            '0': aspect,
+            '1': clear,
+            '2': softness
+        })
+        return self
+
+
+    def grain(self, noise=40, contrast=160, brightness=70):
+        '''Adds grain over the clip
+        https://www.mltframework.org/plugins/FilterGrain/
+
+        Args:
+            noise (int): Maximal value of noise (0 to 200)
+            contrast (int): Adjust contrast for the image (0 to 400)
+            brightness (int): Adjust brightness for the image (0 to 400)
+        '''
+
+        self.fx('grain', {
+            'noise': noise,
+            'contrast': contrast,
+            'brightness': brightness
+        })
+        return self
+
+
+    def grayscale(self):
+        '''Convert the clip to grayscale'''
+
+        self.fx('greyscale')
+        return self
+
+
+
+    def invert(self):
+        '''Inverts the colors of the clip'''
+
+        self.fx('invert')
+        return self
+
+
+    def dynamic_threshold(self):
+        '''Applies a dynamic thresholding effect'''
+
+        self.fx('frei0r.twolay0r')
+        return self
+
+
+    def mirror(self, axis, reverse=False):
+        '''Provides various mirror and image reversing effects.
+
+        Args:
+            axis (str): can be either "horizontal", "vertical", "diagonal", "xdiagonal", "flip", or "flop"
+            reverse (bool): reverse the mirror
+
+        '''
+
+        self.fx('mirror', {
+            'argument': axis,
+            'reverse': 1 if reverse else 0
+        })
+        return self
+
+
+    def threshold(self, threshold=0.5):
+        '''Thresholds the clip
+
+        Args:
+            threshold (float): Threshold value (0 to 1)
+        '''
+
+        self.fx('frei0r.threshold0r', {'0': threshold})
+        return self
+
+
+    def squareblur(self, size=0.5):
+        '''Blurs the clip
+
+        Args:
+            size (float): Amount of blur (0 to 1)
+        '''
+
+        self.fx('frei0r.squareblur', {'0': size})
+        return self
+
+
+    def sharpness(self, amount=0.3, size=0):
+        '''Sharpens the clips
+        https://www.mltframework.org/plugins/FilterFrei0r-sharpness/
+
+        Args:
+            amount (float): amount
+            size (float): size
+        '''
+
+        self.fx('frei0r.sharpness', {
+            '0': amount,
+            '1': size
+        })
+        return self
+
+
+    def luminance(self):
+        '''Creates a luminance map of the image'''
+
+        self.fx('frei0r.luminance')
+        return self
+
+
+    def edgeglow(self, threshold=0.5, upscale=0.5, downscale=0):
+        '''Adds an glowing edges
+
+        Args:
+            threshold (float): threshold for edge lightening
+            upscale (float): multiplier for upscaling edge brightness
+            downscale (float): multiplier for downscaling edge brightness
+        '''
+
+        self.fx('frei0r.edgeglow', {
+            '0': threshold,
+            '1': upscale,
+            '2': downscale
+        })
+        return self
+
+
+    def gradient(self, start_color='#ffffff', end_color='#000000', pattern='linear', start_opacity=0.5, end_opacity=0.5, start_x=0.5, start_y=0, end_x=0.5, end_y=1, offset=0, blend='normal'):
+        '''Draws a gradient on top of the clip.
+
+        Args:
+            start_color (str): First color of the gradient
+            end_color (str): Second color of the gradient
+            pattern (str): "linear" or "radial" gradient
+            start_opacity (float): Opacity of the first color of the gradient
+            end_opacity (float): Opacity of the second color of the gradient
+            start_x (float): X position of the start point of the gradient
+            start_y (float): Y position of the start point of the gradient
+            end_x (float): X position of the end point of the gradient
+            end_y (float): Y position of the end point of the gradient
+            offset: Position of first color in the line connecting gradient ends, really useful only for radial gradient
+            blend (str): Blend mode. Values can be: 'normal', 'add', 'saturate', 'multiply', 'screen', 'overlay', 'darken', 'lighten', 'colordodge', 'colorburn', 'hardlight', 'softlight', 'difference', 'exclusion', 'hslhue', 'hslsaturation', 'hslcolor', or 'hslluminosity'
+        '''
+
+        pattern = {'linear': 'gradient_linear', 'radial': 'gradient_radial'}.get(pattern, 'gradient_linear')
+
+        self.fx('frei0r.cairogradient', {
+            '0': pattern,
+            '1': start_color,
+            '2': start_opacity,
+            '3': end_color,
+            '4': end_opacity,
+            '5': start_x,
+            '6': start_y,
+            '7': end_x,
+            '8': end_y,
+            '9': offset,
+            '10': blend
+        })
+        return self
+
+
+    def hue(self, shift=0):
+        '''Adjusts the hue of the clip
+
+        Args:
+            shift (float): The amount to shift the hue by (between 0 and 1)
+        '''
+
+        self.fx('frei0r.hueshift0r', {'0': shift})
+        return self
+
+
+
+    def sobel(self):
+        '''Applies a sobel filter'''
+
+        self.fx('frei0r.sobel')
+        return self
+
+
+    def posterize(self, levels=0.10):
+        '''
+        Posterizes image by reducing the number of colors used in image
+
+        Args:
+            levels (float): Number of values per channel
+
+        https://www.mltframework.org/plugins/FilterFrei0r-posterize/
+        '''
+
+        self.fx('frei0r.posterize', {'0': levels})
+        return self
+
+
+    def dither(self, amount=0.104167):
+        '''Dithers the clip and reduces the number of available colors
+
+        Args:
+            amount (float): Number of values per channel
+        '''
+
+        self.fx('frei0r.dither', {
+            '0': amount
+        })
+        return self
+
+
+    def saturate(self, saturation=0.125):
+        '''Adjusts the saturation of the clip
+
+        Args:
+            saturation (float): Saturation amount (0 to 1)
+        '''
+
+        self.fx('frei0r.saturat0r', {'0': saturation})
+        return self
+
+
+    def pixelize(self, width=0.1, height=0.1):
+        '''Pixelize the clip
+
+        Args:
+            width (float): Horizontal size of one pixel, as percent of screen size (0 to 1)
+            height (float): Vertical size of one pixel, as percent of screensize (0 to 1)
+        '''
+
+        self.fx('frei0r.pixeliz0r', {
+            '0': width/100.0,
+            '1': height/100.0,
         })
         return self
 
