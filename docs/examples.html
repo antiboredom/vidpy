@@ -8,6 +8,7 @@
     <title>Examples &#8212; VidPy 0.1.7 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
@@ -118,10 +119,10 @@
 <span class="n">clip</span> <span class="o">=</span> <span class="n">Clip</span><span class="p">(</span><span class="s1">&#39;videos/hand2.mp4&#39;</span><span class="p">)</span>
 
 <span class="c1"># create a clip to use a as a mask</span>
-<span class="c1"># you could use use a video for this or a text clip</span>
+<span class="c1"># you can use use a video,text clip or an image</span>
 <span class="n">mask</span> <span class="o">=</span> <span class="n">Clip</span><span class="p">(</span><span class="s1">&#39;videos/mask.png&#39;</span><span class="p">)</span>
 
-<span class="c1"># you can add effects to the mask</span>
+<span class="c1"># you can also add effects to the mask</span>
 <span class="n">mask</span><span class="o">.</span><span class="n">glow</span><span class="p">(</span><span class="s1">&#39;0=0;200=.9&#39;</span><span class="p">)</span>
 
 <span class="c1"># make sure that the duration of the mask is the same as the clip</span>

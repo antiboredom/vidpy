@@ -40,34 +40,43 @@ class Clip(object):
             self.__profile = get_melt_profile(self.resource)
         return self.__profile
 
+
     @property
     def duration(self):
-        '''User defined duration'''
+        '''Duration of the clip'''
         start = self.start if self.start else timestamp(0)
         end = self.end if self.end else timestamp(self.original_duration)
         repeat = self._repeat if self._repeat else 1
         return timestamp((end - start) * repeat)
 
+
     @property
     def total_frames(self):
-        '''Gets the duration and caches it'''
+        '''Total frames in the original clip'''
         return self.get_profile().get('total_frames')
+
 
     @property
     def original_duration(self):
-        '''Gets the duration and caches it'''
+        '''Duration of the original clip'''
         return self.get_profile().get('duration')
+
 
     @property
     def original_fps(self):
+        '''FPS of the original clip'''
         return self.get_profile().get('fps')
+
 
     @property
     def width(self):
+        '''Width of the original clip'''
         return self.get_profile().get('width')
+
 
     @property
     def height(self):
+        '''Height of the original clip'''
         return self.get_profile().get('height')
 
 

@@ -8,6 +8,7 @@
     <title>Documentation &#8212; VidPy 0.1.7 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
@@ -125,7 +126,7 @@
 <dl class="attribute">
 <dt id="vidpy.Clip.duration">
 <code class="descname">duration</code><a class="headerlink" href="#vidpy.Clip.duration" title="Permalink to this definition">¶</a></dt>
-<dd><p>User defined duration</p>
+<dd><p>Duration of the clip</p>
 </dd></dl>
 
 <dl class="method">
@@ -209,6 +210,12 @@
 </table>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="vidpy.Clip.height">
+<code class="descname">height</code><a class="headerlink" href="#vidpy.Clip.height" title="Permalink to this definition">¶</a></dt>
+<dd><p>Height of the original clip</p>
+</dd></dl>
+
 <dl class="method">
 <dt id="vidpy.Clip.hflip">
 <code class="descname">hflip</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/vidpy/clip.html#Clip.hflip"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vidpy.Clip.hflip" title="Permalink to this definition">¶</a></dt>
@@ -248,7 +255,13 @@ to the supplied x,y,w,h params.</p>
 <dl class="attribute">
 <dt id="vidpy.Clip.original_duration">
 <code class="descname">original_duration</code><a class="headerlink" href="#vidpy.Clip.original_duration" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets the duration and caches it</p>
+<dd><p>Duration of the original clip</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="vidpy.Clip.original_fps">
+<code class="descname">original_fps</code><a class="headerlink" href="#vidpy.Clip.original_fps" title="Permalink to this definition">¶</a></dt>
+<dd><p>FPS of the original clip</p>
 </dd></dl>
 
 <dl class="method">
@@ -455,7 +468,7 @@ Negative values will play video in reverse.</p>
 <dl class="attribute">
 <dt id="vidpy.Clip.total_frames">
 <code class="descname">total_frames</code><a class="headerlink" href="#vidpy.Clip.total_frames" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets the duration and caches it</p>
+<dd><p>Total frames in the original clip</p>
 </dd></dl>
 
 <dl class="method">
@@ -495,6 +508,12 @@ Negative values will play video in reverse.</p>
 </tr>
 </tbody>
 </table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="vidpy.Clip.width">
+<code class="descname">width</code><a class="headerlink" href="#vidpy.Clip.width" title="Permalink to this definition">¶</a></dt>
+<dd><p>Width of the original clip</p>
 </dd></dl>
 
 <dl class="method">
@@ -574,7 +593,7 @@ Negative values will play video in reverse.</p>
 <dt id="vidpy.Camera">
 <em class="property">class </em><code class="descclassname">vidpy.</code><code class="descname">Camera</code><span class="sig-paren">(</span><em>device=0</em>, <em>avformat='avfoundation'</em>, <em>pixel_format='yuyv422'</em>, <em>width=1280</em>, <em>height=720</em>, <em>fps=30</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vidpy/camera.html#Camera"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vidpy.Camera" title="Permalink to this definition">¶</a></dt>
 <dd><p>Captures from a camera using ffmpeg</p>
-<p>(Only tested on so far!)</p>
+<p>(Only tested on Mac)</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />

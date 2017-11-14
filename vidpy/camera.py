@@ -3,7 +3,7 @@ from .clip import Clip
 class Camera(Clip):
     '''Captures from a camera using ffmpeg
 
-    (Only tested on so far!)
+    (Only tested on Mac)
 
     Args:
         device: The device to use (by default, 0)
