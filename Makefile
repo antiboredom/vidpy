@@ -50,14 +50,12 @@ coverage:
 	coverage html
 	python -m webbrowser htmlcov/index.html
 
-docs:
-	cd docs
-	make clean
-	make html
-	rm -rf _modules/
-	rm -rf _sources/
-	rm -rf _static/
-	mv build/html/* .
+publish-docs:
+	cd docs && make clean && make html
+	rm -rf docs/_modules/
+	rm -rf docs/_sources/
+	rm -rf docs/_static/
+	mv docs/build/html/* docs/
 	touch .nojekyll
 
 release: clean
