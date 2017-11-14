@@ -322,10 +322,10 @@ class Clip(object):
         '''Does softglow effect on highlights
 
         Args:
-            blur: Blur of the glow
-            brightness: Brightness of highlight areas
-            sharpness: Sharpness of highlight areas
-            blurblend: lend mode used to blend highlight blur with input image
+            blur (float): Blur of the glow
+            brightness (float): Brightness of highlight areas
+            sharpness (float): Sharpness of highlight areas
+            blurblend (float): lend mode used to blend highlight blur with input image
         '''
 
         self.fx('frei0r.softglow', {
@@ -373,6 +373,10 @@ class Clip(object):
         to the supplied x,y,w,h params.
 
         You can use pixels or percentages (in quotes)
+
+        Args:
+            sequence (list): a sequence of (keyframe, x, w, w, h) params
+
         '''
 
         args = ['{}={}/{}:{}x{}'.format(*s) for s in sequence]
@@ -516,9 +520,7 @@ class Clip(object):
 
 
     def alpha_op(self, operation='shave', thresh=0.5, amount=0.333344, invert=False, display='image', input_as_alpha=0):
-        '''Display and manipulation of the alpha channel
-
-        https://www.mltframework.org/plugins/FilterFrei0r-alpha0ps/
+        '''Display and manipulate the alpha channel
 
         Args:
             display: Display: what to display. Choices are image, alpha_as_gray, gray+red, black, gray, white and checkers.
@@ -551,7 +553,7 @@ class Clip(object):
 
 
     def dust(self, maxdiameter=2, maxcount=10):
-        '''Add dust and specks to the Video, as in old movies
+        '''Add dust and specks to the clip
 
         Args:
             maxdiameter (int): Maximal diameter of a dust piece between 0 and 100
@@ -566,11 +568,11 @@ class Clip(object):
 
 
     def cartoon(self, triplevel=.99, diffspace=0.003):
-        '''Cartoonify video, do a form of edge detect
+        '''Cartoonify video, with a form of edge detectection
 
         Args:
-            triplevel (float): level of trip: mapped to [0,1] asymptotical
-            diffspace (float): difference space: a value from 0 to 256 (mapped to [0,1])
+            triplevel (float): level of trip (0 to 1)
+            diffspace (float): difference space (0 to 1)
         '''
 
         self.fx('frei0r.cartoon', {
@@ -606,7 +608,7 @@ class Clip(object):
 
 
     def vignette(self, aspect=0.5, clear=0, softness=0.6):
-        '''Lens vignetting effect, applies natural vignetting
+        '''Applies a vignette effect
 
         Args:
             aspect (float): Aspect ratio (0 to 1)
@@ -624,7 +626,6 @@ class Clip(object):
 
     def grain(self, noise=40, contrast=160, brightness=70):
         '''Adds grain over the clip
-        https://www.mltframework.org/plugins/FilterGrain/
 
         Args:
             noise (int): Maximal value of noise (0 to 200)
@@ -717,14 +718,14 @@ class Clip(object):
 
 
     def luminance(self):
-        '''Creates a luminance map of the image'''
+        '''Creates a luminance map of the clip'''
 
         self.fx('frei0r.luminance')
         return self
 
 
     def edgeglow(self, threshold=0.5, upscale=0.5, downscale=0):
-        '''Adds an glowing edges
+        '''Adds glowing edges
 
         Args:
             threshold (float): threshold for edge lightening
@@ -796,12 +797,10 @@ class Clip(object):
 
     def posterize(self, levels=0.10):
         '''
-        Posterizes image by reducing the number of colors used in image
+        Posterizes the clip by reducing the number of colors used.
 
         Args:
             levels (float): Number of values per channel
-
-        https://www.mltframework.org/plugins/FilterFrei0r-posterize/
         '''
 
         self.fx('frei0r.posterize', {'0': levels})

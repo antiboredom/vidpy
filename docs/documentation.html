@@ -66,6 +66,28 @@
 </tbody>
 </table>
 <dl class="method">
+<dt id="vidpy.Clip.alpha_op">
+<code class="descname">alpha_op</code><span class="sig-paren">(</span><em>operation='shave'</em>, <em>thresh=0.5</em>, <em>amount=0.333344</em>, <em>invert=False</em>, <em>display='image'</em>, <em>input_as_alpha=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vidpy/clip.html#Clip.alpha_op"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vidpy.Clip.alpha_op" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display and manipulate the alpha channel</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>display</strong> – Display: what to display. Choices are image, alpha_as_gray, gray+red, black, gray, white and checkers.</li>
+<li><strong>input_as_alpha</strong> – use input alpha for the display function above.</li>
+<li><strong>operation</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – select the operation to be done on the alpha channel. Options are: shave, shrink_hard, shrink_soft, grow_hard, grow_soft, thresh</li>
+<li><strong>thresh</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) – threshold (only used if you’ve selected the thresh operation)</li>
+<li><strong>amount</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) – grow/shrink amount</li>
+<li><strong>invert</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – invert the alpha channel</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="vidpy.Clip.args">
 <code class="descname">args</code><span class="sig-paren">(</span><em>singletrack=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vidpy/clip.html#Clip.args"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vidpy.Clip.args" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns melt command line arguments as a list</p>
@@ -86,6 +108,44 @@
 </dd></dl>
 
 <dl class="method">
+<dt id="vidpy.Clip.brightness">
+<code class="descname">brightness</code><span class="sig-paren">(</span><em>brightness=0.5</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vidpy/clip.html#Clip.brightness"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vidpy.Clip.brightness" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adjusts the brightness of the clip</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>brightness</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) – brightness between 0.0 and 1.0</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vidpy.Clip.cartoon">
+<code class="descname">cartoon</code><span class="sig-paren">(</span><em>triplevel=0.99</em>, <em>diffspace=0.003</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vidpy/clip.html#Clip.cartoon"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vidpy.Clip.cartoon" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cartoonify video, with a form of edge detectection</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>triplevel</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) – level of trip (0 to 1)</li>
+<li><strong>diffspace</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) – difference space (0 to 1)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vidpy.Clip.charcoal">
+<code class="descname">charcoal</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/vidpy/clip.html#Clip.charcoal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vidpy.Clip.charcoal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applies a charcoal effect</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="vidpy.Clip.chroma">
 <code class="descname">chroma</code><span class="sig-paren">(</span><em>amount=0.15</em>, <em>color=None</em>, <em>blend=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vidpy/clip.html#Clip.chroma"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vidpy.Clip.chroma" title="Permalink to this definition">¶</a></dt>
 <dd><p>Removes a color from the clip, making it transparent</p>
@@ -99,6 +159,20 @@
 <li><strong>blend</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) – Chromakey blend value, between 0 and 1</li>
 </ul>
 </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vidpy.Clip.contrast">
+<code class="descname">contrast</code><span class="sig-paren">(</span><em>amount=0.5</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vidpy/clip.html#Clip.contrast"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vidpy.Clip.contrast" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adjusts the contrast of the clip</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>contrast</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) – The amount of contrast (between 0 and 1)</td>
 </tr>
 </tbody>
 </table>
@@ -123,10 +197,81 @@
 </table>
 </dd></dl>
 
+<dl class="method">
+<dt id="vidpy.Clip.dither">
+<code class="descname">dither</code><span class="sig-paren">(</span><em>amount=0.104167</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vidpy/clip.html#Clip.dither"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vidpy.Clip.dither" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dithers the clip and reduces the number of available colors</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>amount</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) – Number of values per channel</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <dl class="attribute">
 <dt id="vidpy.Clip.duration">
 <code class="descname">duration</code><a class="headerlink" href="#vidpy.Clip.duration" title="Permalink to this definition">¶</a></dt>
 <dd><p>Duration of the clip</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vidpy.Clip.dust">
+<code class="descname">dust</code><span class="sig-paren">(</span><em>maxdiameter=2</em>, <em>maxcount=10</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vidpy/clip.html#Clip.dust"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vidpy.Clip.dust" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add dust and specks to the clip</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>maxdiameter</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – Maximal diameter of a dust piece between 0 and 100</li>
+<li><strong>maxcount</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – How many dust pieces are on the image</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vidpy.Clip.dynamic_threshold">
+<code class="descname">dynamic_threshold</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/vidpy/clip.html#Clip.dynamic_threshold"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vidpy.Clip.dynamic_threshold" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applies a dynamic thresholding effect</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vidpy.Clip.edgeglow">
+<code class="descname">edgeglow</code><span class="sig-paren">(</span><em>threshold=0.5</em>, <em>upscale=0.5</em>, <em>downscale=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vidpy/clip.html#Clip.edgeglow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vidpy.Clip.edgeglow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds glowing edges</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>threshold</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) – threshold for edge lightening</li>
+<li><strong>upscale</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) – multiplier for upscaling edge brightness</li>
+<li><strong>downscale</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) – multiplier for downscaling edge brightness</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vidpy.Clip.extract_color">
+<code class="descname">extract_color</code><span class="sig-paren">(</span><em>color='r'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vidpy/clip.html#Clip.extract_color"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vidpy.Clip.extract_color" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extracts either red, green, or blue from clip</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>color</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Either ‘r’, ‘g’ or ‘b’</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
@@ -210,6 +355,58 @@
 </table>
 </dd></dl>
 
+<dl class="method">
+<dt id="vidpy.Clip.gradient">
+<code class="descname">gradient</code><span class="sig-paren">(</span><em>start_color='#ffffff'</em>, <em>end_color='#000000'</em>, <em>pattern='linear'</em>, <em>start_opacity=0.5</em>, <em>end_opacity=0.5</em>, <em>start_x=0.5</em>, <em>start_y=0</em>, <em>end_x=0.5</em>, <em>end_y=1</em>, <em>offset=0</em>, <em>blend='normal'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vidpy/clip.html#Clip.gradient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vidpy.Clip.gradient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draws a gradient on top of the clip.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>start_color</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – First color of the gradient</li>
+<li><strong>end_color</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Second color of the gradient</li>
+<li><strong>pattern</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – “linear” or “radial” gradient</li>
+<li><strong>start_opacity</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) – Opacity of the first color of the gradient</li>
+<li><strong>end_opacity</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) – Opacity of the second color of the gradient</li>
+<li><strong>start_x</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) – X position of the start point of the gradient</li>
+<li><strong>start_y</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) – Y position of the start point of the gradient</li>
+<li><strong>end_x</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) – X position of the end point of the gradient</li>
+<li><strong>end_y</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) – Y position of the end point of the gradient</li>
+<li><strong>offset</strong> – Position of first color in the line connecting gradient ends, really useful only for radial gradient</li>
+<li><strong>blend</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Blend mode. Values can be: ‘normal’, ‘add’, ‘saturate’, ‘multiply’, ‘screen’, ‘overlay’, ‘darken’, ‘lighten’, ‘colordodge’, ‘colorburn’, ‘hardlight’, ‘softlight’, ‘difference’, ‘exclusion’, ‘hslhue’, ‘hslsaturation’, ‘hslcolor’, or ‘hslluminosity’</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vidpy.Clip.grain">
+<code class="descname">grain</code><span class="sig-paren">(</span><em>noise=40</em>, <em>contrast=160</em>, <em>brightness=70</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vidpy/clip.html#Clip.grain"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vidpy.Clip.grain" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds grain over the clip</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>noise</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – Maximal value of noise (0 to 200)</li>
+<li><strong>contrast</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – Adjust contrast for the image (0 to 400)</li>
+<li><strong>brightness</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – Adjust brightness for the image (0 to 400)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vidpy.Clip.grayscale">
+<code class="descname">grayscale</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/vidpy/clip.html#Clip.grayscale"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vidpy.Clip.grayscale" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert the clip to grayscale</p>
+</dd></dl>
+
 <dl class="attribute">
 <dt id="vidpy.Clip.height">
 <code class="descname">height</code><a class="headerlink" href="#vidpy.Clip.height" title="Permalink to this definition">¶</a></dt>
@@ -223,9 +420,53 @@
 </dd></dl>
 
 <dl class="method">
+<dt id="vidpy.Clip.hue">
+<code class="descname">hue</code><span class="sig-paren">(</span><em>shift=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vidpy/clip.html#Clip.hue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vidpy.Clip.hue" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adjusts the hue of the clip</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>shift</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) – The amount to shift the hue by (between 0 and 1)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vidpy.Clip.invert">
+<code class="descname">invert</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/vidpy/clip.html#Clip.invert"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vidpy.Clip.invert" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inverts the colors of the clip</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="vidpy.Clip.loop">
 <code class="descname">loop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/vidpy/clip.html#Clip.loop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vidpy.Clip.loop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Loops the clip indefinitely</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vidpy.Clip.luminance">
+<code class="descname">luminance</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/vidpy/clip.html#Clip.luminance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vidpy.Clip.luminance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a luminance map of the clip</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vidpy.Clip.mirror">
+<code class="descname">mirror</code><span class="sig-paren">(</span><em>axis</em>, <em>reverse=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vidpy/clip.html#Clip.mirror"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vidpy.Clip.mirror" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provides various mirror and image reversing effects.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>axis</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – can be either “horizontal”, “vertical”, “diagonal”, “xdiagonal”, “flip”, or “flop”</li>
+<li><strong>reverse</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – reverse the mirror</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
@@ -236,6 +477,14 @@
 At each target frame, the clip will be moved and optionally resized
 to the supplied x,y,w,h params.</p>
 <p>You can use pixels or percentages (in quotes)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>sequence</strong> (<em>list</em>) – a sequence of (keyframe, x, w, w, h) params</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
@@ -265,6 +514,24 @@ to the supplied x,y,w,h params.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="vidpy.Clip.pixelize">
+<code class="descname">pixelize</code><span class="sig-paren">(</span><em>width=0.1</em>, <em>height=0.1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vidpy/clip.html#Clip.pixelize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vidpy.Clip.pixelize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pixelize the clip</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>width</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) – Horizontal size of one pixel, as percent of screen size (0 to 1)</li>
+<li><strong>height</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) – Vertical size of one pixel, as percent of screensize (0 to 1)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="vidpy.Clip.position">
 <code class="descname">position</code><span class="sig-paren">(</span><em>x=0</em>, <em>y=0</em>, <em>w='100%'</em>, <em>h='100%'</em>, <em>distort=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vidpy/clip.html#Clip.position"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vidpy.Clip.position" title="Permalink to this definition">¶</a></dt>
 <dd><p>Positions and resizes the clip. Coordinates can be either in pixels or percent.</p>
@@ -281,6 +548,20 @@ to the supplied x,y,w,h params.</p>
 <li><strong>distort</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – Option to distort the image or maintain its ratio</li>
 </ul>
 </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vidpy.Clip.posterize">
+<code class="descname">posterize</code><span class="sig-paren">(</span><em>levels=0.1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vidpy/clip.html#Clip.posterize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vidpy.Clip.posterize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Posterizes the clip by reducing the number of colors used.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>levels</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) – Number of values per channel</td>
 </tr>
 </tbody>
 </table>
@@ -339,6 +620,20 @@ to the supplied x,y,w,h params.</p>
 <li><strong>axis</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – The axis to rotate over, by default “x”</li>
 </ul>
 </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vidpy.Clip.saturate">
+<code class="descname">saturate</code><span class="sig-paren">(</span><em>saturation=0.125</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vidpy/clip.html#Clip.saturate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vidpy.Clip.saturate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adjusts the saturation of the clip</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>saturation</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) – Saturation amount (0 to 1)</td>
 </tr>
 </tbody>
 </table>
@@ -405,6 +700,51 @@ to the supplied x,y,w,h params.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="vidpy.Clip.sharpness">
+<code class="descname">sharpness</code><span class="sig-paren">(</span><em>amount=0.3</em>, <em>size=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vidpy/clip.html#Clip.sharpness"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vidpy.Clip.sharpness" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sharpens the clips
+<a class="reference external" href="https://www.mltframework.org/plugins/FilterFrei0r-sharpness/">https://www.mltframework.org/plugins/FilterFrei0r-sharpness/</a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>amount</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) – amount</li>
+<li><strong>size</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) – size</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vidpy.Clip.sobel">
+<code class="descname">sobel</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/vidpy/clip.html#Clip.sobel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vidpy.Clip.sobel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applies a sobel filter</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vidpy.Clip.softglow">
+<code class="descname">softglow</code><span class="sig-paren">(</span><em>blur=0.5</em>, <em>brightness=0.75</em>, <em>sharpness=0.85</em>, <em>blurblend=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vidpy/clip.html#Clip.softglow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vidpy.Clip.softglow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Does softglow effect on highlights</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>blur</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) – Blur of the glow</li>
+<li><strong>brightness</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) – Brightness of highlight areas</li>
+<li><strong>sharpness</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) – Sharpness of highlight areas</li>
+<li><strong>blurblend</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) – lend mode used to blend highlight blur with input image</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="vidpy.Clip.speed">
 <code class="descname">speed</code><span class="sig-paren">(</span><em>speed</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vidpy/clip.html#Clip.speed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vidpy.Clip.speed" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sets the playback speed of the clip.</p>
@@ -439,6 +779,20 @@ Negative values will play video in reverse.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="vidpy.Clip.squareblur">
+<code class="descname">squareblur</code><span class="sig-paren">(</span><em>size=0.5</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vidpy/clip.html#Clip.squareblur"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vidpy.Clip.squareblur" title="Permalink to this definition">¶</a></dt>
+<dd><p>Blurs the clip</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>size</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) – Amount of blur (0 to 1)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="vidpy.Clip.text">
 <code class="descname">text</code><span class="sig-paren">(</span><em>text</em>, <em>color='#ffffff'</em>, <em>bgcolor='0x00000000'</em>, <em>olcolor='0x00000000'</em>, <em>outline=0</em>, <em>halign='center'</em>, <em>valign='middle'</em>, <em>pad=0</em>, <em>font='Sans'</em>, <em>size=1080</em>, <em>style='normal'</em>, <em>weight=400</em>, <em>bbox=(0</em>, <em>0</em>, <em>'100%'</em>, <em>'100%')</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vidpy/clip.html#Clip.text"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vidpy.Clip.text" title="Permalink to this definition">¶</a></dt>
 <dd><p>Overlays text on a clip.</p>
@@ -460,6 +814,20 @@ Negative values will play video in reverse.</p>
 <li><strong>valign</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Vertical aligment of text. Can be “middle” (default), “top” or “bottom”</li>
 </ul>
 </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vidpy.Clip.threshold">
+<code class="descname">threshold</code><span class="sig-paren">(</span><em>threshold=0.5</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vidpy/clip.html#Clip.threshold"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vidpy.Clip.threshold" title="Permalink to this definition">¶</a></dt>
+<dd><p>Thresholds the clip</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>threshold</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) – Threshold value (0 to 1)</td>
 </tr>
 </tbody>
 </table>
@@ -494,6 +862,25 @@ Negative values will play video in reverse.</p>
 <dt id="vidpy.Clip.vflip">
 <code class="descname">vflip</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/vidpy/clip.html#Clip.vflip"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vidpy.Clip.vflip" title="Permalink to this definition">¶</a></dt>
 <dd><p>Flip the clip vertically</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vidpy.Clip.vignette">
+<code class="descname">vignette</code><span class="sig-paren">(</span><em>aspect=0.5</em>, <em>clear=0</em>, <em>softness=0.6</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vidpy/clip.html#Clip.vignette"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vidpy.Clip.vignette" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applies a vignette effect</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>aspect</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) – Aspect ratio (0 to 1)</li>
+<li><strong>clear</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) – Size of the unaffected center (0 to 1)</li>
+<li><strong>softness</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) – Softness (0 to 1)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">

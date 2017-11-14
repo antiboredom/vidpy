@@ -360,6 +360,25 @@
         <span class="k">return</span> <span class="bp">self</span></div>
 
 
+<div class="viewcode-block" id="Clip.softglow"><a class="viewcode-back" href="../../documentation.html#vidpy.Clip.softglow">[docs]</a>    <span class="k">def</span> <span class="nf">softglow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">blur</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">brightness</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span> <span class="n">sharpness</span><span class="o">=</span><span class="mf">0.85</span><span class="p">,</span> <span class="n">blurblend</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Does softglow effect on highlights</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            blur (float): Blur of the glow</span>
+<span class="sd">            brightness (float): Brightness of highlight areas</span>
+<span class="sd">            sharpness (float): Sharpness of highlight areas</span>
+<span class="sd">            blurblend (float): lend mode used to blend highlight blur with input image</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">fx</span><span class="p">(</span><span class="s1">&#39;frei0r.softglow&#39;</span><span class="p">,</span> <span class="p">{</span>
+            <span class="s1">&#39;0&#39;</span><span class="p">:</span> <span class="n">blur</span><span class="p">,</span>
+            <span class="s1">&#39;1&#39;</span><span class="p">:</span> <span class="n">brightness</span><span class="p">,</span>
+            <span class="s1">&#39;2&#39;</span><span class="p">:</span> <span class="n">sharpness</span><span class="p">,</span>
+            <span class="s1">&#39;3&#39;</span><span class="p">:</span> <span class="n">blurblend</span><span class="p">,</span>
+        <span class="p">})</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
 <div class="viewcode-block" id="Clip.vflip"><a class="viewcode-back" href="../../documentation.html#vidpy.Clip.vflip">[docs]</a>    <span class="k">def</span> <span class="nf">vflip</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;Flip the clip vertically&#39;&#39;&#39;</span>
 
@@ -396,6 +415,10 @@
 <span class="sd">        to the supplied x,y,w,h params.</span>
 
 <span class="sd">        You can use pixels or percentages (in quotes)</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            sequence (list): a sequence of (keyframe, x, w, w, h) params</span>
+
 <span class="sd">        &#39;&#39;&#39;</span>
 
         <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">=</span><span class="si">{}</span><span class="s1">/</span><span class="si">{}</span><span class="s1">:</span><span class="si">{}</span><span class="s1">x</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">sequence</span><span class="p">]</span>
@@ -521,6 +544,346 @@
             <span class="s1">&#39;transition.halign&#39;</span><span class="p">:</span> <span class="s1">&#39;center&#39;</span><span class="p">,</span>
             <span class="s1">&#39;transition.fill&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
             <span class="s1">&#39;transition.distort&#39;</span><span class="p">:</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">distort</span> <span class="k">else</span> <span class="mi">0</span>
+        <span class="p">})</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+<div class="viewcode-block" id="Clip.brightness"><a class="viewcode-back" href="../../documentation.html#vidpy.Clip.brightness">[docs]</a>    <span class="k">def</span> <span class="nf">brightness</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">brightness</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Adjusts the brightness of the clip</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            brightness (float): brightness between 0.0 and 1.0</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">fx</span><span class="p">(</span><span class="s1">&#39;frei0r.brightness&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;0&#39;</span><span class="p">:</span> <span class="n">brightness</span><span class="p">})</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+<div class="viewcode-block" id="Clip.alpha_op"><a class="viewcode-back" href="../../documentation.html#vidpy.Clip.alpha_op">[docs]</a>    <span class="k">def</span> <span class="nf">alpha_op</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">operation</span><span class="o">=</span><span class="s1">&#39;shave&#39;</span><span class="p">,</span> <span class="n">thresh</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">amount</span><span class="o">=</span><span class="mf">0.333344</span><span class="p">,</span> <span class="n">invert</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">display</span><span class="o">=</span><span class="s1">&#39;image&#39;</span><span class="p">,</span> <span class="n">input_as_alpha</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Display and manipulate the alpha channel</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            display: Display: what to display. Choices are image, alpha_as_gray, gray+red, black, gray, white and checkers.</span>
+<span class="sd">            input_as_alpha: use input alpha for the display function above.</span>
+<span class="sd">            operation (str): select the operation to be done on the alpha channel. Options are: shave, shrink_hard, shrink_soft, grow_hard, grow_soft, thresh</span>
+<span class="sd">            thresh (float): threshold (only used if you&#39;ve selected the thresh operation)</span>
+<span class="sd">            amount (float): grow/shrink amount</span>
+<span class="sd">            invert (bool): invert the alpha channel</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="n">display</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;image&#39;</span><span class="p">:</span> <span class="mf">1.0</span><span class="o">/</span><span class="mi">7</span><span class="p">,</span> <span class="s1">&#39;alpha_as_gray&#39;</span><span class="p">:</span> <span class="mf">2.0</span><span class="o">/</span><span class="mi">7</span><span class="p">,</span> <span class="s1">&#39;gray+red&#39;</span><span class="p">:</span> <span class="mf">3.0</span><span class="o">/</span><span class="mi">7</span><span class="p">,</span> <span class="s1">&#39;black&#39;</span><span class="p">:</span> <span class="mf">4.0</span><span class="o">/</span><span class="mi">7</span><span class="p">,</span> <span class="s1">&#39;gray&#39;</span><span class="p">:</span> <span class="mf">5.0</span><span class="o">/</span><span class="mi">7</span><span class="p">,</span> <span class="s1">&#39;white&#39;</span><span class="p">:</span> <span class="mf">6.0</span><span class="o">/</span><span class="mi">7</span><span class="p">,</span> <span class="s1">&#39;checkers&#39;</span><span class="p">:</span> <span class="mf">7.0</span><span class="o">/</span><span class="mi">7</span><span class="p">}[</span><span class="n">display</span><span class="p">]</span>
+        <span class="n">operation</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;shave&#39;</span><span class="p">:</span> <span class="mf">1.0</span><span class="o">/</span><span class="mi">6</span><span class="p">,</span> <span class="s1">&#39;shrink_hard&#39;</span><span class="p">:</span> <span class="mf">2.0</span><span class="o">/</span><span class="mi">6</span><span class="p">,</span> <span class="s1">&#39;shrink_soft&#39;</span><span class="p">:</span> <span class="mf">3.0</span><span class="o">/</span><span class="mi">6</span><span class="p">,</span> <span class="s1">&#39;grow_hard&#39;</span><span class="p">:</span> <span class="mf">4.0</span><span class="o">/</span><span class="mi">6</span><span class="p">,</span> <span class="s1">&#39;grow_soft&#39;</span><span class="p">:</span> <span class="mf">5.0</span><span class="o">/</span><span class="mi">6</span><span class="p">,</span> <span class="s1">&#39;thresh&#39;</span><span class="p">:</span> <span class="mf">6.0</span><span class="o">/</span><span class="mi">6</span><span class="p">}</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">operation</span><span class="p">,</span> <span class="n">operation</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">fx</span><span class="p">(</span><span class="s1">&#39;frei0r.alpha0ps&#39;</span><span class="p">,</span> <span class="p">{</span>
+            <span class="s1">&#39;0&#39;</span><span class="p">:</span> <span class="n">display</span><span class="p">,</span>
+            <span class="s1">&#39;1&#39;</span><span class="p">:</span> <span class="n">input_as_alpha</span><span class="p">,</span>
+            <span class="s1">&#39;2&#39;</span><span class="p">:</span> <span class="n">operation</span><span class="p">,</span>
+            <span class="s1">&#39;3&#39;</span><span class="p">:</span> <span class="n">thresh</span><span class="p">,</span>
+            <span class="s1">&#39;4&#39;</span><span class="p">:</span> <span class="n">amount</span><span class="p">,</span>
+            <span class="s1">&#39;5&#39;</span><span class="p">:</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">invert</span> <span class="k">else</span> <span class="mi">0</span>
+        <span class="p">})</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+<div class="viewcode-block" id="Clip.charcoal"><a class="viewcode-back" href="../../documentation.html#vidpy.Clip.charcoal">[docs]</a>    <span class="k">def</span> <span class="nf">charcoal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Applies a charcoal effect &#39;&#39;&#39;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">fx</span><span class="p">(</span><span class="s1">&#39;charcoal&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+<div class="viewcode-block" id="Clip.dust"><a class="viewcode-back" href="../../documentation.html#vidpy.Clip.dust">[docs]</a>    <span class="k">def</span> <span class="nf">dust</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">maxdiameter</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">maxcount</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Add dust and specks to the clip</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            maxdiameter (int): Maximal diameter of a dust piece between 0 and 100</span>
+<span class="sd">            maxcount (int): How many dust pieces are on the image</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">fx</span><span class="p">(</span><span class="s1">&#39;dust&#39;</span><span class="p">,</span> <span class="p">{</span>
+            <span class="s1">&#39;maxdiameter&#39;</span><span class="p">:</span> <span class="n">maxdiameter</span><span class="p">,</span>
+            <span class="s1">&#39;maxcount&#39;</span><span class="p">:</span> <span class="n">maxcount</span>
+        <span class="p">})</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+<div class="viewcode-block" id="Clip.cartoon"><a class="viewcode-back" href="../../documentation.html#vidpy.Clip.cartoon">[docs]</a>    <span class="k">def</span> <span class="nf">cartoon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">triplevel</span><span class="o">=.</span><span class="mi">99</span><span class="p">,</span> <span class="n">diffspace</span><span class="o">=</span><span class="mf">0.003</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Cartoonify video, with a form of edge detectection</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            triplevel (float): level of trip (0 to 1)</span>
+<span class="sd">            diffspace (float): difference space (0 to 1)</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">fx</span><span class="p">(</span><span class="s1">&#39;frei0r.cartoon&#39;</span><span class="p">,</span> <span class="p">{</span>
+            <span class="s1">&#39;0&#39;</span><span class="p">:</span> <span class="n">triplevel</span><span class="p">,</span>
+            <span class="s1">&#39;1&#39;</span><span class="p">:</span> <span class="n">diffspace</span>
+        <span class="p">})</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+<div class="viewcode-block" id="Clip.contrast"><a class="viewcode-back" href="../../documentation.html#vidpy.Clip.contrast">[docs]</a>    <span class="k">def</span> <span class="nf">contrast</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Adjusts the contrast of the clip</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            contrast (float): The amount of contrast (between 0 and 1)</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">fx</span><span class="p">(</span><span class="s1">&#39;frei0r.contrast0r&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;0&#39;</span><span class="p">:</span> <span class="n">amount</span><span class="p">})</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+<div class="viewcode-block" id="Clip.extract_color"><a class="viewcode-back" href="../../documentation.html#vidpy.Clip.extract_color">[docs]</a>    <span class="k">def</span> <span class="nf">extract_color</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Extracts either red, green, or blue from clip</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            color (str): Either &#39;r&#39;, &#39;g&#39; or &#39;b&#39;</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="k">if</span> <span class="n">color</span> <span class="ow">not</span> <span class="ow">in</span> <span class="s1">&#39;rgb&#39;</span><span class="p">:</span>
+            <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;r&#39;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">fx</span><span class="p">(</span><span class="s1">&#39;frei0r.</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">color</span><span class="o">.</span><span class="n">upper</span><span class="p">()))</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+<div class="viewcode-block" id="Clip.vignette"><a class="viewcode-back" href="../../documentation.html#vidpy.Clip.vignette">[docs]</a>    <span class="k">def</span> <span class="nf">vignette</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">clear</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">softness</span><span class="o">=</span><span class="mf">0.6</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Applies a vignette effect</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            aspect (float): Aspect ratio (0 to 1)</span>
+<span class="sd">            clear (float): Size of the unaffected center (0 to 1)</span>
+<span class="sd">            softness (float): Softness (0 to 1)</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">fx</span><span class="p">(</span><span class="s1">&#39;frei0r.vignette&#39;</span><span class="p">,</span> <span class="p">{</span>
+            <span class="s1">&#39;0&#39;</span><span class="p">:</span> <span class="n">aspect</span><span class="p">,</span>
+            <span class="s1">&#39;1&#39;</span><span class="p">:</span> <span class="n">clear</span><span class="p">,</span>
+            <span class="s1">&#39;2&#39;</span><span class="p">:</span> <span class="n">softness</span>
+        <span class="p">})</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+<div class="viewcode-block" id="Clip.grain"><a class="viewcode-back" href="../../documentation.html#vidpy.Clip.grain">[docs]</a>    <span class="k">def</span> <span class="nf">grain</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">contrast</span><span class="o">=</span><span class="mi">160</span><span class="p">,</span> <span class="n">brightness</span><span class="o">=</span><span class="mi">70</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Adds grain over the clip</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            noise (int): Maximal value of noise (0 to 200)</span>
+<span class="sd">            contrast (int): Adjust contrast for the image (0 to 400)</span>
+<span class="sd">            brightness (int): Adjust brightness for the image (0 to 400)</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">fx</span><span class="p">(</span><span class="s1">&#39;grain&#39;</span><span class="p">,</span> <span class="p">{</span>
+            <span class="s1">&#39;noise&#39;</span><span class="p">:</span> <span class="n">noise</span><span class="p">,</span>
+            <span class="s1">&#39;contrast&#39;</span><span class="p">:</span> <span class="n">contrast</span><span class="p">,</span>
+            <span class="s1">&#39;brightness&#39;</span><span class="p">:</span> <span class="n">brightness</span>
+        <span class="p">})</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+<div class="viewcode-block" id="Clip.grayscale"><a class="viewcode-back" href="../../documentation.html#vidpy.Clip.grayscale">[docs]</a>    <span class="k">def</span> <span class="nf">grayscale</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Convert the clip to grayscale&#39;&#39;&#39;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">fx</span><span class="p">(</span><span class="s1">&#39;greyscale&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+
+<div class="viewcode-block" id="Clip.invert"><a class="viewcode-back" href="../../documentation.html#vidpy.Clip.invert">[docs]</a>    <span class="k">def</span> <span class="nf">invert</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Inverts the colors of the clip&#39;&#39;&#39;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">fx</span><span class="p">(</span><span class="s1">&#39;invert&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+<div class="viewcode-block" id="Clip.dynamic_threshold"><a class="viewcode-back" href="../../documentation.html#vidpy.Clip.dynamic_threshold">[docs]</a>    <span class="k">def</span> <span class="nf">dynamic_threshold</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Applies a dynamic thresholding effect&#39;&#39;&#39;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">fx</span><span class="p">(</span><span class="s1">&#39;frei0r.twolay0r&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+<div class="viewcode-block" id="Clip.mirror"><a class="viewcode-back" href="../../documentation.html#vidpy.Clip.mirror">[docs]</a>    <span class="k">def</span> <span class="nf">mirror</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Provides various mirror and image reversing effects.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            axis (str): can be either &quot;horizontal&quot;, &quot;vertical&quot;, &quot;diagonal&quot;, &quot;xdiagonal&quot;, &quot;flip&quot;, or &quot;flop&quot;</span>
+<span class="sd">            reverse (bool): reverse the mirror</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">fx</span><span class="p">(</span><span class="s1">&#39;mirror&#39;</span><span class="p">,</span> <span class="p">{</span>
+            <span class="s1">&#39;argument&#39;</span><span class="p">:</span> <span class="n">axis</span><span class="p">,</span>
+            <span class="s1">&#39;reverse&#39;</span><span class="p">:</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">reverse</span> <span class="k">else</span> <span class="mi">0</span>
+        <span class="p">})</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+<div class="viewcode-block" id="Clip.threshold"><a class="viewcode-back" href="../../documentation.html#vidpy.Clip.threshold">[docs]</a>    <span class="k">def</span> <span class="nf">threshold</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Thresholds the clip</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            threshold (float): Threshold value (0 to 1)</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">fx</span><span class="p">(</span><span class="s1">&#39;frei0r.threshold0r&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;0&#39;</span><span class="p">:</span> <span class="n">threshold</span><span class="p">})</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+<div class="viewcode-block" id="Clip.squareblur"><a class="viewcode-back" href="../../documentation.html#vidpy.Clip.squareblur">[docs]</a>    <span class="k">def</span> <span class="nf">squareblur</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Blurs the clip</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            size (float): Amount of blur (0 to 1)</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">fx</span><span class="p">(</span><span class="s1">&#39;frei0r.squareblur&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;0&#39;</span><span class="p">:</span> <span class="n">size</span><span class="p">})</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+<div class="viewcode-block" id="Clip.sharpness"><a class="viewcode-back" href="../../documentation.html#vidpy.Clip.sharpness">[docs]</a>    <span class="k">def</span> <span class="nf">sharpness</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Sharpens the clips</span>
+<span class="sd">        https://www.mltframework.org/plugins/FilterFrei0r-sharpness/</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            amount (float): amount</span>
+<span class="sd">            size (float): size</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">fx</span><span class="p">(</span><span class="s1">&#39;frei0r.sharpness&#39;</span><span class="p">,</span> <span class="p">{</span>
+            <span class="s1">&#39;0&#39;</span><span class="p">:</span> <span class="n">amount</span><span class="p">,</span>
+            <span class="s1">&#39;1&#39;</span><span class="p">:</span> <span class="n">size</span>
+        <span class="p">})</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+<div class="viewcode-block" id="Clip.luminance"><a class="viewcode-back" href="../../documentation.html#vidpy.Clip.luminance">[docs]</a>    <span class="k">def</span> <span class="nf">luminance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Creates a luminance map of the clip&#39;&#39;&#39;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">fx</span><span class="p">(</span><span class="s1">&#39;frei0r.luminance&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+<div class="viewcode-block" id="Clip.edgeglow"><a class="viewcode-back" href="../../documentation.html#vidpy.Clip.edgeglow">[docs]</a>    <span class="k">def</span> <span class="nf">edgeglow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">upscale</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">downscale</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Adds glowing edges</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            threshold (float): threshold for edge lightening</span>
+<span class="sd">            upscale (float): multiplier for upscaling edge brightness</span>
+<span class="sd">            downscale (float): multiplier for downscaling edge brightness</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">fx</span><span class="p">(</span><span class="s1">&#39;frei0r.edgeglow&#39;</span><span class="p">,</span> <span class="p">{</span>
+            <span class="s1">&#39;0&#39;</span><span class="p">:</span> <span class="n">threshold</span><span class="p">,</span>
+            <span class="s1">&#39;1&#39;</span><span class="p">:</span> <span class="n">upscale</span><span class="p">,</span>
+            <span class="s1">&#39;2&#39;</span><span class="p">:</span> <span class="n">downscale</span>
+        <span class="p">})</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+<div class="viewcode-block" id="Clip.gradient"><a class="viewcode-back" href="../../documentation.html#vidpy.Clip.gradient">[docs]</a>    <span class="k">def</span> <span class="nf">gradient</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start_color</span><span class="o">=</span><span class="s1">&#39;#ffffff&#39;</span><span class="p">,</span> <span class="n">end_color</span><span class="o">=</span><span class="s1">&#39;#000000&#39;</span><span class="p">,</span> <span class="n">pattern</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span> <span class="n">start_opacity</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">end_opacity</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">start_x</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">start_y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">end_x</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">end_y</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">blend</span><span class="o">=</span><span class="s1">&#39;normal&#39;</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Draws a gradient on top of the clip.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            start_color (str): First color of the gradient</span>
+<span class="sd">            end_color (str): Second color of the gradient</span>
+<span class="sd">            pattern (str): &quot;linear&quot; or &quot;radial&quot; gradient</span>
+<span class="sd">            start_opacity (float): Opacity of the first color of the gradient</span>
+<span class="sd">            end_opacity (float): Opacity of the second color of the gradient</span>
+<span class="sd">            start_x (float): X position of the start point of the gradient</span>
+<span class="sd">            start_y (float): Y position of the start point of the gradient</span>
+<span class="sd">            end_x (float): X position of the end point of the gradient</span>
+<span class="sd">            end_y (float): Y position of the end point of the gradient</span>
+<span class="sd">            offset: Position of first color in the line connecting gradient ends, really useful only for radial gradient</span>
+<span class="sd">            blend (str): Blend mode. Values can be: &#39;normal&#39;, &#39;add&#39;, &#39;saturate&#39;, &#39;multiply&#39;, &#39;screen&#39;, &#39;overlay&#39;, &#39;darken&#39;, &#39;lighten&#39;, &#39;colordodge&#39;, &#39;colorburn&#39;, &#39;hardlight&#39;, &#39;softlight&#39;, &#39;difference&#39;, &#39;exclusion&#39;, &#39;hslhue&#39;, &#39;hslsaturation&#39;, &#39;hslcolor&#39;, or &#39;hslluminosity&#39;</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="n">pattern</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;linear&#39;</span><span class="p">:</span> <span class="s1">&#39;gradient_linear&#39;</span><span class="p">,</span> <span class="s1">&#39;radial&#39;</span><span class="p">:</span> <span class="s1">&#39;gradient_radial&#39;</span><span class="p">}</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="s1">&#39;gradient_linear&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">fx</span><span class="p">(</span><span class="s1">&#39;frei0r.cairogradient&#39;</span><span class="p">,</span> <span class="p">{</span>
+            <span class="s1">&#39;0&#39;</span><span class="p">:</span> <span class="n">pattern</span><span class="p">,</span>
+            <span class="s1">&#39;1&#39;</span><span class="p">:</span> <span class="n">start_color</span><span class="p">,</span>
+            <span class="s1">&#39;2&#39;</span><span class="p">:</span> <span class="n">start_opacity</span><span class="p">,</span>
+            <span class="s1">&#39;3&#39;</span><span class="p">:</span> <span class="n">end_color</span><span class="p">,</span>
+            <span class="s1">&#39;4&#39;</span><span class="p">:</span> <span class="n">end_opacity</span><span class="p">,</span>
+            <span class="s1">&#39;5&#39;</span><span class="p">:</span> <span class="n">start_x</span><span class="p">,</span>
+            <span class="s1">&#39;6&#39;</span><span class="p">:</span> <span class="n">start_y</span><span class="p">,</span>
+            <span class="s1">&#39;7&#39;</span><span class="p">:</span> <span class="n">end_x</span><span class="p">,</span>
+            <span class="s1">&#39;8&#39;</span><span class="p">:</span> <span class="n">end_y</span><span class="p">,</span>
+            <span class="s1">&#39;9&#39;</span><span class="p">:</span> <span class="n">offset</span><span class="p">,</span>
+            <span class="s1">&#39;10&#39;</span><span class="p">:</span> <span class="n">blend</span>
+        <span class="p">})</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+<div class="viewcode-block" id="Clip.hue"><a class="viewcode-back" href="../../documentation.html#vidpy.Clip.hue">[docs]</a>    <span class="k">def</span> <span class="nf">hue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Adjusts the hue of the clip</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            shift (float): The amount to shift the hue by (between 0 and 1)</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">fx</span><span class="p">(</span><span class="s1">&#39;frei0r.hueshift0r&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;0&#39;</span><span class="p">:</span> <span class="n">shift</span><span class="p">})</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+
+<div class="viewcode-block" id="Clip.sobel"><a class="viewcode-back" href="../../documentation.html#vidpy.Clip.sobel">[docs]</a>    <span class="k">def</span> <span class="nf">sobel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Applies a sobel filter&#39;&#39;&#39;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">fx</span><span class="p">(</span><span class="s1">&#39;frei0r.sobel&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+<div class="viewcode-block" id="Clip.posterize"><a class="viewcode-back" href="../../documentation.html#vidpy.Clip.posterize">[docs]</a>    <span class="k">def</span> <span class="nf">posterize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="mf">0.10</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Posterizes the clip by reducing the number of colors used.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            levels (float): Number of values per channel</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">fx</span><span class="p">(</span><span class="s1">&#39;frei0r.posterize&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;0&#39;</span><span class="p">:</span> <span class="n">levels</span><span class="p">})</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+<div class="viewcode-block" id="Clip.dither"><a class="viewcode-back" href="../../documentation.html#vidpy.Clip.dither">[docs]</a>    <span class="k">def</span> <span class="nf">dither</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount</span><span class="o">=</span><span class="mf">0.104167</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Dithers the clip and reduces the number of available colors</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            amount (float): Number of values per channel</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">fx</span><span class="p">(</span><span class="s1">&#39;frei0r.dither&#39;</span><span class="p">,</span> <span class="p">{</span>
+            <span class="s1">&#39;0&#39;</span><span class="p">:</span> <span class="n">amount</span>
+        <span class="p">})</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+<div class="viewcode-block" id="Clip.saturate"><a class="viewcode-back" href="../../documentation.html#vidpy.Clip.saturate">[docs]</a>    <span class="k">def</span> <span class="nf">saturate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">saturation</span><span class="o">=</span><span class="mf">0.125</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Adjusts the saturation of the clip</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            saturation (float): Saturation amount (0 to 1)</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">fx</span><span class="p">(</span><span class="s1">&#39;frei0r.saturat0r&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;0&#39;</span><span class="p">:</span> <span class="n">saturation</span><span class="p">})</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+<div class="viewcode-block" id="Clip.pixelize"><a class="viewcode-back" href="../../documentation.html#vidpy.Clip.pixelize">[docs]</a>    <span class="k">def</span> <span class="nf">pixelize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Pixelize the clip</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            width (float): Horizontal size of one pixel, as percent of screen size (0 to 1)</span>
+<span class="sd">            height (float): Vertical size of one pixel, as percent of screensize (0 to 1)</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">fx</span><span class="p">(</span><span class="s1">&#39;frei0r.pixeliz0r&#39;</span><span class="p">,</span> <span class="p">{</span>
+            <span class="s1">&#39;0&#39;</span><span class="p">:</span> <span class="n">width</span><span class="o">/</span><span class="mf">100.0</span><span class="p">,</span>
+            <span class="s1">&#39;1&#39;</span><span class="p">:</span> <span class="n">height</span><span class="o">/</span><span class="mf">100.0</span><span class="p">,</span>
         <span class="p">})</span>
         <span class="k">return</span> <span class="bp">self</span></div>
 
