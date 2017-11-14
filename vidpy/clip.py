@@ -159,11 +159,11 @@ class Clip(object):
     def transition(self, name, params=None):
         '''Adds any melt transition to a track
 
-        For a full list, see: https://www.mltframework.org/plugins/PluginsFilters/
+        For a full list, see: https://www.mltframework.org/plugins/PluginsTransitions/
 
         Args:
-            name (str): the name of a filter to add
-            params (dict): a dictionary containing melt filter parameters
+            name (str): the name of a transition to add
+            params (dict): a dictionary containing melt transition parameters
         '''
 
         self.transitions.append((name, params))
