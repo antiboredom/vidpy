@@ -52,6 +52,22 @@ Framework</a>.</p>
 the api will likely change. If you’re interested in testing it out,
 please do, and leave comments/suggestions/issues in the <a class="reference external" href="https://github.com/antiboredom/vidpy/issues">issue
 tracker</a>.</p>
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+    <iframe src="https://www.youtube.com/embed/DzYvZx_eSRA" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+</div><div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">vidpy</span> <span class="k">import</span> <span class="n">Clip</span><span class="p">,</span> <span class="n">Composition</span>
+
+<span class="n">clips</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">):</span>
+    <span class="n">clip</span> <span class="o">=</span> <span class="n">Clip</span><span class="p">(</span><span class="n">vid</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="n">i</span><span class="o">*</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">clip</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">clip</span><span class="o">.</span><span class="n">chroma</span><span class="p">(</span><span class="n">amount</span><span class="o">=.</span><span class="mi">20</span><span class="p">)</span>
+    <span class="n">clip</span><span class="o">.</span><span class="n">position</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">i</span><span class="o">*</span><span class="mi">160</span><span class="o">-</span><span class="mi">500</span><span class="p">)</span>
+    <span class="n">clips</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">clip</span><span class="p">)</span>
+
+<span class="n">comp</span> <span class="o">=</span> <span class="n">Composition</span><span class="p">(</span><span class="n">clips</span><span class="p">,</span> <span class="n">bgcolor</span><span class="o">=</span><span class="s1">&#39;#ff5179&#39;</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">comp</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;hands.mp4&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
