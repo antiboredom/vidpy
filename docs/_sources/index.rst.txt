@@ -1,3 +1,10 @@
+.. meta::
+   :description: Python video editor and compositor
+   :title: VidPy
+   :Author: Sam Lavigne
+   :keywords: video, python
+
+
 VidPy
 =================================
 
