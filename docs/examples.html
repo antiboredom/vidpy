@@ -245,6 +245,65 @@
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
     <iframe src="https://www.youtube.com/embed/vl6cb8Rlo5w" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
 </div></div>
+<div class="section" id="filter-gallery">
+<h2>Filter gallery<a class="headerlink" href="#filter-gallery" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">vidpy</span> <span class="k">import</span> <span class="n">Composition</span><span class="p">,</span> <span class="n">Clip</span>
+
+<span class="n">vid</span> <span class="o">=</span> <span class="s1">&#39;videos/hand3.mp4&#39;</span>
+
+<span class="n">filters</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;brightness&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">.</span><span class="mi">8</span><span class="p">],</span>
+    <span class="s1">&#39;contrast&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">.</span><span class="mi">9</span><span class="p">],</span>
+    <span class="s1">&#39;opacity&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">.</span><span class="mi">1</span><span class="p">],</span>
+    <span class="s1">&#39;hue&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">.</span><span class="mi">8</span><span class="p">],</span>
+    <span class="s1">&#39;saturate&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">.</span><span class="mi">9</span><span class="p">],</span>
+    <span class="s1">&#39;grayscale&#39;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s1">&#39;threshold&#39;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s1">&#39;dynamic_threshold&#39;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s1">&#39;invert&#39;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s1">&#39;extract_color&#39;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s1">&#39;glow&#39;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s1">&#39;softglow&#39;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s1">&#39;cartoon&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.9</span><span class="p">],</span>
+    <span class="s1">&#39;chroma&#39;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s1">&#39;vflip&#39;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s1">&#39;hflip&#39;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s1">&#39;position&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="s1">&#39;30%&#39;</span><span class="p">,</span> <span class="s1">&#39;30%&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;move&#39;</span><span class="p">:</span> <span class="p">[[(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;-100%&#39;</span><span class="p">,</span> <span class="s1">&#39;-100%&#39;</span><span class="p">,</span> <span class="s1">&#39;100%&#39;</span><span class="p">,</span> <span class="s1">&#39;100%&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;100%&#39;</span><span class="p">,</span> <span class="s1">&#39;100%&#39;</span><span class="p">)]],</span>
+    <span class="s1">&#39;charcoal&#39;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s1">&#39;dust&#39;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s1">&#39;grain&#39;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s1">&#39;vignette&#39;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s1">&#39;mirror&#39;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s1">&#39;squareblur&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">.</span><span class="mi">01</span><span class="p">],</span>
+    <span class="s1">&#39;sharpness&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+    <span class="s1">&#39;luminance&#39;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s1">&#39;posterize&#39;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s1">&#39;pixelize&#39;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s1">&#39;gradient&#39;</span><span class="p">:</span> <span class="p">[],</span>
+<span class="p">}</span>
+
+<span class="n">clips</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">filters</span><span class="p">:</span>
+    <span class="n">clip</span> <span class="o">=</span> <span class="n">Clip</span><span class="p">(</span><span class="n">vid</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">clip</span><span class="o">.</span><span class="n">volume</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="n">args</span> <span class="o">=</span> <span class="n">filters</span><span class="p">[</span><span class="n">f</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">getattr</span><span class="p">(</span><span class="n">clip</span><span class="p">,</span> <span class="n">f</span><span class="p">)(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">getattr</span><span class="p">(</span><span class="n">clip</span><span class="p">,</span> <span class="n">f</span><span class="p">)()</span>
+
+    <span class="n">clip</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">olcolor</span><span class="o">=</span><span class="s1">&#39;#000000&#39;</span><span class="p">,</span> <span class="n">outline</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">clips</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">clip</span><span class="p">)</span>
+
+<span class="n">Composition</span><span class="p">(</span><span class="n">clips</span><span class="p">,</span> <span class="n">singletrack</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">preview</span><span class="p">()</span>
+</pre></div>
+</div>
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+    <iframe src="https://www.youtube.com/embed/QGxQ3tE0Lks" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+</div></div>
 <div class="section" id="camera">
 <h2>Camera<a class="headerlink" href="#camera" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">vidpy</span> <span class="k">import</span> <span class="n">Composition</span><span class="p">,</span> <span class="n">Camera</span>
@@ -309,6 +368,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#masks">Masks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#auto-chroma-key">Auto Chroma Key</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#text">Text</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#filter-gallery">Filter gallery</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#camera">Camera</a></li>
 </ul>
 </li>

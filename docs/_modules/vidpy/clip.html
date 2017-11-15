@@ -705,7 +705,7 @@
         <span class="k">return</span> <span class="bp">self</span></div>
 
 
-<div class="viewcode-block" id="Clip.mirror"><a class="viewcode-back" href="../../documentation.html#vidpy.Clip.mirror">[docs]</a>    <span class="k">def</span> <span class="nf">mirror</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="Clip.mirror"><a class="viewcode-back" href="../../documentation.html#vidpy.Clip.mirror">[docs]</a>    <span class="k">def</span> <span class="nf">mirror</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="s1">&#39;horizontal&#39;</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;Provides various mirror and image reversing effects.</span>
 
 <span class="sd">        Args:</span>
@@ -882,8 +882,8 @@
 <span class="sd">        &#39;&#39;&#39;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">fx</span><span class="p">(</span><span class="s1">&#39;frei0r.pixeliz0r&#39;</span><span class="p">,</span> <span class="p">{</span>
-            <span class="s1">&#39;0&#39;</span><span class="p">:</span> <span class="n">width</span><span class="o">/</span><span class="mf">100.0</span><span class="p">,</span>
-            <span class="s1">&#39;1&#39;</span><span class="p">:</span> <span class="n">height</span><span class="o">/</span><span class="mf">100.0</span><span class="p">,</span>
+            <span class="s1">&#39;0&#39;</span><span class="p">:</span> <span class="n">width</span><span class="p">,</span>
+            <span class="s1">&#39;1&#39;</span><span class="p">:</span> <span class="n">height</span>
         <span class="p">})</span>
         <span class="k">return</span> <span class="bp">self</span></div>
 
@@ -1044,6 +1044,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../examples.html#masks">Masks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../examples.html#auto-chroma-key">Auto Chroma Key</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../examples.html#text">Text</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../examples.html#filter-gallery">Filter gallery</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../examples.html#camera">Camera</a></li>
 </ul>
 </li>
