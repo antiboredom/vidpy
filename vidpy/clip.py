@@ -663,7 +663,7 @@ class Clip(object):
         return self
 
 
-    def mirror(self, axis, reverse=False):
+    def mirror(self, axis='horizontal', reverse=False):
         '''Provides various mirror and image reversing effects.
 
         Args:
@@ -840,8 +840,8 @@ class Clip(object):
         '''
 
         self.fx('frei0r.pixeliz0r', {
-            '0': width/100.0,
-            '1': height/100.0,
+            '0': width,
+            '1': height
         })
         return self
 
