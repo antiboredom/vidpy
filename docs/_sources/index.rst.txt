@@ -28,7 +28,7 @@ tracker <https://github.com/antiboredom/vidpy/issues>`_.
 
   clips = []
   for i in range(0, 8):
-      clip = Clip(vid, start=i*5)
+      clip = Clip('hand.mp4', start=i*5)
       clip.repeat(5)
       clip.chroma(amount=.20)
       clip.position(x=i*160-500)
