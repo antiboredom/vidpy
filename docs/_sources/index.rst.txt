@@ -34,7 +34,7 @@ tracker <https://github.com/antiboredom/vidpy/issues>`_.
       clip.position(x=i*160-500)
       clips.append(clip)
 
-  comp = Composition(clips, bgcolor='#ff5179', duration=200)
+  comp = Composition(clips, bgcolor='#ff5179', duration=8)
   comp.save('hands.mp4')
 
 
