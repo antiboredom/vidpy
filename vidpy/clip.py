@@ -461,6 +461,25 @@ class Clip(object):
         return self
 
 
+    def crop(self, top=0, left=0, bottom=0, right=0):
+        '''Crops the clip
+
+        Args:
+            top (int): Pixels to crop from the top
+            left (int): Pixels to crop from the left
+            bottom (int): Pixels to crop from the bottom
+            right (int): Pixels to crop from the right
+        '''
+
+        self.fx('crop', {
+            'top': top,
+            'left': left,
+            'bottom': bottom,
+            'right': right
+        })
+        return self
+
+
     def position(self, x=0, y=0, w='100%', h='100%', distort=True):
         '''Positions and resizes the clip. Coordinates can be either in pixels or percent.
 
