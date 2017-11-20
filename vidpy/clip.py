@@ -461,10 +461,10 @@ class Clip(object):
         return self
 
 
-    def position(self, x=0, y=0, w='100%', h='100%', distort=False):
+    def position(self, x=0, y=0, w='100%', h='100%', distort=True):
         '''Positions and resizes the clip. Coordinates can be either in pixels or percent.
 
-        Aspect ratio will be mainted unless distort is set to True
+        To maintain aspect ration, set distort=False
 
         Args:
             x: optional x coordinate
@@ -485,10 +485,10 @@ class Clip(object):
         return self
 
 
-    def resize(self, w='100%', h='100%', distort=False):
+    def resize(self, w='100%', h='100%', distort=True):
         '''Resizes the clip. Coordinates can be either in pixels or percent.
 
-        Aspect ratio will be mainted unless distort is set to True
+        To maintain aspect ration, set distort=False
 
         Args:
             w: optional width
