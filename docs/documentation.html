@@ -5,14 +5,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Documentation &#8212; VidPy 0.1.8 documentation</title>
+    <title>Documentation &#8212; VidPy 0.1.9 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.1.8',
+        VERSION:     '0.1.9',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -173,6 +173,26 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>contrast</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) – The amount of contrast (between 0 and 1)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vidpy.Clip.crop">
+<code class="descname">crop</code><span class="sig-paren">(</span><em>top=0</em>, <em>left=0</em>, <em>bottom=0</em>, <em>right=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vidpy/clip.html#Clip.crop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vidpy.Clip.crop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Crops the clip</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>top</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – Pixels to crop from the top</li>
+<li><strong>left</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – Pixels to crop from the left</li>
+<li><strong>bottom</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – Pixels to crop from the bottom</li>
+<li><strong>right</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – Pixels to crop from the right</li>
+</ul>
+</td>
 </tr>
 </tbody>
 </table>
@@ -533,9 +553,9 @@ to the supplied x,y,w,h params.</p>
 
 <dl class="method">
 <dt id="vidpy.Clip.position">
-<code class="descname">position</code><span class="sig-paren">(</span><em>x=0</em>, <em>y=0</em>, <em>w='100%'</em>, <em>h='100%'</em>, <em>distort=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vidpy/clip.html#Clip.position"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vidpy.Clip.position" title="Permalink to this definition">¶</a></dt>
+<code class="descname">position</code><span class="sig-paren">(</span><em>x=0</em>, <em>y=0</em>, <em>w='100%'</em>, <em>h='100%'</em>, <em>distort=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vidpy/clip.html#Clip.position"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vidpy.Clip.position" title="Permalink to this definition">¶</a></dt>
 <dd><p>Positions and resizes the clip. Coordinates can be either in pixels or percent.</p>
-<p>Aspect ratio will be mainted unless distort is set to True</p>
+<p>To maintain aspect ration, set distort=False</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -589,9 +609,9 @@ to the supplied x,y,w,h params.</p>
 
 <dl class="method">
 <dt id="vidpy.Clip.resize">
-<code class="descname">resize</code><span class="sig-paren">(</span><em>w='100%'</em>, <em>h='100%'</em>, <em>distort=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vidpy/clip.html#Clip.resize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vidpy.Clip.resize" title="Permalink to this definition">¶</a></dt>
+<code class="descname">resize</code><span class="sig-paren">(</span><em>w='100%'</em>, <em>h='100%'</em>, <em>distort=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vidpy/clip.html#Clip.resize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vidpy.Clip.resize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Resizes the clip. Coordinates can be either in pixels or percent.</p>
-<p>Aspect ratio will be mainted unless distort is set to True</p>
+<p>To maintain aspect ration, set distort=False</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
