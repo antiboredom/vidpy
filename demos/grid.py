@@ -32,7 +32,7 @@ while y < canvas_height:
 
     # increment the x and y position
     x += vid_width
-    if x > canvas_width:
+    if x >= canvas_width:
         y += vid_height
         x = 0
 
