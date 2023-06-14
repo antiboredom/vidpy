@@ -10,10 +10,11 @@ class Clip(object):
         start (float): The in-point of the clip in seconds (optional). Setting this will trim from the start of the clip
         end (float): The out-point of the clip in seconds (optional). Setting this will trim from the end of the clip
         offset (float): Time in seconds before the clip is played.
+        video_only (bool): Set True add a video-only track (melt-cli option '-video-track')
         **kwargs: Option parameters that will get sent to melt
     '''
 
-    def __init__(self, resource=None, service=None, start=0, end=None, offset=0, **kwargs):
+    def __init__(self, resource=None, service=None, start=0, end=None, offset=0, video_only=False, **kwargs):
         self.resource = resource
         self.service = service
         self.start = timestamp(start)
@@ -28,6 +29,7 @@ class Clip(object):
         self.__profile = None
         self.mask = None
         self.is_mask = False
+        self.video_only = video_only
 
         if self.resource.__class__.__name__ == 'Composition':
             self.resource = self.resource.save_xml()
@@ -899,8 +901,10 @@ class Clip(object):
 
         args = []
 
-        if not singletrack:
+        if not singletrack and not self.video_only:
             args += ['-track']
+        elif self.video_only:
+            args += ['-video-track']
 
         if self.offset > 0:
             args += ['-blank', str(self.offset)]
