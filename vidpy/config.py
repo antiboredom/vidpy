@@ -1,13 +1,16 @@
 import os
 
-MELT_BINARY = ''
+MELT_BINARY = ""
 
-MAC = '/Applications/Shotcut.app/Contents/MacOS/qmelt'
-WIN = 'C:\Program Files\Shotcut\qmelt.exe'
+PATHS = [
+    "melt",
+    "/Applications/Shotcut.app/Contents/MacOS/melt",
+    r"C:\Program Files\Shotcut\melt.exe"
+    "/Applications/Shotcut.app/Contents/MacOS/qmelt",
+    r"C:\Program Files\Shotcut\qmelt.exe",
+]
 
-if os.path.exists(MAC):
-    MELT_BINARY = MAC
-elif os.path.exists(WIN):
-    MELT_BINARY = WIN
-else:
-    MELT_BINARY = 'melt'
+for p in PATHS:
+    if os.path.exists(p):
+        MELT_BINARY = p
+        break
