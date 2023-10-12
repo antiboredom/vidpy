@@ -9,3 +9,4 @@ dist/
 !demos/videos/*.mp4
 *.egg-info/
 .tox
+.DS_Store
