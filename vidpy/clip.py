@@ -480,7 +480,7 @@ class Clip(object):
         return self
 
 
-    def position(self, x=0, y=0, w='100%', h='100%', distort=True):
+    def position(self, x=0, y=0, w=None, h=None, distort=False):
         '''Positions and resizes the clip. Coordinates can be either in pixels or percent.
 
         To maintain aspect ration, set distort=False
@@ -493,8 +493,14 @@ class Clip(object):
             distort (bool): Option to distort the image or maintain its ratio
         '''
 
+        if w is None:
+            w = self.width
+
+        if h is None:
+            h = self.height
+
         self.fx('affine', {
-            'transition.geometry': '{}/{}:{}x{}'.format(x, y, w, h),
+            'transition.rect': '{}/{}:{}x{}'.format(x, y, w, h),
             'transition.valign': 'middle',
             'transition.halign': 'center',
             'transition.fill': 0,

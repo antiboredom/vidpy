@@ -56,11 +56,17 @@ class Composition(object):
         if self.fps:
             profile.set('frame_rate_num', str(self.fps))
 
+        if not self.width or not self.height:
+            self.width = self.clips[0].width
+            self.height = self.clips[0].height
+
         if self.width and self.height:
             profile.set('width', str(self.width))
             profile.set('display_aspect_num', str(self.width))
             profile.set('height', str(self.height))
             profile.set('display_aspect_den', str(self.height))
+            profile.set("sample_aspect_num", "1")
+            profile.set("sample_aspect_den", "1")
 
         return xml
 
